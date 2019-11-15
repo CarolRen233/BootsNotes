@@ -1,0 +1,26 @@
+createdAt: "2019-11-15T05:48:12.111Z"
+updatedAt: "2019-11-15T05:49:15.473Z"
+type: "MARKDOWN_NOTE"
+folder: "0c8dbf9ec6d493d3fd38"
+title: "Ubuntu安装Anaconda和Cuda"
+tags: []
+content: '''
+  Ubuntu安装Anaconda和Cuda
+  [TOC]
+  
+  ## 安装Anaconda
+  
+  [参考链接](https://blog.csdn.net/qq_15192373/article/details/81091098) 
+  
+  [链接](https://www.digitalocean.com/community/tutorials/how-to-install-anaconda-on-ubuntu-18-04-quickstart) 这个更好用
+  
+  ## 安装Cuda
+  
+  进入官网，直接在[页面](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal) 上按照自己的设备
+  ![](/home/carol/Pictures/Screenshot from 2019-11-09 14-32-59.png) 
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
