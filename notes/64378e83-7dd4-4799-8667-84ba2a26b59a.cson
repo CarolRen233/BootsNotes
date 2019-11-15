@@ -1,0 +1,24 @@
+createdAt: "2019-11-15T05:51:02.834Z"
+updatedAt: "2019-11-15T05:51:19.198Z"
+type: "MARKDOWN_NOTE"
+folder: "0c8dbf9ec6d493d3fd38"
+title: "常见Errors"
+tags: []
+content: '''
+  常见Errors
+  
+  ##Jupyter Notebook
+  
+  当jupyter notebook使用parser=argparse.ArgumentParser()报出此等错误：
+  An exception has occurred, use %tb to see the full traceback.
+  
+  
+  ~~~
+  opt=parser.parse_args(args=[])#添加args=[]
+  ~~~
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
