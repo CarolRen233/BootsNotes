@@ -1,0 +1,274 @@
+## Machine Learning Individual Student Homework 1
+
+姓名：任妍
+学号：1901213094
+
+
+### 1 数据表征
+
+从[scikit-learn网站](https://scikit-learn.org/0.19/datasets/mldata.html) 下载minist的数据包**mnist-original.mat**
+
+数据是70k x 784的一个numpy数组，其中784就是28×28的一个图片，代表手写的一个数字
+图片示例：
+![](imgs/20191115-100011.png)
+
+每一张图片包含28像素×28像素。可以用一个数字数组来表示这张图片：
+
+![](imgs/20191115-100046.png)
+
+skicit-learn直接将图片展开成一个向量，长度是 28x28 = 784。虽然由二维变成了一维，但只要保持各个图片采用相同的方式展开。从这个角度来看，MNIST数据集的图片就是在784维向量空间里面的点
+
+
+### 2 评价指标
+
+#### 2.1 classification_report
+
+metrics.classification_report包含如下指标
+
+**accuracy_score**
+
+本代码的评价指标，有sklearn的accuracy_score，normalize：默认值为True，返回正确分类的比例；如果为False，返回正确分类的样本数。代码如下
+
+~~~
+sklearn.metrics.accuracy_score(y_true, y_pred, normalize=True, sample_weight=None)
+~~~
+
+
+**recall_score**
+
+recall_score 召回率 = 提取出的正确信息条数 / 样本中的信息条数。通俗地说，就是所有准确的条目有多少被检索出来了。
+
+~~~python
+sklearn.metrics.recall_score(y_true, y_pred, labels=None, pos_label=1,average='binary', sample_weight=None)
+~~~
+
+**F1-score**
+
+F1分数是分类问题的一个衡量指标。一些多分类问题的机器学习竞赛，常常将F1-score作为最终测评的方法。它是精确率和召回率的调和平均数，最大为1，最小为0。
+
+![](imgs/20191115-102557.png)
+
+
+
+以上的指标结果如下
+
+            precision    recall  f1-score   support
+
+         0.0       0.99      0.99      0.99      1024
+         1.0       0.99      0.99      0.99      1185
+         2.0       0.98      0.99      0.98      1051
+         3.0       0.98      0.98      0.98      1057
+         4.0       0.99      0.99      0.99       964
+         5.0       0.98      0.98      0.98       964
+         6.0       0.99      0.99      0.99      1085
+         7.0       0.99      0.98      0.99      1128
+         8.0       0.97      0.98      0.97      1037
+         9.0       0.98      0.97      0.98      1005
+ 
+#### 2.2 confusion_matrix
+
+混淆矩阵就是为了进一步分析性能而对该算法测试结果做出的总结
+
+本作业的混淆矩阵如图所示
+
+
+
+### 3 模型详解
+
+#### 3.1 Split the dataset
+
+先将数据划分成训练数据和测试数据，同时对数据进行归一化，方便后续的计算
+
+~~~python
+mnist = fetch_mldata('MNIST original', data_home='./')
+images = mnist.data
+targets = mnist.target
+X_data = images/255.0
+Y = targets
+X_train, X_test, y_train, y_test = train_test_split(X_data, Y, test_size=0.15, random_state=42)
+~~~
+
+#### 3.2 Create a classifier
+
+建一个分类器，参数C和gamma的作用：
+
+C的作用：在尽可能的形成一个光滑的决策边界和尽可能正确的分类所有训练点之间形成的平衡，C越大，那么就会有更多的数据被正确分类，也就是容错率越低
+
+gamma的作用：就是把数据映射到新的特征空间之后，gamma大的话，新的数据形成的正态分布σ就小，那么数据就比较集中
+
+
+~~~
+# Create a classifier: a support vector classifier
+param_C = 5
+param_gamma = 0.05
+classifier = svm.SVC(C=param_C,gamma=param_gamma)
+
+#We learn the digits on train part
+start_time = dt.datetime.now()
+print('Start learning at {}'.format(str(start_time)))
+classifier.fit(X_train, y_train)
+end_time = dt.datetime.now()
+print('Stop learning {}'.format(str(end_time)))
+elapsed_time= end_time - start_time
+print('Elapsed learning {}'.format(str(elapsed_time)))
+
+~~~
+
+
+#### 3.3 Predict
+
+~~~
+# Now predict the value of the test
+
+expected = y_test
+predicted = classifier.predict(X_test)
+~~~
+
+#### 3.4 Evaluate
+
+展示2中的评价指标
+
+~~~
+#show_some_digits(X_test, predicted, title_text="Predicted {}")
+
+print("Classification report for classifier %s:\n%s\n"
+      % (classifier, metrics.classification_report(expected, predicted)))
+
+cm = metrics.confusion_matrix(expected, predicted)
+print("Confusion matrix:\n%s" % cm)
+
+#plot_confusion_matrix(cm)
+
+#数字形式的confusion_matrix
+print("Accuracy={}".format(metrics.accuracy_score(expected, predicted)))
+
+#图示形式的confusion_matrix
+def plot_confusion_matrix(y_true, y_pred, classes,
+                          normalize=False,
+                          title=None,
+                          cmap=plt.cm.Blues):
+    """
+    This function prints and plots the confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+    """
+    if not title:
+        if normalize:
+            title = 'Normalized confusion matrix'
+        else:
+            title = 'Confusion matrix, without normalization'
+
+    # Compute confusion matrix
+    cm = metrics.confusion_matrix(y_true, y_pred)
+    # Only use the labels that appear in the data
+    # = classes[unique_labels(y_true, y_pred)]
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        print("Normalized confusion matrix")
+    else:
+        print('Confusion matrix, without normalization')
+
+    print(cm)
+
+    fig, ax = plt.subplots()
+    im = ax.imshow(cm, interpolation='nearest', cmap=cmap)
+    ax.figure.colorbar(im, ax=ax)
+    # We want to show all ticks...
+    ax.set(xticks=np.arange(cm.shape[1]),
+           yticks=np.arange(cm.shape[0]),
+           # ... and label them with the respective list entries
+           xticklabels=classes, yticklabels=classes,
+           title=title,
+           ylabel='True label',
+           xlabel='Predicted label')
+
+    # Rotate the tick labels and set their alignment.
+    plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
+             rotation_mode="anchor")
+
+    # Loop over data dimensions and create text annotations.
+    fmt = '.2f' if normalize else 'd'
+    thresh = cm.max() / 2.
+    for i in range(cm.shape[0]):
+        for j in range(cm.shape[1]):
+            ax.text(j, i, format(cm[i, j], fmt),
+                    ha="center", va="center",
+                    color="white" if cm[i, j] > thresh else "black")
+    fig.tight_layout()
+    return ax
+
+
+np.set_printoptions(precision=2)
+
+class_names = [0,1,2,3,4,5,6,7,8,9]
+# Plot non-normalized confusion matrix
+plot_confusion_matrix(expected, predicted, classes=class_names,
+                      title='Confusion matrix, without normalization')
+
+# Plot normalized confusion matrix
+plot_confusion_matrix(expected, predicted, classes=class_names, normalize=True,
+                      title='Normalized confusion matrix')
+
+plt.show()
+
+~~~
+
+### 4 结果展示
+
+**准确率：0.985**
+
+其他evaluation指标如下
+~~~
+
+Accuracy=0.9852380952380952
+
+Classification report for classifier SVC(C=5, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma=0.05, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.99      0.99      1024
+         1.0       0.99      0.99      0.99      1185
+         2.0       0.98      0.99      0.98      1051
+         3.0       0.98      0.98      0.98      1057
+         4.0       0.99      0.99      0.99       964
+         5.0       0.98      0.98      0.98       964
+         6.0       0.99      0.99      0.99      1085
+         7.0       0.99      0.98      0.99      1128
+         8.0       0.97      0.98      0.97      1037
+         9.0       0.98      0.97      0.98      1005
+
+   micro avg       0.99      0.99      0.99     10500
+   macro avg       0.99      0.99      0.99     10500
+weighted avg       0.99      0.99      0.99     10500
+
+
+Confusion matrix:
+[[1014    0    2    0    0    2    2    0    1    3]
+ [   0 1177    2    1    1    0    1    0    2    1]
+ [   2    2 1037    2    0    0    0    2    5    1]
+ [   0    0    3 1035    0    5    0    6    6    2]
+ [   0    0    1    0  957    0    1    2    0    3]
+ [   1    1    0    4    1  947    4    0    5    1]
+ [   2    0    1    0    2    0 1076    0    4    0]
+ [   1    1    8    1    1    0    0 1110    2    4]
+ [   0    4    2    4    1    6    0    1 1018    1]
+ [   3    1    0    7    5    2    0    4    9  974]]
+
+~~~
+
+![](/home/carol/Documents/Others/Figure_1.png) 
+
+![](/home/carol/Documents/Others/Figure_2.png) 
+
+### 5 分析思考
+
+在作这个作业的过程中，我产生了2点思考
+
+1. 一些机器学习的算法依然是有竞争力的，因为针对MNIST数据集，其实有很多方法，比方说CNN之后，用LeNet来分类，也取得了很好的结果，分类准确率在99%，与本作业的SVM方法相差不远。因此，CNN的出现不代表机器学习算法就没有其用处。相反，我在学习机器学习的过程中，学到了很多精巧的思想和设计，我认为这些思想是可以运用到如今的神经网络中的
+2. 在跑代码的时候，有的时候如果想要快速产生结果，可以不用一次性把所有的训练集都用上，可以先用一小部分，先看看代码能否跑通，然后再把整个数据集用上，例如
+~~~
+X_train= X_train[:len(X_train)//100]
+y_train= y_train[:len(y_train)//100]
+~~~
+

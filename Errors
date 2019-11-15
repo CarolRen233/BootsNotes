@@ -1,0 +1,9 @@
+##Jupyter Notebook
+
+当jupyter notebook使用parser=argparse.ArgumentParser()报出此等错误：
+An exception has occurred, use %tb to see the full traceback.
+
+
+~~~
+opt=parser.parse_args(args=[])#添加args=[]
+~~~

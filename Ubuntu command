@@ -1,0 +1,44 @@
+## ubuntu 常见命令
+
+### 文件处理
+
+#### 压缩与解压缩
+
+~~~
+zip -r example_service.zip example_service/
+unzip FileName.zip
+~~~
+
+#### 删除文件夹
+
+~~~
+rm -rf few-shot-ctm
+~~~
+
+#### 显示文件夹里面有什么
+
+~~~
+ls -ll
+~~~
+
+#### 路径
+返回上一级
+
+~~~
+cd ..
+cd ../..
+~~~
+返回主目录
+~~~
+cd ~
+~~~
+
+#### 复制文件到指定目录
+
+~~~
+cp -r kfbreader_linux ~/workspace/renyan/tianchi/baseline/retinanet
+~~~
+
+### Vim
+
+[Vim使用方法](https://www.runoob.com/linux/linux-vim.html) 
