@@ -1,5 +1,5 @@
 createdAt: "2019-11-16T02:27:55.758Z"
-updatedAt: "2019-11-16T05:31:30.249Z"
+updatedAt: "2019-11-16T06:39:51.285Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Paper Notes - Learning Compositional Representations for Few-Shot Recognition"
@@ -11,6 +11,10 @@ content: '''
   
   [TOC]
   
+  ## 总结
+  
+  1. 这篇论文基本是建立在*Jacob Andreas. Measuring compositionality in representation learning. In ICLR, 2019*这篇论文基础之上的
+  2. 
   ## Abstract & Introduction
   人脑能够从小样本中学习到东西可能是因为人脑的compositional structure，这也是deep learning model所缺乏的
   
@@ -71,8 +75,102 @@ content: '''
   \\end{aligned}
   $$
   
-  ![30d5ef0a.png](:storage/852b449a-1f64-4ac5-994c-b37edeac76f3/30d5ef0a.png)
   
+  从图片中很容易看出有哪些attributes，例如CUB的鸟的图片里就有这些
+  
+  beak:curvy,
+  wing color:grey, 
+  breast color:white
+  
+  但是如何将他们在deep model里面表示出来呢？作者依然是建立在论文[3]的基础上，采用了同样的方法
+  
+  $$
+  \\begin{aligned}
+  &augment\\  the\\  labels\\  y_{i} \\ with D_{x_{i}}:\\\\
+  & D_{0} ： primitive\\ (所有的attribute可以取的值,参考最后部分“参考”) \\\\
+  & D_{x_{i}} ： derivations\\ (某个x_{i}dede attribute取的值，参考最后部分“参考”) \\\\
+  & D_{x_{i}} \\ is \\  a \\  subset of D_{0}\\\\
+  \\end{aligned}
+  $$
+  
+  
+  我们希望这些attribute就是可以代表一张图片的，代表的公式(这里我们是希望这个D里面的attributes annotation是完备的exhustive，这是理想情况)：
+  ![476b0e20.png](:storage\\852b449a-1f64-4ac5-994c-b37edeac76f3\\476b0e20.png)
+  其中，η是k×m维的，k=|D₀|，m是image embedding的维度，例如下图
+  ![41cb2ee7.png](:storage\\852b449a-1f64-4ac5-994c-b37edeac76f3\\41cb2ee7.png)
+  
+  $$
+  \\begin{aligned}
+  &f_{\\theta}(x_{i})是作用与data(image)的\\\\
+  &我们希望之后给定一个novel的data也可产生类别结果 \\\\
+  &\\hat{f_{\\eta}(d)}是作用于attribute的 \\\\
+  &我们希望所有的attribute的函数相加也可以产生结果
+  \\end{aligned}
+  $$
+  
+  约束公式：
+  
+  这里σ是距离，我们要不断的训练，来找到θ，可以使attributes加和就能表示成图片
+  
+  ![2b9d4c58.png](:storage\\852b449a-1f64-4ac5-994c-b37edeac76f3\\2b9d4c58.png)
+  
+  ![9694e671.png](:storage\\852b449a-1f64-4ac5-994c-b37edeac76f3\\9694e671.png)
+  
+  loss函数，容易理解，一个就是class分类的loss，一个就是σ距离，我们希望越小越好
+  
+  ![b5126d5b.png](:storage\\852b449a-1f64-4ac5-994c-b37edeac76f3\\b5126d5b.png)
+  
+  
+  但是，作者认为，attributes不可能完备的，即使是在CUB这种只针对鸟的数据集，都很难，更别说那些大型数据集了，所以这里采用了一个soft的方法
+  
+  ![8283bef7.png](:storage\\852b449a-1f64-4ac5-994c-b37edeac76f3\\8283bef7.png)
+  
+  where w(xi) accounts for a part of the image representation which is not described by the attributes
+  
+  此时我们只是尽可能的maximize the similarity，因此用到点积来衡量相似程度
+  
+  ![4e3b610a.png](:storage\\852b449a-1f64-4ac5-994c-b37edeac76f3\\4e3b610a.png)
+  
+  又为了解决一些attribute可能会相关的问题，又用了下面的loss
+  
+  ![ced6f303.png](:storage\\852b449a-1f64-4ac5-994c-b37edeac76f3\\ced6f303.png)
+  
+  又又为了简化D，因为D是在instance level上的，我们就默认一个类别share同样的D
+  
+  
+  ## 参考
+  
+  ~~~
+  D_{0}:
+  1 has_bill_shape::curved_(up_or_down)
+  2 has_bill_shape::dagger
+  3 has_bill_shape::hooked
+  4 has_bill_shape::needle
+  5 has_bill_shape::hooked_seabird
+  6 has_bill_shape::spatulate
+  7 has_bill_shape::all-purpose
+  8 has_bill_shape::cone
+  9 has_bill_shape::specialized
+  10 has_wing_color::blue
+  11 has_wing_color::brown
+  12 has_wing_color::iridescent
+  13 has_wing_color::purple
+  14 has_wing_color::rufous
+  15 has_wing_color::grey
+  16 has_wing_color::yellow
+  17 has_wing_color::olive
+  18 has_wing_color::green
+  19 has_wing_color::pink
+  20 has_wing_color::orange
+  21 has_wing_color::black
+  22 has_wing_color::white
+  23 has_wing_color::red
+  24 has_wing_color::buff
+  
+  D_{x_{1}}:
+  has_bill_shape::dagger
+  has_wing_color::grey
+  ~~~
   
   
   
@@ -86,6 +184,8 @@ content: '''
   
   
 '''
-linesHighlighted: []
+linesHighlighted: [
+  46
+]
 isStarred: false
 isTrashed: false
