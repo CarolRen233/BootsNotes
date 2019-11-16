@@ -1,0 +1,72 @@
+createdAt: "2019-11-16T02:27:55.758Z"
+updatedAt: "2019-11-16T03:52:09.283Z"
+type: "MARKDOWN_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "Paper Notes - Learning Compositional Representations for Few-Shot Recognition"
+tags: [
+  "Paper_Notes"
+]
+content: '''
+  # Paper Notes - Learning Compositional Representations for Few-Shot Recognition
+  
+  [TOC]
+  
+  ## Abstract & Introduction
+  人脑能够从小样本中学习到东西可能是因为人脑的compositional structure，这也是deep learning model所缺乏的
+  
+  Cognitive science identifies compositionality as a property that is crucial to this task（few-shot）
+  
+  人类将问题分解成不同的parts，就像下图这样
+  
+  ![699a8c4c.png](:storage/852b449a-1f64-4ac5-994c-b37edeac76f3/699a8c4c.png)
+  
+  但是现在流行的deep learning的方法却是以梯度为基础，产生不容易解释的representation
+  
+  >However, state-of-the-art methods for virtually all visual recognition tasks are based on deep learning [24, 20]. The parameters of deep neural networks are optimized for the end task with gradient-based methods, resulting in 
+  
+  representations that are not easily interpretable
+  我们希望寻找qualitative interpretation，最近的一篇Jacob Andreas. Measuring compositionality in representation learning. In ICLR, 2019.
+  
+  论文就尝试这样子做，但是Nevertheless, these approaches do not investigate the problem of improving the compositional properties of neural networks.
+  
+  
+  
+  ## Model
+  
+  >Our method takes as input a dataset of images together with their class labels and category-level attribute annotations.
+  >
+  >Our method takes as input a dataset of images together with their class labels and category-level attribute annotations. The attributes can be either purely visual, such as object parts (beak shape) and scene elements (grass), or more abstract, such as openness of a scene.
+  >
+  >在Jacob Andreas的那篇文章里面，a feature encoding of an image is defined as compositional over  a set of attributes if it can be represented as a combination of the encodings of these attributes.
+  
+  作者在这个基础上，形成了自己的方法，就是将attributes annotation作为约束
+  
+  这种约束，意味着要
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

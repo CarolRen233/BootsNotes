@@ -1,5 +1,5 @@
 createdAt: "2019-11-15T05:51:30.930Z"
-updatedAt: "2019-11-15T05:51:44.071Z"
+updatedAt: "2019-11-16T03:25:39.272Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "BUuntu常见命令"
@@ -47,6 +47,12 @@ content: '''
   ~~~
   cp -r kfbreader_linux ~/workspace/renyan/tianchi/baseline/retinanet
   ~~~
+  
+  #### 安装文件
+  ~~~
+  sudo dpkg -i [package name.deb]
+  ~~~
+  
   
   ### Vim
   
