@@ -1,5 +1,5 @@
 createdAt: "2019-11-16T02:27:55.758Z"
-updatedAt: "2019-11-16T03:52:09.283Z"
+updatedAt: "2019-11-16T05:31:30.249Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Paper Notes - Learning Compositional Representations for Few-Shot Recognition"
@@ -41,18 +41,37 @@ content: '''
   
   作者在这个基础上，形成了自己的方法，就是将attributes annotation作为约束
   
-  这种约束，意味着要
+  这种约束，意味着要exhaustive的attribute annotation，但是这是不现实的，所以采用了一种relax version，不是image **exactly =** sum of  attribute embeddings，而是尽可能的maximize the similarity
+  
+  ![f31d66a4.png](:storage/852b449a-1f64-4ac5-994c-b37edeac76f3/f31d66a4.png)
+  
+  
+  >Finally, we observe that enforcing **orthogonality** of the attribute embeddings leads to a better disentanglement of the resulting image representation.
+  
+  本方法在多个数据集上取得了很好的效果
+  
+  >所谓的Top-1 Accuracy是指排名第一的类别与实际结果相符的准确率，
+  >
+  >而Top-5 Accuracy是指排名前五的类别包含实际结果的准确率。
   
   
   
+  ## Approach
   
+  Base and novel data
   
+  $$
+  \\begin{aligned}
+  &Base \\\\
+  &categoies : C_{base} \\\\
+  &dataset: S_{base}\\\\
+  &Novel \\\\
+  &categoies : C_{novel} \\\\
+  &dataset: S_{novel}\\\\
+  \\end{aligned}
+  $$
   
-  
-  
-  
-  
-  
+  ![30d5ef0a.png](:storage/852b449a-1f64-4ac5-994c-b37edeac76f3/30d5ef0a.png)
   
   
   
