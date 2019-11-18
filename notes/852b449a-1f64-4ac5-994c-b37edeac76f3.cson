@@ -1,10 +1,11 @@
 createdAt: "2019-11-16T02:27:55.758Z"
-updatedAt: "2019-11-16T06:39:51.285Z"
+updatedAt: "2019-11-16T07:33:37.324Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Paper Notes - Learning Compositional Representations for Few-Shot Recognition"
 tags: [
   "Paper_Notes"
+  "N-shot"
 ]
 content: '''
   # Paper Notes - Learning Compositional Representations for Few-Shot Recognition
@@ -53,6 +54,7 @@ content: '''
   >Finally, we observe that enforcing **orthogonality** of the attribute embeddings leads to a better disentanglement of the resulting image representation.
   
   本方法在多个数据集上取得了很好的效果
+  
   
   >所谓的Top-1 Accuracy是指排名第一的类别与实际结果相符的准确率，
   >
@@ -112,7 +114,7 @@ content: '''
   
   这里σ是距离，我们要不断的训练，来找到θ，可以使attributes加和就能表示成图片
   
-  ![2b9d4c58.png](:storage\\852b449a-1f64-4ac5-994c-b37edeac76f3\\2b9d4c58.png)
+  ![ed33850c.png](:storage/852b449a-1f64-4ac5-994c-b37edeac76f3/ed33850c.png)
   
   ![9694e671.png](:storage\\852b449a-1f64-4ac5-994c-b37edeac76f3\\9694e671.png)
   
@@ -184,8 +186,6 @@ content: '''
   
   
 '''
-linesHighlighted: [
-  46
-]
+linesHighlighted: []
 isStarred: false
 isTrashed: false

@@ -1,0 +1,40 @@
+createdAt: "2019-11-18T06:41:51.510Z"
+updatedAt: "2019-11-18T07:01:57.006Z"
+type: "MARKDOWN_NOTE"
+folder: "6b4f122b9934a34de253"
+title: "参考资料"
+tags: []
+content: '''
+  # 参考资料
+  
+  [TOC]
+  
+  ## 数据结构：
+  - 《大话数据结构》：“树”及之前的章节代码和讲解认真看，“树”后的章节无需看代码，只用大致了解有哪些算法和其原理即可
+  
+  ## Python
+  - [Programming for Everybody (Getting Started with Python)](https://www.coursera.org/learn/python/home/welcome)]:所有的内容和习题都完成
+  - 上面课程完成之后，再学两个东西：**类(class), 函数**，(Udacity之前有个课程讲这两个的，但是现在这个课程撤了，找不到了，你可以自己在网上找一下博客或者视频看看)，然后python学习基本就结束了，后面就是需要用什么再学什么就行了
+  
+  
+  
+  ## Git & Github
+  
+  这个会了之后就可以畅游github，把别人的代码拿来学习，研究，改进了
+  
+  - [【Git版本控制】入门教程_培训课程_基础技术-优达学城(Udacity)官网](https://cn.udacity.com/course/version-control-with-git--ud123)
+  - [【GitHub远程代码库协作】入门教程_培训课程_基础技术-优达学城(Udacity)官网](https://cn.udacity.com/course/github-collaboration--ud456)
+  
+  这两个课程学习过程遇到问题可以看我写的知乎文章(如何使用 GitHub)[[如何使用 GitHub？ - 知乎](https://www.zhihu.com/question/20070065/answer/619933013)]
+  
+  
+  
+  
+  
+  
+  最后祝阿菲转CS成功~ 赚大钱~
+  如果我将来婚姻不幸就把我接到美国哈哈哈~
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

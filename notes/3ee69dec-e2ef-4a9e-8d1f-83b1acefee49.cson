@@ -1,0 +1,50 @@
+createdAt: "2019-11-16T07:58:18.171Z"
+updatedAt: "2019-11-16T08:27:12.242Z"
+type: "MARKDOWN_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "Datesets for few-shot learning"
+tags: [
+  "N-shot"
+]
+content: '''
+  # Datesets for few-shot learning  
+  
+  [TOC]
+  
+  
+  ## CUB-200-2011(1.1G)
+  [LINK](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html)
+  -  It contains 11,788 images of birds
+  -  labeled with 200 categories corresponding to bird species
+  -  authors have collected annotations for 307 attributes
+  -   These attribute annotations have been collected on the image level via crowd sourcing. We aggregate them on the category level(就是compositional的[论文](https://sites.google.com/view/comprepr/home#h.p_QgIUq9RrFk0v)里面采用的方法，为了简化)
+  
+  ## SUN397(39G)
+  
+  [LINK](https://vision.princeton.edu/projects/2010/SUN/)
+  - for scene recognition
+  - 397 most well sampled categories
+  - totaling to 108,754 images
+  -  [Patterson et al]([](https://link.springer.com/content/pdf/10.1007%2Fs11263-013-0695-z.pdf)) have collected discriminative attributes for these scene cat- egories, resulting in a vocabulary of 106 attributes that are both discriminative and shared across scene classes
+  
+  ### SUN Attribute Dataset (1.7G)
+  [LINK](http://cs.brown.edu/~gmpatter/sunattributes.html)
+  可以下载
+  
+  ## ImageNet 
+  [Attributes download](http://image-net.org/download-attributes)
+  
+  ### ImageNet 1000 
+  
+  [Low-shot Visual Recognition by Shrinking and Hallucinating Features - 2017](http://openaccess.thecvf.com/content_ICCV_2017/papers/Hariharan_Low-Shot_Visual_Recognition_ICCV_2017_paper.pdf)
+  -  divided the 1000 ImageNet categories randomly into 389 base categories and 611 novel categories
+  
+  
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

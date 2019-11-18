@@ -1,10 +1,40 @@
 createdAt: "2019-11-16T03:31:30.898Z"
-updatedAt: "2019-11-16T03:34:26.033Z"
+updatedAt: "2019-11-16T08:35:16.268Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
-title: ""
-tags: []
-content: ""
+title: "Reading Materials for meta learning"
+tags: [
+  "N-shot"
+]
+content: '''
+  # Reading Materials for meta learning
+  
+  [toc]
+  
+  ## Articles:
+  
+  - [Meta Learning目前的研究思路](https://zhuanlan.zhihu.com/p/28639662)
+  - [接下来要研究的方向(迁移，meta)](https://zhuanlan.zhihu.com/p/27696130)
+  - [Meta-Learning: Learning to Learn Fast](https://lilianweng.github.io/lil-log/2018/11/30/meta-learning.html)
+  
+  
+  
+  ## Survey
+  
+  - [Vanschoren J. Meta-learning: A survey[J]. arXiv preprint arXiv:1810.03548, 2018](https://arxiv.org/pdf/1810.03548.pdf)
+  - [A Survey of Zero-Shot Learning: Settings, Methods, and Applications](http://www.ntulily.org/wp-content/uploads/journal/A_Survey_of_Zero-Shot_Learning_Settings_Methods_and_Applications_accepted.pdf)
+  - [Generalizing from a Few Examples: A Survey on Few-Shot Learning](https://arxiv.org/pdf/1904.05046.pdf)
+  - 
+  
+  ## Papers
+  
+  - [Meta-Transfer Learning for Few-Shot Learning](http://openaccess.thecvf.com/content_CVPR_2019/papers/Sun_Meta-Transfer_Learning_for_Few-Shot_Learning_CVPR_2019_paper.pdf)
+  
+  
+  ## Codes
+  
+  [Papers With Code : Meta-Learning](https://paperswithcode.com/task/meta-learning)
+'''
 linesHighlighted: []
 isStarred: false
 isTrashed: false
