@@ -1,0 +1,19 @@
+createdAt: "2019-11-18T07:13:51.871Z"
+updatedAt: "2019-11-18T07:16:53.637Z"
+type: "MARKDOWN_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "Overview on Meta-Learning"
+tags: []
+content: '''
+  # Overview on Meta-Learning
+  
+  When we learn new skills, we rarely - if ever - start from scratch. We start from skills learned earlier in related tasks, reuse approaches that worked well before, and focus on what is likely worth trying based on experience (Lake et al., 2017). With every skill learned, learning new skills becomes easier, requiring fewer examples and less trial-and-error. In short, we earn how to learn across tasks. Likewise, when building machine learning models for a pecific task, we often build on experience with related tasks, or use our (often implicit) nderstanding of the behavior of machine learning techniques to help make the right choices.
+  
+  
+  The challenge in meta-learning is to learn from prior experience in a systematic, datadriven ay. First, we need to collect meta-data that describe prior learning tasks and previously learned models. They comprise the exact algorithm configurations used to train the models, including hyperparameter settings, pipeline compositions and/or network architectures, he resulting model evaluations, such as accuracy and training time, the learned odel parameters, such as the trained weights of a neural net, as well as measurable properties f the task itself, also known as meta-features. Second, we need to learn from this prior meta-data, to extract and transfer knowledge that guides the search for optimal models for new tasks. This chapter presents a concise overview of different meta-learning approaches to do this effectively.
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
