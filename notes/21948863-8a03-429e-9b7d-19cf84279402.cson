@@ -1,0 +1,97 @@
+createdAt: "2019-11-18T08:54:26.802Z"
+updatedAt: "2019-11-18T11:21:00.297Z"
+type: "MARKDOWN_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "Survey on Few-Shot Learning"
+tags: []
+content: '''
+  # Survey on Few-Shot Learning
+  
+  [TOC]
+  
+  [论文地址](https:\\\\arxiv.org\\pdf\\1711.04043.pdf) (写的很烂！)
+  [A Closer Look at Few-shot Classification](https://openreview.net/forum?id=HkxLXnAcFQ)
+  
+  
+  ## 1. Overview
+  
+  ### 1.1 Notation
+  
+  >![26b425da.png](:storage\\21948863-8a03-429e-9b7d-19cf84279402\\26b425da.png)
+  >
+  
+  ### 1.2 Relevant Learning Problems
+  
+  - Semi-supervised learning
+  - Imbalanced learning
+  - Transfer learning
+  - Meta-learning
+  
+  ## 2. Methods
+  
+  
+  ### 2.1 Model Based
+  
+  >Model Based 方法旨在通过模型结构的设计快速在少量样本上更新参数，直接建立输入 x 和预测值 P 的映射函数
+  
+  就是快速在少量样本上更新参数，利用LSTM的思想，每次的example输入就是一个时刻的输入，然后又利用NTMs神经网络的外部存储进行短时记忆，并能通过缓慢权值更新来进行长时记忆
+  
+  ### 2.2 Metric Based
+  
+  >Metric Based 方法通过度量 batch 集中的样本和 support 集中样本的距离，借助最近邻的思想完成分类
+  >
+  
+  如果在 Few-shot Learning 的任务中去训练普通的基于cross-entropy的神经网络分类器，那么几乎肯定是会过拟合，因为神经网络分类器中有数以万计的参数需要优化。
+  
+  所以，很多非参数化的方法（最近邻、K-近邻、Kmeans）是不需要优化参数的，因此可以在meta-learning的框架下构造一种可以端到端训练的 few-shot 分类器。该方法是对样本间距离分布进行建模，使得同类样本靠近，异类样本远离。
+  
+  #### 2.2.1 Siamese Network
+  
+  [Siamese Neural Networks for One-shot Image Recognition](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf)
+  
+  孪生网络是一个双路的神经网络，训练时，通过组合的方式构造不同的成对样本，输入网络进行训练，在最上层通过样本对的距离判断他们是否属于同一个类，并产生对应的概率分布。
+  
+  在预测阶段，孪生网络处理测试样本和支撑集之间每一个样本对，最终预测结果为支撑集上概率最高的类别。
+  
+  #### 2.2.2 Match Network
+  
+  [Matching Networks for One Shot Learning](https://arxiv.org/pdf/1606.04080.pdf)
+  
+  建模过程的创新，文章提出了基于memory和attention的matching nets，使得可以快速学习。
+  
+  训练过程的创新，文章基于传统机器学习的一个原则，即训练和测试是要在同样条件下进行的，提出在训练时不断地让网络只看每一类的少量样本，这将和测试的过程保持一致。
+  
+  ### 2.2.3 Prototype Network
+  
+   [Prototypical networks for few-shot learning](http://papers.nips.cc/paper/6996-prototypical-networks-for-few-shot-learning.pdf)
+   
+  每个类别都存在一个原型表达，该类的原型是support set在embedding空间中的均值。然后，分类问题变成在embedding空间中的最近邻。
+  
+  
+  ### 2.2.4 Relation Network
+  
+  [Learning to compare: Relation network for few-shot learning](https://arxiv.org/pdf/1711.06025.pdf)
+  
+  前面介绍的几个网络结构在最终的距离度量上都使用了固定的度量方式，如cosine，欧式距离等，这种模型结构下所有的学习过程都发生在样本的embedding阶段。
+  
+  认为，度量方式也是网络中非常重要的一环，需要对其进行建模，所以该网络不满足单一且固定的距离度量方式，而是训练一个网络来学习（例如 CNN）距离的度量方式，在 loss 方面也有所改变，考虑到relation network更多的关注relation score，更像一种回归，而非 0/1 分类，所以使用了MSE取代了cross-entropy。
+  
+  
+  
+  ### 2.3 Optimization Based
+  
+  >Optimization Based 方法认为普通的梯度下降方法难以在 few-shot 场景下拟合，因此通过调整优化方法来完成小样本分类的任务。
+  >
+  
+  #### 2.3.1 meta-learner
+  
+  meta learner的目标是在各种不同的学习任务上学出一个模型，使得可以仅用少量的样本就能解决一些新的学习任务。这种任务的挑战是模型需要结合之前的经验和当前新任务的少量样本信息，并避免在新数据上过拟合。
+  
+  
+  训练过程中，从训练集（64 个类，每类 600 个样本）中随机采样 5 个类，每个类 5 个样本，构成支撑集，去学习learner；然后从训练集的样本（采出的 5 个类，每类剩下的样本）中采样构成Batch集，集合中每类有 15 个样本，用来获得learner的loss，去学习meta leaner。
+  
+  测试的流程一样，从测试集（16 个类，每类 600 个样本）中随机采样 5 个类，每个类 5 个样本，构成支撑集Support Set，去学习learner；然后从测试集剩余的样本（采出的 5 个类，每类剩下的样本）中采样构成Batch集，集合中每类有 15 个样本，用来获得learner的参数，进而得到预测的类别概率。
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

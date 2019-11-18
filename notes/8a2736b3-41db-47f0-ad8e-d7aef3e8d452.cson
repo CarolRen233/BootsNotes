@@ -1,5 +1,5 @@
 createdAt: "2019-11-18T07:09:14.320Z"
-updatedAt: "2019-11-18T08:51:04.744Z"
+updatedAt: "2019-11-18T11:07:03.961Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Meta-learning Survey"
@@ -103,7 +103,7 @@ content: '''
   2. [Prototypical networks for few-shot learning](http://papers.nips.cc/paper/6996-prototypical-networks-for-few-shot-learning.pdf)的Prototypical Networks(引用量666)把examples map到一个p维向量空间，然后使那些在同一个class的离得更近。然后计算每个class的prototype (mean vector)，对于新的test instance就也map到这个空间，然后计算softmax over all possible classes. [Meta-learning for semi-supervised few-shot classification](https://arxiv.org/pdf/1803.00676.pdf)在这个基础上将其改成半监督的
   3. [Optimization as a model for few-shot learning](https://openreview.net/pdf?id=rJY0-Kcll)(引用量530)用了LSTM的方法，每次有个新的example进来，就计算loss，用梯度下降来更新parameters
   4. [Model-agnostic meta-learning for fast adaptation of deep networks](https://arxiv.org/pdf/1703.03400.pdf)(引用量999)MAML,用一个随机的initial的parameter值w_{k}，选择一组prior tasks，然后开始用J examples取train，计算梯度和loss，然后更新w_{k}。[Meta-learning and universality](https://arxiv.org/pdf/1710.11622.pdf)证明了这种方法的universality
-  5. [Meta-learning with memory-augmented neural networks.](http://proceedings.mlr.press/v48/santoro16.pdf)(引用量408)利用了[Neural turing machines](https://arxiv.org/pdf/1410.5401.pdf%20(http://Neural%20Turning%20Machines)%20)(引用量1202)这个网络，是一种有记忆能力的网络
+  5. [Meta-learning with memory-augmented neural networks.](http://proceedings.mlr.press/v48/santoro16.pdf)(引用量408)利用了[Neural turing machines](https://arxiv.org/pdf/1410.5401.pdf%20(http://Neural%20Turning%20Machines)%20)(引用量1202)NTMs这个网络，是一种有记忆能力的网络
   
   
   

@@ -1,0 +1,130 @@
+createdAt: "2019-11-18T11:23:55.055Z"
+updatedAt: "2019-11-18T12:51:09.967Z"
+type: "MARKDOWN_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "A Survey of Zero-Shot Learning"
+tags: []
+content: '''
+  # A Survey of Zero-Shot Learning
+  
+  [TOC]
+  
+  [论文链接](http://www.ntulily.org/wp-content/uploads/journal/A_Survey_of_Zero-Shot_Learning_Settings_Methods_and_Applications_accepted.pdf)
+  
+  ## 1. Introduction 
+  ### 1.1 Application/Motivatoin
+  
+  - The number of target classes is large. 人类可以识别至少3w种classes，到那时收集这么多的classes不现实
+  - Target classes are rare
+  - Target classes change over time
+  - In some particular tasks, it is expensive to obtain labeled instances
+  
+  ### 1.2 Notation
+  
+  ![43af84bc.png](:storage\\769469e9-ef16-4c2d-a023-ac8e0d5c3cac\\43af84bc.png)
+  
+  
+  ### 1.3 Auxiliary information
+  
+  一些辅助性的信息是很有必要的，就是一些Auxiliary information。
+  
+  需要一些semantic information的描述，例如，人就可以在没见过斑马的时候通过“一种马身上有条纹”的描述来认识斑马
+  
+  所以又有一个semantic space
+  
+  ![4a0bfc2e.png](:storage\\769469e9-ef16-4c2d-a023-ac8e0d5c3cac\\4a0bfc2e.png)
+  
+  
+  ### 1.4 learning settings
+  
+  
+  goal： is to learn the zero-shot classifier f u (·)
+  
+  
+  
+  - **Class-Inductive Instance-Inductive (CIII) Setting**: Only labeled training instances D^tr and seen class prototypes T^s are used in model learning.
+  - **Class-Transductive Instance-Inductive (CTII) Setting**:Labeled training instances Dtr , seen class prototypes Ts and unseen class prototypes Tu are used in model learning.
+  - **Class-Transductive Instance-Transductive (CTIT) Setting**: Labeled training instances Dt r , seen class prototypes Ts , unlabeled testing instances Xte and unseen class prototypes Tu are used in model learning.
+  
+  ## 2. Semantic Spaces
+  
+  ### 2.1 Engineered Semantic Spaces
+  
+  >In engineered semantic spaces, each dimension of the semantic space is designed by humans.
+  
+  **人为设计的semantic space**
+  
+  #### 2.1.1 Attribute spaces
+  
+  - [Learning to Detect Unseen Object Classes by Between-Class Attribute Transfer](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.165.9750&rep=rep1&type=pdf)(引用量1552)
+  
+  - [Zero-shot learning with semantic output codes](https://papers.nips.cc/paper/3650-zero-shot-learning-with-semantic-output-codes.pdf)(引用量611)
+  
+  >Each attribute is usually a word or a phrase, corresponding to one property of these classes
+  >
+  >Then, these attributes are used
+  to form the semantic space, with each dimension being one attribute
+  >
+  >For each class, the values of each dimension of the corresponding prototype is determined by whether this class has the corresponding attribute. Suppose in the animal recognition problem, there are three attributes: “having stripes”, “living on land” and “plant eating”. For the class “tiger”, the corresponding values of these three attributes form the prototype [1, 1, 0]. For the class “horse”, the corresponding values form the prototype [0, 1, 1]
+  
+  #### 2.1.2 Lexical spaces
+  
+  - [Label-Embedding for Image Classification.](https://arxiv.org/pdf/1503.08677.pdf)(引用量235)
+  - [Evaluation of Output Embeddings for
+  Fine-Grained Image Classification](http://openaccess.thecvf.com/content_cvpr_2015/papers/Akata_Evaluation_of_Output_2015_CVPR_paper.pdf)(引用量438)
+  
+  
+  >词典空间Lexical spaces are based on the labels of the classes and datasets(**such as WordNet**) that can provide semantic information.
+  >
+  >One way is by leveraging the hierarchical relationships in WordNet. Such as using all seen and unseen classes, together with their ancestors in WordNet to form the semantic space, with each dimension corresponding to one class
+  >
+  >In some approaches, the value is 1 if cj is the ancestor of ci or is ci itself; otherwise, the value is 0 [3]. In other approaches, the value is determined by the distance between ci and cj inWordNet; the distance measure can be Jiang-Conrath distance [4], Lin distance [4] or path length similarity [4].
+  
+  #### 2.1.3 Text-keyword spaces
+  
+  - []()(引用量)
+  
+  >Text-keyword spaces are kinds of semantic spaces that are constructed by a set of keywords extracted from the text descriptions of each class
+  >
+  >In text-keyword spaces, the most common source of the text descriptions is websites, including both general websites like Wikipedia [4, 120], and domain specific websites.
+  >
+  >For example, in [8, 31], as the task is zeroshot flower recognition in images, both the Plant Database and Plant Encyclopedia are used (which are specific for plants) to obtain the text descriptions for each flower class. 
+  
+  ### 2.2 Learned Semantic Spaces
+  
+  >In learned semantic spaces, the dimensions in the spaces are not  designed by humans. Prototypesof each class are obtained from the output of some machine learning model
+  >
+  **利用一些机器学习的model来自动生成，此时的each dimensiion没有明确的semantic meaning
+  
+  #### 2.2.1 Label-embedding spaces.
+  >Label-embedding spaces are kinds of semantic spaces in which the class prototypes are obtained through the **embedding of class labels**.
+  >
+  利用了nlp的word embedding的方式
+  
+  #### 2.2.2 Text-embedding spaces.
+  
+  #### 2.2.3 Image-representation spaces.
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,5 +1,5 @@
 createdAt: "2019-11-18T07:13:51.871Z"
-updatedAt: "2019-11-18T07:16:53.637Z"
+updatedAt: "2019-11-18T09:02:27.065Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Overview on Meta-Learning"
@@ -12,6 +12,12 @@ content: '''
   
   The challenge in meta-learning is to learn from prior experience in a systematic, datadriven ay. First, we need to collect meta-data that describe prior learning tasks and previously learned models. They comprise the exact algorithm configurations used to train the models, including hyperparameter settings, pipeline compositions and/or network architectures, he resulting model evaluations, such as accuracy and training time, the learned odel parameters, such as the trained weights of a neural net, as well as measurable properties f the task itself, also known as meta-features. Second, we need to learn from this prior meta-data, to extract and transfer knowledge that guides the search for optimal models for new tasks. This chapter presents a concise overview of different meta-learning approaches to do this effectively.
   
+  
+  
+  “Can machines think [122]? ” This is the question raised in Alan Turing’s seminal paper entitled “Computing Machinery and Intelligence” in 1950. He made the statement that, “The idea behind digital computers may be explained by saying that these machines are intended to carry out any operations which could be done by a human computer”. In other words, the ultimate goal of machines is to be as intelligent as humans. Recent years, due to the appearance of powerful computing devices such as GPU, large-scale data sets such as ImageNet [26], advanced models and algorithms such as CNN [64], AI speeds up its pace to be like humans and defeats humans in many fields. To name a few, AlphaGo [106] has defeated human champions in playing the ancient game of go, and ResNet [50] has a higher classification accuracy than humans on ImageNet data set of 1000 classes. While in other fields, AI involves in human’s daily life as highly intelligent tools, such as voice assistants, search engines, autonomous driving cars , and industrial robots.
+  
+  
+  Albeit its prosperity, current AI cannot rapidly generalize from a few examples to perform the task. The aforementioned successful applications of AI rely on exhaustive learning from large-scale data. In contrast, humans are capable of learning new task scenarios rapidly by utilizing what they learned in the past. For example, a child who learned how to add can rapidly transfer his knowledge to learn how to multiply given a few examples, e.g., 2 × 3 = 2 + 2 + 2 and 1 × 3 = 1 + 1 + 1. Another example is that given a few photos of a stranger, a child can easily identify the same person from a large number of photos.
   
 '''
 linesHighlighted: []
