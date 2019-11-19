@@ -1,5 +1,5 @@
 createdAt: "2019-11-18T11:23:55.055Z"
-updatedAt: "2019-11-18T12:51:09.967Z"
+updatedAt: "2019-11-19T11:06:44.912Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "A Survey of Zero-Shot Learning"
@@ -98,20 +98,33 @@ content: '''
   
   #### 2.2.1 Label-embedding spaces.
   >Label-embedding spaces are kinds of semantic spaces in which the class prototypes are obtained through the **embedding of class labels**.
+  >In this space, semantically similar words or phrases are embedded as nearby vectors
   >
+  
   利用了nlp的word embedding的方式
   
   #### 2.2.2 Text-embedding spaces.
   
+  >Text-embedding spaces are a kind of semantic spaces, in which the class prototypes are obtained by embedding the text descriptions for each class.
+  
+  
   #### 2.2.3 Image-representation spaces.
   
   
+  >Image-representation spaces are kinds of semantic spaces in which the class prototypes are obtained from images belonging to each class
   
   
   
+  ## 3. Methods
+  
+  
+  ### 3.1 Classifier-Based Methods
+  
+  #### 3.1.1 Correspondence Methods
   
   
   
+  ### 3.2 Instance-Based Methods
   
   
   
@@ -125,6 +138,8 @@ content: '''
   
   
 '''
-linesHighlighted: []
+linesHighlighted: [
+  4
+]
 isStarred: false
 isTrashed: false
