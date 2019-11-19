@@ -1,0 +1,114 @@
+createdAt: "2019-11-19T12:04:30.893Z"
+updatedAt: "2019-11-19T13:52:13.450Z"
+type: "SNIPPET_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "分析main.py代码 - comp_feats_release"
+tags: []
+description: "分析main.py代码 - comp_feats_release"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "__main__.py"
+    mode: "Python"
+    content: '''
+      if __name__=='__main__':
+          np.random.seed(10)
+          params = parse_args()
+          
+          # gpu的个数也是可以设置的
+          ids_list = ''
+          for i in range(len(params.gpu)):
+              ids_list += params.gpu[i] + ','
+          ids_list = ids_list[:-1]
+      
+          os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+          os.environ["CUDA_VISIBLE_DEVICES"] = ids_list
+          
+          #tensorboard要先设置好一个writer，指定好一会要写的东西放到哪里
+          writer = SummaryWriter(logdir='./' + params.checkpoint_dir)
+      
+          #在这里，某个例子当中，我们对traincfg，valcfg的参数就是base_classes_train_cub_template.yaml/base_classes__cub_template.yaml这个文件，yaml文件其实就是里面储存了一些参数值，方便我们调用
+          with open(params.traincfg,'r') as f:
+              train_data_params = yaml.load(f)
+          with open(params.valcfg,'r') as f:
+              val_data_params = yaml.load(f)
+      
+          #这里的data也是写好的文件，里面有一些functoin可以使用,这里的train_loader就是load按照yaml文件中的dataset_type的那个数据集，然后按照yaml中transform_params里面的参数进行预处理，然后按照yaml中data_loader_params的一些参数，例如batch size，的train的数据
+          train_loader = data.get_data_loader(train_data_params)
+          val_loader = data.get_data_loader(val_data_params)
+      
+          model = get_model(params.model, params.num_classes, is_cosine=params.is_cosine)
+      
+          num_attrs = 0
+          if train_loader.dataset.attribute_data is not None:
+              num_attrs = train_loader.dataset.attribute_data.size(1)
+          loss_fn = losses.GenericLoss(model.final_feat_dim, params.is_soft, num_attrs)
+      
+          model = torch.nn.DataParallel(model)
+      
+          if not os.path.isdir(params.checkpoint_dir):
+              os.makedirs(params.checkpoint_dir)
+          start_epoch = params.start_epoch
+          stop_epoch = params.stop_epoch
+          resume_file = get_resume_file(params.resume_file)
+          if resume_file is not None:
+              tmp = torch.load(resume_file)
+              model.load_state_dict(tmp['state'])
+      
+          model = model.cuda()
+          model = main_training_loop(train_loader, val_loader, model, loss_fn, start_epoch, stop_epoch, params, writer)
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "parse_args().py"
+    mode: "Python"
+    content: '''
+      def parse_args():
+          parser = argparse.ArgumentParser(description='Main training script')
+          parser.add_argument('--traincfg', required=True, help='yaml file containing config for data')
+          parser.add_argument('--valcfg', required=True, help='yaml file containing config for data')
+          parser.add_argument('--model', default='ResNet18', help='model: ResNet{10|18|34}')
+          parser.add_argument('--lr', default=0.1, type=float, help='Initial learning rate')
+          parser.add_argument('--momentum', default=0.9, type=float, help='Momentum')
+          parser.add_argument('--weight_decay', default=0.0001, type=float, help='Weight decay')
+          parser.add_argument('--lr_decay', default=0.1, type=float, help='Learning rate decay')
+          parser.add_argument('--step_size1', default=30, type=int, help='First step size')
+          parser.add_argument('--step_size2', default=60, type=int, help='Second step size')
+          parser.add_argument('--print_freq', default=10, type=int,help='Print frequecy')
+          parser.add_argument('--save_freq', default=10, type=int, help='Save frequency')
+          parser.add_argument('--start_epoch', default=0, type=int,help ='Starting epoch')
+          parser.add_argument('--stop_epoch', default=90, type=int, help ='Stopping epoch')
+          parser.add_argument('--gpu', nargs='*', help='GPU id')
+          parser.add_argument('--resume_file', default=None, help='resume from file')
+          parser.add_argument('--checkpoint_dir', required=True, help='Directory for storing check points')
+          parser.add_argument('--num_classes',default=1000, type=int, help='num classes')
+          parser.add_argument('--dampening', default=0, type=float, help='dampening')
+          parser.add_argument('--is_cosine', help='use cosine classifier', action='store_true')
+          parser.add_argument('--is_soft', help='use soft attrinute loss', action='store_true')
+          parser.add_argument('--attr_weight', default=0, type=float, help='Weight of the attribute loss')
+          parser.add_argument('--orth_weight', default=0, type=float, help='Weight of the orthogonality')
+    '''
+  }
+  {
+    name: "get_model.py"
+    mode: "Python"
+    content: '''
+      \'''
+      
+      
+      \'''
+      
+      def get_model(model_name, num_classes, is_cosine=False):
+          model_dict = dict(ResNet10 = ResNetFeat.ResNet10,
+                      ResNet18 = ResNetFeat.ResNet18,
+                      ResNet34 = ResNetFeat.ResNet34,
+                      ResNet50 = ResNetFeat.ResNet50,
+                      ResNet101 = ResNetFeat.ResNet101)
+          return model_dict[model_name](num_classes, False, is_cosine=is_cosine)
+    '''
+    linesHighlighted: []
+  }
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,63 @@
+createdAt: "2019-11-19T12:28:21.916Z"
+updatedAt: "2019-11-19T12:33:10.250Z"
+type: "SNIPPET_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "不同类型文件的作用 - comp_feats_release"
+tags: []
+description: '''
+  不同类型文件的作用 - comp_feats_release
+  
+'''
+snippets: [
+  {
+    linesHighlighted: []
+    name: ".yaml"
+    mode: "YAML"
+    content: '''
+      \'''
+      yaml文件就是为了可以方便调用参数，都储存在这里，也方便修改下次使用
+      
+      \'''
+      
+      dataset_type: 'MetaDataset'
+      dataset_params:
+        meta: 'base_classes_train_meta_cub_fixed.json'
+        rootdir: 'scratch/ptokmako/CUB_200_2011' # Change this to ImageNet directory
+        use_attributes: False
+        attribute_file: 'cub_class_attr_05thresh_freq'
+      transform_params:
+        transform_list: ['RandomResizedCrop', 'ImageJitter', 'RandomHorizontalFlip', 'ToTensor', 'Normalize']
+        image_size: 224
+        jitter_params:
+          Brightness: 0.4
+          Contrast: 0.4
+          Color: 0.4
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+      data_loader_params:
+        batch_size: 16
+        shuffle: True
+        num_workers: 12
+        pin_memory: True
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: ".json"
+    content: '''
+      \'''
+      储存dataset的lable信息的，就是lable的分类有哪几种？然后每种分类的表示用数字进行表示，1，2，3。然后每张图片的地址
+      \'''
+      
+      "label_names": ["001.Black_footed_Albatross", "002.Laysan_Albatross", "003.Sooty_Albatross", "004.Groove_billed_Ani", "005.Crested_Auklet", "006.Least_Auklet", "007.Parakeet_Auklet", "008.Rhinoceros_Auklet", "009.Brewer_Blackbird", "010.Red_winged_Blackbird", "011.Rusty_Blackbird", "012.Yellow_headed_Blackbird", "013.Bobolink", "014.Indigo_Bunting"]
+      "image_labels": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14]
+      "image_names": ["images/002.Laysan_Albatross/Laysan_Albatross_0002_1027.jpg", "images/002.Laysan_Albatross/Laysan_Albatross_0082_524.jpg", "images/002.Laysan_Albatross/Laysan_Albatross_0070_788.jpg", "images/002.Laysan_Albatross/Laysan_Albatross_0053_543.jpg", "images/002.Laysan_Albatross/Laysan_Albatross_0001_545.jpg", "images/002.Laysan_Albatross/Laysan_Albatross_0023_1059.jpg", "images/002.Laysan_Albatross/Laysan_Albatross_0060_777.jpg"]
+      
+      
+    '''
+    mode: "JSON"
+  }
+]
+isStarred: false
+isTrashed: false

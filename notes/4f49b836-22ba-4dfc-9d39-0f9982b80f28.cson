@@ -1,0 +1,126 @@
+createdAt: "2019-11-19T12:35:40.578Z"
+updatedAt: "2019-11-19T13:40:59.935Z"
+type: "SNIPPET_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "分析data.py代码 - comp_feats_release"
+tags: []
+description: "分析data.py代码 - comp_feats_release"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "get_data_loader(params).py"
+    mode: "Python"
+    content: '''
+      \'''
+      
+      transform_params:
+        transform_list: ['RandomResizedCrop', 'ImageJitter', 'RandomHorizontalFlip', 'ToTensor', 'Normalize']
+        image_size: 224
+        jitter_params:
+          Brightness: 0.4
+          Contrast: 0.4
+          Color: 0.4
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+      dataset_params:
+        meta: 'base_classes_train_meta_cub_fixed.json'
+        rootdir: 'scratch/ptokmako/CUB_200_2011' # Change this to ImageNet directory
+        use_attributes: False
+        attribute_file: 'cub_class_attr_05thresh_freq'
+      data_loader_params:
+        batch_size: 16
+        shuffle: True
+        num_workers: 12
+        pin_memory: True
+        
+        这里我们输入的其实是一个yaml文件的内容，就是为了获得这个yaml文件里面的一些参数，因为yaml文件可以看作是一种字典式的储存，因此就是这样子dataset_type=params['dataset_type']就可以获得里面的值并且赋值给dataset_type了
+      \'''
+      dataset_dict = dict(MetaDataset=myMetaDataset.MetaDataset,
+                          CocoDetection=dsets.CocoDetection,
+                          CocoCaptions=dsets.CocoCaptions,
+                          LSUN=dsets.LSUN,
+                          CIFAR10=dsets.CIFAR10,
+                          CIFAR100=dsets.CIFAR100,
+                          ImageFolder=dsets.ImageFolder)
+      
+      def get_data_loader(params):
+          dataset_type=params['dataset_type']
+          dataset_params=params['dataset_params']
+      
+          transform_params = params['transform_params']
+          
+         # 这里的[parse_transform用到了隔壁的一个定义好的函数，然后我们就得到了一个list，list里面就是transform的method
+          transform_list = [parse_transform(x, transform_params) for x in transform_params['transform_list']]
+          
+          # transforms.Compose就是把多个步骤整合到一起，这里就是把transform_list里面的步骤整合到一起，因为list里面是多个method
+          transform = transforms.Compose(transform_list)
+      
+          #dataset_dict就是前面定义好的，其实这里就是希望我们如果想用不同的数据集的化，它都有相应的数据集，其中myMetaDataset是定义的一个py文件，里面有MetaDataset的class，其他的dsets都是 import torchvision.datasets 的
+          #dataset就是经过transform之后的dataset
+          dataset = dataset_dict[dataset_type](transform=transform, **dataset_params)
+          #data_loader_params就是yaml文件中的那样，batch  size多大啊什么的数据
+          data_loader_params = params['data_loader_params']
+          #data_loader就是按照设置好的batchsize的经过transform之后的data
+          data_loader = torch.utils.data.DataLoader(dataset, **data_loader_params)
+      
+          return data_loader
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "parse_transform(transform_type, transform_params).py"
+    mode: "Python"
+    content: '''
+      \'''
+      来看下yaml文件里面的内容
+      
+      transform_params:
+        transform_list: ['RandomResizedCrop', 'ImageJitter', 'RandomHorizontalFlip', 'ToTensor', 'Normalize']
+        image_size: 224
+        jitter_params:
+          Brightness: 0.4
+          Contrast: 0.4
+          Color: 0.4
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+      
+      那么这个函数的作用就是为每一种图片的transform方法返回一个实例化的方法
+      \'''
+      
+      def parse_transform(transform_type, transform_params):
+          if transform_type=='ImageJitter':
+            #像这个，就是返回一个方法，这个方法可以对image进行transform，transform的参数就是 Brightness: 0.4 Contrast: 0.4 Color: 0.4，然后这个method其实里面是可以放一个图片的
+              method = additional_transforms.ImageJitter(transform_params['jitter_params'])
+              return method
+          method = getattr(transforms, transform_type)
+          if transform_type=='RandomResizedCrop' or transform_type=='CenterCrop':
+              return method(transform_params['image_size'])
+          elif transform_type=='Resize':
+              return method(transform_params['scale'])
+          elif transform_type=='Normalize':
+              return method(mean=transform_params['mean'], std=transform_params['std'])
+          else:
+              return method()
+    '''
+  }
+  {
+    name: "get_dataset(params).py"
+    mode: "Python"
+    content: '''
+      def get_dataset(params):
+          dataset_type=params['dataset_type']
+          dataset_params=params['dataset_params']
+      
+          transform_params = params['transform_params']
+          transform_list = [parse_transform(x, transform_params) for x in transform_params['transform_list']]
+          transform = transforms.Compose(transform_list)
+      
+          dataset = dataset_dict[dataset_type](transform=transform **dataset_params)
+      
+          return dataset
+    '''
+    linesHighlighted: []
+  }
+]
+isStarred: false
+isTrashed: false

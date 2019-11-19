@@ -1,0 +1,37 @@
+createdAt: "2019-11-19T13:55:58.593Z"
+updatedAt: "2019-11-19T14:15:02.713Z"
+type: "MARKDOWN_NOTE"
+folder: "ba78bd24b69f615562d5"
+title: "2019.11.11-11.17_周报_任妍"
+tags: []
+content: '''
+  # 2019.11.11-11.17_周报_任妍
+  
+  [TOC]
+  
+  
+  ## 本周工作总结
+  
+  研究Few-shot，主要工作有以下：
+  
+  - 精读2019 ICCV一篇few-shot论文：[Learning Compositional Representations for Few-Shot Recognition](<http://openaccess.thecvf.com/content_ICCV_2019/papers/Tokmakov_Learning_Compositional_Representations_for_Few-Shot_Recognition_ICCV_2019_paper.pdf>)
+  - 三篇综述了解这个领域： [A Survey of Zero-Shot Learning](http://www.ntulily.org/wp-content/uploads/journal/A_Survey_of_Zero-Shot_Learning_Settings_Methods_and_Applications_accepted.pdf)、 [Survey on Few-Shot Learning](https:\\\\arxiv.org\\pdf\\1711.04043.pdf)、[Meta-learning Survey](https://arxiv.org/pdf/1810.03548.pdf)
+  - 了解经典算法，prototype，match network等
+  - 了解2019 CVPR，ICCV相关最新进展
+  - 复现Learning Compositional Representations for Few-Shot Recognition论文代码
+  
+  
+  
+  ## 本周遇到问题及解决方案
+  
+  暂时进展顺利
+  
+  
+  ## 下周计划
+  
+  - Learning Compositional Representations for Few-Shot Recognition论文代码仔细阅读，学习代码
+  - 尝试创新并取得初步试验成果
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

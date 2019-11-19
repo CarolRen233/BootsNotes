@@ -1,0 +1,35 @@
+createdAt: "2019-11-19T11:24:37.453Z"
+updatedAt: "2019-11-19T14:06:36.011Z"
+type: "MARKDOWN_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "N-shot Contents"
+tags: []
+content: '''
+  ### N-shot Contents
+   
+  #### Survey
+  
+  - [A Survey of Zero-Shot Learning](:note:769469e9-ef16-4c2d-a023-ac8e0d5c3cac)
+  - [Survey on Few-Shot Learning](:note:21948863-8a03-429e-9b7d-19cf84279402)
+  - [Meta-learning Survey](:note:8a2736b3-41db-47f0-ad8e-d7aef3e8d452)
+  
+  #### Paper Reading Notes
+  
+  
+  
+  2019 ICCV
+  
+  - [Paper Notes - Learning Compositional Representations for Few-Shot Recognition](:note:852b449a-1f64-4ac5-994c-b37edeac76f3)
+  - 
+  #### Codes Reading
+  
+  
+  
+  #### Others
+  
+  - [Reading Materials for meta learning](:note:baa3130d-159a-41c1-83a6-b65fd6f4e65f)
+  - 
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
