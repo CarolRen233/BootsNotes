@@ -1,5 +1,5 @@
 createdAt: "2019-11-19T12:04:30.893Z"
-updatedAt: "2019-11-20T03:32:34.344Z"
+updatedAt: "2019-11-20T11:04:49.131Z"
 type: "SNIPPET_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "分析main.py代码 - comp_feats_release"
@@ -99,9 +99,36 @@ snippets: [
     '''
   }
   {
+    linesHighlighted: []
     name: "main_training_loop.py"
     mode: "Python"
     content: '''
+      \'''
+      training的过程
+      
+      \'''
+      
+      def accuracy(scores, labels):
+          topk_scores, topk_labels = scores.topk(5, 1, True, True)
+          label_ind = labels.cpu().numpy()
+          topk_ind = topk_labels.cpu().numpy()
+          top1_correct = np.sum(topk_ind[:,0] == label_ind)
+          top5_correct = np.sum(topk_ind == label_ind.reshape((-1,1)))
+          return float(top1_correct), float(top5_correct)
+      
+      # 前面的epoch学习率快一点，后面慢一点
+      def adjust_learning_rate(optimizer, epoch, params):
+          if epoch < params.step_size1:
+              lr = 0.1
+          elif epoch < params.step_size2:
+              lr = 0.01
+          else:
+              lr = 0.001
+      
+          for param_group in optimizer.param_groups:
+              param_group['lr'] = lr
+              
+              
       def main_training_loop(train_loader, val_loader, model, loss_fn, start_epoch, stop_epoch, params, writer):
           iter_ind = 0
       
@@ -111,6 +138,7 @@ snippets: [
       
           for epoch in range(start_epoch,stop_epoch):
               adjust_learning_rate(optimizer, epoch, params)
+              #在使用PyTorch进行训练和测试时一定注意要把实例化的model指定train/eval；
               model.train()
       
               # start timing
@@ -121,6 +149,13 @@ snippets: [
               avg_loss=0
       
               #train
+              # 这里的enumerate很有用，就是对于一个list，它自动count，i就是count，例如
+              # my_list =    ['apple', 'banana', 'grapes', 'pear']
+              # counter_list = list(enumerate(my_list, 1))
+              # print(counter_list)
+              # # Output: [(1, 'apple'), (2, 'banana'), (3, 'grapes'), (4, 'pear')]
+              
+              # 然后train_loader是myMetaDataset.py定义好，如果以有attribute的话，return img, target, attributes ，如果没有，就return img, target, torch.Tensor(1)
               for i, (x, y, attributes) in enumerate(train_loader):
                   data_time = data_time + (time.time()-start_data_time)
                   x = x.cuda()
@@ -142,6 +177,7 @@ snippets: [
       
                   avg_loss = avg_loss + loss.item()
       
+                  #这里就是保存模型文件的频率，10个epoch一保存
                   if i % params.print_freq==0:
                       print(optimizer.state_dict()['param_groups'][0]['lr'])
                       print('Epoch {:d}/{:d} | Batch {:d}/{:d} | Loss {:f} | Data time {:f} | SGD time {:f}'.format(epoch,
@@ -183,7 +219,6 @@ snippets: [
           return model
       
     '''
-    linesHighlighted: []
   }
   {
     linesHighlighted: []

@@ -1,5 +1,5 @@
 createdAt: "2019-11-16T03:31:30.898Z"
-updatedAt: "2019-11-16T08:35:16.268Z"
+updatedAt: "2019-11-20T08:24:21.545Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Reading Materials for meta learning"
@@ -24,7 +24,7 @@ content: '''
   - [Vanschoren J. Meta-learning: A survey[J]. arXiv preprint arXiv:1810.03548, 2018](https://arxiv.org/pdf/1810.03548.pdf)
   - [A Survey of Zero-Shot Learning: Settings, Methods, and Applications](http://www.ntulily.org/wp-content/uploads/journal/A_Survey_of_Zero-Shot_Learning_Settings_Methods_and_Applications_accepted.pdf)
   - [Generalizing from a Few Examples: A Survey on Few-Shot Learning](https://arxiv.org/pdf/1904.05046.pdf)
-  - 
+  
   
   ## Papers
   
