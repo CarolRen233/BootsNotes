@@ -1,0 +1,26 @@
+createdAt: "2019-11-20T03:19:50.379Z"
+updatedAt: "2019-11-20T03:21:05.340Z"
+type: "MARKDOWN_NOTE"
+folder: "0c8dbf9ec6d493d3fd38"
+title: "python 常见功能"
+tags: []
+content: '''
+  # python 常见功能
+  
+  
+  [TOC]
+  
+  ## 文件相关
+  
+  
+  查看有没有某个文件夹，没有的话就自己建一个
+  
+  ~~~python
+  import os
+  if not os.path.exists(directory):
+      os.makedirs(directory)
+  ~~~
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

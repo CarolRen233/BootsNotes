@@ -1,5 +1,5 @@
 createdAt: "2019-11-19T12:04:30.893Z"
-updatedAt: "2019-11-19T13:52:13.450Z"
+updatedAt: "2019-11-20T03:32:34.344Z"
 type: "SNIPPET_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "分析main.py代码 - comp_feats_release"
@@ -37,19 +37,26 @@ snippets: [
           train_loader = data.get_data_loader(train_data_params)
           val_loader = data.get_data_loader(val_data_params)
       
+          # get_model就是隔壁的函数，用来返回相应的模型
           model = get_model(params.model, params.num_classes, is_cosine=params.is_cosine)
       
+          # trainloader就是data.py中的get_data_loader函数返回的一个loader，torch.utils.data.DataLoader(dataset, **data_loader_params)，其中的dataset是myMetaDataset.py里面的一个MetaDataset的class实例化了，默认情况下 self.attribute_data = None，如果yaml文件中 use_attributes: 不是False，那么就attribute_data就是attribute_file里面的信息
           num_attrs = 0
           if train_loader.dataset.attribute_data is not None:
               num_attrs = train_loader.dataset.attribute_data.size(1)
+          # loss_fn这里也是import losses，losses.py里面定义了一些loss函数
           loss_fn = losses.GenericLoss(model.final_feat_dim, params.is_soft, num_attrs)
       
+          #有多个gpu，那么就DataParallel
           model = torch.nn.DataParallel(model)
       
+          #将模型文件保存在这个路径下，先检查有没有这个路径，没有的话就新建一个
           if not os.path.isdir(params.checkpoint_dir):
               os.makedirs(params.checkpoint_dir)
+              
           start_epoch = params.start_epoch
           stop_epoch = params.stop_epoch
+          #resume_file 就是从这个file重新开始，可能是如果之前训练过了，那么就直接从模型文件里面调出来重新从这个checkpoint开始就好了，（本代码好像是每隔10个epoch就保存一次）
           resume_file = get_resume_file(params.resume_file)
           if resume_file is not None:
               tmp = torch.load(resume_file)
@@ -84,6 +91,7 @@ snippets: [
           parser.add_argument('--checkpoint_dir', required=True, help='Directory for storing check points')
           parser.add_argument('--num_classes',default=1000, type=int, help='num classes')
           parser.add_argument('--dampening', default=0, type=float, help='dampening')
+          # is_cosine就是文章里面的constraint的公式，用的sigma函数就是一个距离函数，这个距离函数是可以用cosine距离来计算的
           parser.add_argument('--is_cosine', help='use cosine classifier', action='store_true')
           parser.add_argument('--is_soft', help='use soft attrinute loss', action='store_true')
           parser.add_argument('--attr_weight', default=0, type=float, help='Weight of the attribute loss')
@@ -91,11 +99,127 @@ snippets: [
     '''
   }
   {
+    name: "main_training_loop.py"
+    mode: "Python"
+    content: '''
+      def main_training_loop(train_loader, val_loader, model, loss_fn, start_epoch, stop_epoch, params, writer):
+          iter_ind = 0
+      
+          optimizer = torch.optim.SGD(list(filter(lambda p: p.requires_grad, model.parameters())) +
+                                      list(loss_fn.attr_loss.parameters()), params.lr, momentum=params.momentum,
+                                      weight_decay=params.weight_decay, dampening=params.dampening)
+      
+          for epoch in range(start_epoch,stop_epoch):
+              adjust_learning_rate(optimizer, epoch, params)
+              model.train()
+      
+              # start timing
+              data_time=0
+              sgd_time=0
+              test_time=0
+              start_data_time=time.time()
+              avg_loss=0
+      
+              #train
+              for i, (x, y, attributes) in enumerate(train_loader):
+                  data_time = data_time + (time.time()-start_data_time)
+                  x = x.cuda()
+                  y = y.cuda()
+                  start_sgd_time=time.time()
+                  optimizer.zero_grad()
+      
+                  loss, attr_loss, orth_loss = loss_fn(model, x, y, attributes)
+                  writer.add_scalar('loss', loss.item(), iter_ind)
+                  if attr_loss is not None:
+                      writer.add_scalar('attr_loss', attr_loss.item(), iter_ind)
+                      loss += params.attr_weight * attr_loss
+                  if orth_loss is not None:
+                      writer.add_scalar('orth_loss', orth_loss.item(), iter_ind)
+                      loss += params.orth_weight * orth_loss
+                  loss.backward()
+                  optimizer.step()
+                  sgd_time = sgd_time + (time.time() - start_sgd_time)
+      
+                  avg_loss = avg_loss + loss.item()
+      
+                  if i % params.print_freq==0:
+                      print(optimizer.state_dict()['param_groups'][0]['lr'])
+                      print('Epoch {:d}/{:d} | Batch {:d}/{:d} | Loss {:f} | Data time {:f} | SGD time {:f}'.format(epoch,
+                          stop_epoch, i, len(train_loader), avg_loss/float(i+1), data_time/float(i+1), sgd_time/float(i+1)))
+                  start_data_time = time.time()
+                  iter_ind += 1
+      
+              #test
+              model.eval()
+              data_time=0
+              start_data_time = time.time()
+              top1=0
+              top5=0
+              count = 0
+              for i, (x, y, attributes) in enumerate(val_loader):
+                  data_time = data_time + (time.time()-start_data_time)
+                  x = x.cuda()
+                  y = y.cuda()
+                  start_test_time = time.time()
+                  scores, features = model(x)
+                  top1_this, top5_this = accuracy(scores.data, y)
+                  top1 = top1 + top1_this
+                  top5 = top5 + top5_this
+                  count = count + scores.size(0)
+                  test_time = test_time + time.time() - start_test_time
+                  if (i % params.print_freq == 0) or (i == len(val_loader) - 1):
+                      print('Epoch {:d}/{:d} | Batch {:d}/{:d} | Top-1 {:f} | Top-5 {:f} | Data time {:f} | Test time {:f}'.format(epoch,
+                          stop_epoch, i, len(val_loader), top1/float(count), top5/float(count), data_time/float(i+1), test_time/float(i+1)))
+      
+              writer.add_scalar('val_top1', top1/float(count), epoch)
+              writer.add_scalar('val_top5', top5 / float(count), epoch)
+      
+              if (epoch % params.save_freq==0) or (epoch==stop_epoch-1):
+                  if not os.path.isdir(params.checkpoint_dir):
+                      os.makedirs(params.checkpoint_dir)
+                  outfile = os.path.join(params.checkpoint_dir, '{:d}.tar'.format(epoch))
+                  torch.save({'epoch': epoch, 'state': model.state_dict()}, outfile)
+      
+          return model
+      
+    '''
+    linesHighlighted: []
+  }
+  {
+    linesHighlighted: []
+    name: "base_classes_train_cub_template.yaml"
+    mode: "YAML"
+    content: '''
+      dataset_type: 'MetaDataset'
+      dataset_params:
+        meta: 'base_classes_train_meta_cub_fixed.json'
+        rootdir: 'scratch/ptokmako/CUB_200_2011' # Change this to ImageNet directory
+        use_attributes: False
+        attribute_file: 'cub_class_attr_05thresh_freq'
+      transform_params:
+        transform_list: ['RandomResizedCrop', 'ImageJitter', 'RandomHorizontalFlip', 'ToTensor', 'Normalize']
+        image_size: 224
+        jitter_params:
+          Brightness: 0.4
+          Contrast: 0.4
+          Color: 0.4
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+      data_loader_params:
+        batch_size: 16
+        shuffle: True
+        num_workers: 12
+        pin_memory: True
+      
+    '''
+  }
+  {
+    linesHighlighted: []
     name: "get_model.py"
     mode: "Python"
     content: '''
       \'''
-      
+      写了一个ResNetFeat的文件，然后这个get_model就是返回相应的模型
       
       \'''
       
@@ -107,7 +231,6 @@ snippets: [
                       ResNet101 = ResNetFeat.ResNet101)
           return model_dict[model_name](num_classes, False, is_cosine=is_cosine)
     '''
-    linesHighlighted: []
   }
 ]
 isStarred: false

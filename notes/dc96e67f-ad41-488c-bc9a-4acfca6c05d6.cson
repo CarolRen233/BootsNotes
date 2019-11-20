@@ -1,0 +1,72 @@
+createdAt: "2019-11-20T03:04:09.196Z"
+updatedAt: "2019-11-20T03:04:45.282Z"
+type: "SNIPPET_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "分析losses.py代码 - comp_feats_release"
+tags: []
+description: "分析losses.py代码 - comp_feats_release"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "losses.py"
+    mode: "Python"
+    content: '''
+      \'''
+      这个就是loss函数是这样定义的
+      
+      \'''
+      
+      # Copyright 2017-present, Facebook, Inc.
+      # All rights reserved.
+      #
+      # This source code is licensed under the license found in the
+      # LICENSE file in the root directory of this source tree.
+      
+      
+      import torch
+      import torch.nn as nn
+      from torch.autograd import Variable
+      from compositional_analyzer import SoftConstraint, HardConstrain
+      
+      
+      class GenericLoss:
+          def __init__(self, feat_dim, is_soft, num_attr=0):
+              # self.attr_classifier = AttributeClassifier(160, 500).cuda()
+              if is_soft:
+                  self.attr_loss = SoftConstraint(num_attr, feat_dim).cuda()
+              else:
+                  self.attr_loss = HardConstrain(num_attr + 1, feat_dim).cuda()
+      
+              self.cross_entropy_loss = nn.CrossEntropyLoss()
+      
+          def __call__(self, model, x_var, y_var, attributes=None):
+              scores, feats = model(x_var)
+              orig_loss = self.cross_entropy_loss(scores, y_var)
+      
+              attr_loss = None
+              orth_loss = None
+              if attributes.size(1) > 1:
+                  orth_loss = Variable(torch.zeros(1), requires_grad=True).cuda()
+                  for name, param in self.attr_loss.embedder.named_parameters():
+                      if 'bias' not in name:
+                          param_flat = param.view(param.shape[0], -1)
+                          sym = torch.mm(param_flat, torch.t(param_flat))
+                          sym -= Variable(torch.eye(param_flat.shape[0])).cuda()
+                          orth_loss = orth_loss + sym.sum()
+      
+                  orth_loss = orth_loss[0].abs()
+      
+                  attr_loss = 0
+                  for i in range(len(feats)):
+                      attr_l, _ = self.attr_loss(attributes.cuda(), feats[i])
+                      attr_loss += attr_l
+              return orig_loss, attr_loss, orth_loss
+      
+      
+      
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

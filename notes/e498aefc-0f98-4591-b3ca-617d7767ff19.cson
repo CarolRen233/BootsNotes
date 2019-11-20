@@ -1,13 +1,12 @@
 createdAt: "2019-11-19T11:38:26.461Z"
-updatedAt: "2019-11-19T13:41:57.251Z"
+updatedAt: "2019-11-20T03:06:18.674Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Code Reading - Learning Compositional Representations for Few-Shot Recognition"
 tags: []
 content: '''
   # Code Reading - Learning Compositional Representations for Few-Shot Recognition
-  
-  
+   
   
   [TOC]
   
@@ -15,7 +14,9 @@ content: '''
   
   [分析main.py代码 - comp_feats_release](:note:459da1c5-ab19-4784-bdff-c0dbfac3e407)
   [分析data.py代码 - comp_feats_release](:note:4f49b836-22ba-4dfc-9d39-0f9982b80f28)
-  
+  [分析compositional_analyzer.py代码 - comp_feats_release](:note:0d8d06b9-57e9-46ef-aecb-f9b69c9b59e2)
+  [分析myMetaDataset.py代码 - comp_feats_release](:note:d4e25508-5044-48cb-b8f7-3769b3f013bb)
+  [分析ResNetFeat.py代码 - comp_feats_release](:note:85f230b5-d44c-4fea-94ae-18257dc38b53)
   ## Functions of different types of documents
   
   例子：

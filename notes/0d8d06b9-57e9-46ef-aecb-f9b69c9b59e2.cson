@@ -1,0 +1,86 @@
+createdAt: "2019-11-20T03:00:56.080Z"
+updatedAt: "2019-11-20T03:03:28.936Z"
+type: "SNIPPET_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "分析compositional_analyzer.py代码 - comp_feats_release"
+tags: []
+description: "分析compositional_analyzer.py代码 - comp_feats_release"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "compositional_analyzer.py"
+    mode: "Python"
+    content: '''
+      \'''
+      
+      文章最主要的算法核心，就是这个了
+      
+      \'''
+      
+      import torch
+      import torch.nn as nn
+      import numpy as np
+      from torch.nn.functional import cosine_similarity
+      
+      
+      class HardConstrain(nn.Module):
+          def __init__(self, num_attr, feat_dim):
+              super(HardConstrain, self).__init__()
+              self.embedder = nn.Embedding(num_attr, feat_dim, padding_idx=0)
+      
+          def forward(self, attrs, features):
+              if attrs.dim() == 1:
+                  attrs = attrs.unsqueeze(0)
+      
+              atrs_inds = torch.zeros(len(attrs), 72).long().cuda()
+              for i in range(len(attrs)):
+                  inds = attrs[i, :].nonzero().squeeze().long()
+                  if len(inds.size()) != 0:
+                      atrs_inds[i, :len(inds)] = inds + 1
+              embeddings = self.embedder(atrs_inds)
+              embeddings = embeddings.sum(1).squeeze()
+              index_empty = embeddings.sum(1).squeeze() == 0
+      
+              loss = 1 - cosine_similarity(embeddings, features, 1)
+              loss[index_empty] = 0
+      
+              return loss.mean(), None
+      
+      
+      class SoftConstraint(nn.Module):
+          def __init__(self, num_attr, feat_dim):
+              super(SoftConstraint, self).__init__()
+      
+              self.embedder = nn.Linear(feat_dim, num_attr, bias=False)
+      
+              self.num_attr = num_attr
+              self.sigmoid = nn.Sigmoid()
+              self.loss = nn.MultiLabelSoftMarginLoss(reduce=False)
+      
+          def forward(self, attrs, features):
+              labels = attrs.float().cuda()
+              if labels.dim() == 1:
+                  labels = labels.unsqueeze(0)
+              loss_mask = torch.ones(len(features), self.num_attr).cuda()
+              # ignore 80% of the negative attribute labels to balance the number of positive and negative examples
+              for i in range(len(labels)):
+                  zeros = (labels[i, :] == 0).nonzero()
+                  indices = np.random.choice(zeros.squeeze(), int(round(len(zeros) * 0.8)), False)
+                  loss_mask[i, indices] = 0
+      
+              # ignore samples without attribute annotations
+              index_empty = labels.sum(1).squeeze() == 0
+      
+              scores = self.embedder(features)
+      
+              loss = self.loss(scores, labels)
+              loss[index_empty] = 0
+              loss *= loss_mask
+      
+              return loss.mean(), scores
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

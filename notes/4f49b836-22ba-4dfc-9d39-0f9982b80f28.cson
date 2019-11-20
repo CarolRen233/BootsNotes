@@ -1,5 +1,5 @@
 createdAt: "2019-11-19T12:35:40.578Z"
-updatedAt: "2019-11-19T13:40:59.935Z"
+updatedAt: "2019-11-20T02:37:41.241Z"
 type: "SNIPPET_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "分析data.py代码 - comp_feats_release"
@@ -13,6 +13,12 @@ snippets: [
     content: '''
       \'''
       
+      dataset_type: 'MetaDataset'
+      dataset_params:
+        meta: 'base_classes_train_meta_cub_fixed.json'
+        rootdir: 'scratch/ptokmako/CUB_200_2011' # Change this to ImageNet directory
+        use_attributes: False
+        attribute_file: 'cub_class_attr_05thresh_freq'
       transform_params:
         transform_list: ['RandomResizedCrop', 'ImageJitter', 'RandomHorizontalFlip', 'ToTensor', 'Normalize']
         image_size: 224
@@ -22,16 +28,12 @@ snippets: [
           Color: 0.4
         mean: [0.485, 0.456, 0.406]
         std: [0.229, 0.224, 0.225]
-      dataset_params:
-        meta: 'base_classes_train_meta_cub_fixed.json'
-        rootdir: 'scratch/ptokmako/CUB_200_2011' # Change this to ImageNet directory
-        use_attributes: False
-        attribute_file: 'cub_class_attr_05thresh_freq'
       data_loader_params:
         batch_size: 16
         shuffle: True
         num_workers: 12
         pin_memory: True
+      
         
         这里我们输入的其实是一个yaml文件的内容，就是为了获得这个yaml文件里面的一些参数，因为yaml文件可以看作是一种字典式的储存，因此就是这样子dataset_type=params['dataset_type']就可以获得里面的值并且赋值给dataset_type了
       \'''
@@ -56,11 +58,11 @@ snippets: [
           transform = transforms.Compose(transform_list)
       
           #dataset_dict就是前面定义好的，其实这里就是希望我们如果想用不同的数据集的化，它都有相应的数据集，其中myMetaDataset是定义的一个py文件，里面有MetaDataset的class，其他的dsets都是 import torchvision.datasets 的
-          #dataset就是经过transform之后的dataset
+          #dataset就是根据字典里找到myMetaDataset.MetaDataset，这其实就是myMetaDataset.py里面的一个MetaDataset的class实例化了，按照yaml文件给定的transform方式进行transform的，然后还有一些相关的dataset的参数也加进来，方便之后调用
           dataset = dataset_dict[dataset_type](transform=transform, **dataset_params)
           #data_loader_params就是yaml文件中的那样，batch  size多大啊什么的数据
           data_loader_params = params['data_loader_params']
-          #data_loader就是按照设置好的batchsize的经过transform之后的data
+          #data_loader就是按照设置好的batchsize的经过transform之后的data，dataloader本来就是pytorch里面的一个class，里面可以放参数，这里的**data_loader_params，**允许将关键字参数转化为字典，你能够在之后使用键调用来进行步进或字典迭代
           data_loader = torch.utils.data.DataLoader(dataset, **data_loader_params)
       
           return data_loader
@@ -104,6 +106,7 @@ snippets: [
     '''
   }
   {
+    linesHighlighted: []
     name: "get_dataset(params).py"
     mode: "Python"
     content: '''
@@ -119,7 +122,6 @@ snippets: [
       
           return dataset
     '''
-    linesHighlighted: []
   }
 ]
 isStarred: false

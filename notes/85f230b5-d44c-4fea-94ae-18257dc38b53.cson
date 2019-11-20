@@ -1,0 +1,139 @@
+createdAt: "2019-11-20T02:00:58.016Z"
+updatedAt: "2019-11-20T02:01:22.751Z"
+type: "SNIPPET_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "分析ResNetFeat.py代码 - comp_feats_release"
+tags: []
+description: "分析ResNetFeat.py代码 - comp_feats_release"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "ResNetFeat.py"
+    mode: "Python"
+    content: '''
+      import ResNetBasic
+      import torch
+      import torch.nn as nn
+      from torch.nn.functional import cosine_similarity
+      import math
+      
+      # Modification of ResNet so that it also outputs a feature vector
+      class ResNetFeat(ResNetBasic.ResNet):
+          def __init__(self, block, list_of_num_layers, list_of_out_dims, num_classes=1000, only_trunk=False,
+                       classifier_has_bias=True, is_cosine=False, attr_layer_min=None, attr_layer_max=None):
+              super(ResNetFeat, self).__init__(block, list_of_num_layers, list_of_out_dims, num_classes, only_trunk)
+              self.pre_layer = nn.Linear(self.final_feat_dim, self.final_feat_dim)
+              self.avg_pool = [nn.AdaptiveAvgPool2d(1), nn.AdaptiveAvgPool2d(1), nn.AdaptiveAvgPool2d(1),
+                               nn.AdaptiveAvgPool2d(1), nn.AdaptiveAvgPool2d(1), nn.AdaptiveAvgPool2d(1),
+                               nn.AdaptiveAvgPool2d(1), nn.AdaptiveAvgPool2d(1), nn.AdaptiveAvgPool2d(1),
+                               nn.AdaptiveAvgPool2d(1), nn.AdaptiveAvgPool2d(1)]
+      
+              if is_cosine:
+                  self.classifier = Cosine(self.final_feat_dim, num_classes)
+              else:
+                  self.classifier = nn.Linear(self.final_feat_dim, num_classes, bias=classifier_has_bias)
+      
+              self.intermediate_features = {}
+      
+              def hook_features(module, input, output):
+                  device_id = output.get_device()
+                  self.intermediate_features[device_id].append(output)
+      
+              transforms = []
+              if attr_layer_min is not None:
+                  for i in range(attr_layer_min, attr_layer_max):
+                      if self.trunk[i].outdim != self.final_feat_dim:
+                          transforms.append(nn.Linear(self.trunk[i].outdim, self.final_feat_dim))
+                      else:
+                          transforms.append(nn.Sequential())
+                      self.trunk[i].register_forward_hook(hook_features)
+              self.transforms = nn.Sequential(*transforms)
+      
+          def forward(self, x):
+              device_id = x.get_device()
+              self.intermediate_features[device_id] = []
+      
+              out = self.trunk(x)
+      
+              intermediate_features_pooled = []
+              for i in range(len(self.intermediate_features[device_id])):
+                  temp = self.avg_pool[i](self.intermediate_features[device_id][i]).view(self.intermediate_features[device_id][i].size(0), -1)
+                  temp = self.transforms[i](temp)
+                  intermediate_features_pooled.append(temp)
+      
+              out = out.view(out.size(0), -1)
+              # linear layer without relu for training cosine classifier
+              out = self.pre_layer(out)
+      
+              intermediate_features_pooled.append(out)
+      
+              scores = self.classifier(out)
+      
+              return scores, intermediate_features_pooled
+      
+          def get_classifier_weight(self):
+              return self.classifier.weight
+      
+          def get_classifier(self):
+              return self.classifier
+      
+      
+      def ResNet10(num_classes=1000, only_trunk=False, classifier_has_bias=False, is_cosine=False):
+          return ResNetFeat(ResNetBasic.SimpleBlock, [1,1,1,1],[64,128,256,500], num_classes, only_trunk,
+                            classifier_has_bias=classifier_has_bias, is_cosine=is_cosine, attr_layer_min=7, attr_layer_max=7)
+      
+      def ResNet18(num_classes=1000, only_trunk=False, classifier_has_bias=False, is_cosine=False):
+          return ResNetFeat(ResNetBasic.SimpleBlock, [2,2,2,2],[64,128,256,500],num_classes, only_trunk,
+                            classifier_has_bias=classifier_has_bias, is_cosine=is_cosine, attr_layer_min=9, attr_layer_max=11)
+      
+      def ResNet34(num_classes=1000, only_trunk=False, classifier_has_bias=False, is_cosine=False):
+          return ResNetFeat(ResNetBasic.SimpleBlock, [3,4,6,3],[64,128,256,500], num_classes, only_trunk,
+                            classifier_has_bias=classifier_has_bias, is_cosine=is_cosine, attr_layer_min=9, attr_layer_max=19)
+      
+      def ResNet50(num_classes=1000, only_trunk=False, is_cosine=False):
+          return ResNetFeat(ResNetBasic.BottleneckBlock, [3,4,6,3], [256,512,1024,2048], num_classes, only_trunk,
+                            classifier_has_bias=False, is_cosine=is_cosine)
+      
+      def ResNet101(num_classes=1000, only_trunk=False, is_cosine=False):
+          return ResNetFeat(ResNetBasic.BottleneckBlock, [3,4,23,3],[256,512,1024,2048], num_classes, only_trunk,
+                            classifier_has_bias=False, is_cosine=is_cosine)
+      
+      
+      def get_model(model_name, num_classes, is_cosine=False):
+          model_dict = dict(ResNet10 = ResNet10,
+                      ResNet18 = ResNet18,
+                      ResNet34 = ResNet34,
+                      ResNet50 = ResNet50,
+                      ResNet101 = ResNet101)
+          return model_dict[model_name](num_classes, False, classifier_has_bias=False, is_cosine=is_cosine)
+      
+      
+      class Cosine(nn.Module):
+      
+          def __init__(self, in_features, out_features):
+              super(Cosine, self).__init__()
+              self.in_features = in_features
+              self.out_features = out_features
+              self.t = torch.ones(1).cuda() * 10
+              self.weight = nn.Parameter(torch.Tensor(out_features, in_features))
+              self.reset_parameters()
+      
+          def reset_parameters(self):
+              stdv = 1. / math.sqrt(self.weight.size(1))
+              self.weight.data.uniform_(-stdv, stdv)
+      
+          def forward(self, input):
+              batch_size = input.size(0)
+              return self.t.cuda() * cosine_similarity(input.unsqueeze(1).expand(batch_size, self.out_features, self.in_features),
+                                       self.weight.unsqueeze(0).expand(batch_size, self.out_features, self.in_features).cuda(), 2)
+      
+          def extra_repr(self):
+              return 'in_features={}, out_features={}'.format(
+                  self.in_features, self.out_features
+              )
+      
+    '''
+  }
+]
+isStarred: false
+isTrashed: false

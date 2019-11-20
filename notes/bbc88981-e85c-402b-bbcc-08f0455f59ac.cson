@@ -1,5 +1,5 @@
 createdAt: "2019-11-19T11:24:37.453Z"
-updatedAt: "2019-11-19T14:06:36.011Z"
+updatedAt: "2019-11-20T03:06:14.396Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "N-shot Contents"
@@ -23,12 +23,12 @@ content: '''
   - 
   #### Codes Reading
   
-  
+  - [Code Reading - Learning Compositional Representations for Few-Shot Recognition](:note:e498aefc-0f98-4591-b3ca-617d7767ff19)
   
   #### Others
   
   - [Reading Materials for meta learning](:note:baa3130d-159a-41c1-83a6-b65fd6f4e65f)
-  - 
+  -  
 '''
 linesHighlighted: []
 isStarred: false

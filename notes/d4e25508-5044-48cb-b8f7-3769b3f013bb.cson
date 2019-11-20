@@ -1,0 +1,60 @@
+createdAt: "2019-11-20T02:32:50.151Z"
+updatedAt: "2019-11-20T02:34:59.084Z"
+type: "SNIPPET_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "分析myMetaDataset.py代码 - comp_feats_release"
+tags: []
+description: "分析myMetaDataset.py代码 - comp_feats_release"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "myMetaDataset.py"
+    mode: "Python"
+    content: '''
+      \'''
+      定义了一个类，然后我们要处理的dataset可以用这个类来进行实例化，其中meta就是这个dtaset的json格式的label信息，然后默认是不是用attribute的，但是这个论文里面要做一些使用的实验，所以也可以使用
+      
+      \'''
+      
+      import torch
+      from PIL import Image
+      import json
+      import os
+      
+      identity = lambda x:x
+      class MetaDataset:
+          def __init__(self, rootdir='/mnt/fair/imagenet-256', meta='/home/bharathh/imagenet_meta/train.json', use_attributes=False, attribute_file=None,
+                       transform=None, target_transform=identity):
+              with open(meta, 'r') as f:
+                  self.meta = json.load(f)
+      
+              self.attribute_data = None
+              if use_attributes:
+                  self.attribute_data = torch.load(attribute_file + '.dat')
+      
+              self.rootdir=rootdir
+              self.transform = transform
+              self.target_transform = target_transform
+              self.use_attributes = use_attributes
+      
+          def __getitem__(self, i):
+              image_path = os.path.join(self.rootdir, self.meta['image_names'][i])
+              img = Image.open(image_path).convert('RGB')
+              target = self.target_transform(self.meta['image_labels'][i])
+      
+              img = self.transform(img)
+      
+              if self.use_attributes:
+                  attributes = self.attribute_data[target]
+      
+                  return img, target, attributes
+              else:
+                  return img, target, torch.Tensor(1)
+      
+          def __len__(self):
+              return len(self.meta['image_names'])
+    '''
+  }
+]
+isStarred: false
+isTrashed: false
