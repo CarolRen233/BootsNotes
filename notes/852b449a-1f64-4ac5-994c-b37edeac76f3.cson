@@ -1,5 +1,5 @@
 createdAt: "2019-11-16T02:27:55.758Z"
-updatedAt: "2019-11-16T07:33:37.324Z"
+updatedAt: "2019-11-21T03:00:30.161Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Paper Notes - Learning Compositional Representations for Few-Shot Recognition"
@@ -12,6 +12,7 @@ content: '''
   
   [TOC]
   
+  [论文地址](https://arxiv.org/pdf/1812.09213.pdf)
   ## 总结
   
   1. 这篇论文基本是建立在*Jacob Andreas. Measuring compositionality in representation learning. In ICLR, 2019*这篇论文基础之上的
