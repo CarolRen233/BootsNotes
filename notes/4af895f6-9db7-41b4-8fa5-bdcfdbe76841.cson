@@ -1,0 +1,134 @@
+createdAt: "2019-11-22T12:41:19.618Z"
+updatedAt: "2019-11-22T13:43:28.455Z"
+type: "MARKDOWN_NOTE"
+folder: "8d283bc4c34b355efef1"
+title: "报告正文"
+tags: []
+content: '''
+  # 报告正文
+  [TOC]
+  
+  
+  ## （一）立项依据与研究内容
+  
+  
+  ### 1．项目的立项依据
+  
+  *（研究意义、国内外研究现状及发展动态分析，需结合科学研究发展趋势来论述科学意义；或结合国民经济和社会发展中迫切需要解决的关键科技问题来论述其应用前景。附主要参考文献目录）*
+  
+  #### 1.1 研究意义 
+  
+  
+  随着不同领域中大数据应用程序的增加，大数据计算和服务已成为学术研究，行业界和政府服务中非常热门的研究和应用主题。根据IDC的预测1，大数据技术市场“到2017年将以27％的复合年增长率（CAGR）增长，达到324亿美元”（Chuanqi Tao and Jerry Gao. Quality Assurance for Big Data Application– Issues, Challenges, and Needs.）。如今，随着大数据科学，分析和技术的快速发展，越来越多的研究人员，企业和应用程序专业人员能够使用各种数据挖掘和机器学习算法，开源平台和工具以及云数据库技术，这表明大数据计算和应用程序服务为人们的日常生活带来了新的商机和需求高质量的大数据和服务应用程序可以帮助企业识别问题，改进流程，提高生产率，有效的定制支持，智能决策和优化解决方案。
+  
+  
+  但是，由于生成的数据量巨大，到达数据的速度快以及异构数据的种类繁多，因此数据的质量还远远不够完美（Steve Sarsfield, ―How a Small Data Error Becomes a Big Data Quality Problem‖, September 3, 2012. Retrievable at: https://www.linkedin.com/grp/post/103526-162333712）
+  Wipro（[The Burgeoning Need for Big Data Assurance](https://www.wipro.com/applications/the-burgeoning-need-for-big-data-assurance/)）的调研发现，数据质量低下的主要原因包括：
+  
+  - 大量的结构化和非结构化数据及其日益增长的复杂性
+  - 组织内的数据存储问题
+  - 不断变化的技术格局和不断增加的集成复杂性导致数据不一致
+  - 商业信息管理中缺乏通用/标准语言
+  
+  数据模型通常存在以下问题：
+  - 需要关联，挖掘，分析和处理哪些数据
+  - 哪些来源为上述步骤提供了数据
+  - 数据应如何收集（通常会阐明数据清洗/清理）和使用方式-也称为数据治理
+  - 应如何使用处理的数据
+  
+  由于数据已成为基于大数据的应用程序和服务系统中越来越重要的部分，因此数据质量成为主要问题。 根据新的Experian Data Quality全球基准报告（M. R. Wigan and R. Clake, ―Big Data’s Big Unintended Consequences‖, IEEE Computer, Vol. 46, Issue 6, Pages:46-53, 2013），“平均而言，美国组织相信他们的数据中有32％是不准确的，比去年的25％增长了28％。” 不良的数据质量可能会影响业务收入，浪费企业资源，降低生产力，甚至导致错误的业务决策。 诸如数据管理混乱，传感器质量低下，数据收集系统不可靠，数据收集和转换质量低下之类的质量问题会导致业务失败和经济损失。 据估计，错误数据每年使美国企业损失6000亿美元。 因此，大数据质量验证和质量保证已成为学术研究主题中的重要和关键问题，也是大数据服务应用程序和供应商面临的挑战。
+  
+  #### 1.2 国内外研究现状
+  
+  **国外**
+  
+  -  D. M. Strong, Y. W. Lee, R. Y. Wang, ―Data quality in context‖. Communications of the ACM, Vol.40, Issue 5, Pages: 103-110,1997.
+  -  L. L. Pipino, Y. W. Lee, R. Y. Wang, ―Data quality assessment‖. Communications of the ACM, Vol.45, Issue 4, Pages: 211-218, 2002.
+  -  A. O. Mohammed, S. A. Talab, ―Enhanced Extraction Clinical Data Technique to Improve Data Quality in Clinical Data Warehouse‖. International Journal of Database Theory and Application, Vol.8, Issue 3, Pages: 333-342, 2015.
+  - M. I. Svanks, ―Integrity analysis: Methods for automating data quality assurance‖. Information and Software Technology, Vol.30, Issue 10, Pages:595-605, 1988.
+  - J. Alferes, P.Poirier, C. Lamaire-Chad, et al. ―Data quality assurance in monitoring of wastewater quality: Univariate on-line and off-line methods‖. Proceedings of the11th IWA conference on instrumentation control and automation, 18-20, September,2013.
+  - A.L.Ali and F.Schmid, ―Data quality assurance for volunteered geographic information‖, Geographic Information Science. Springer International Publishing, Pages126-141,2014.
+  -  IBM数据治理委员会数据治理要素模型(*IBM Corporation. IBM data governance council maturity model:Building a roadmap for effective data governance[R]. 2007.*)
+  - Gartner数据管理参考框架及数据治理和信息管理要素模型(*Gartner Group. Big data[EB / OL]. http:// www. gartner. com/ itglossary/big-data.*)
+  
+  **国内**
+  
+  - DAMA 数据管理知识体系（DMBOK） 框架(*DAMA International. DAMA数据管理知识体系指南[M]. 马欢,刘晨, 等译. 北京: 清华大学出版社, 2012.*)
+  - - 张绍华等结合六西格玛管理方法提出大数据质量项目管理六西格玛模型(*张绍华, 潘蓉, 宗宇伟. 大数据治理与服务[M]. 上海: 上海科学技术出版社, 2016: 120.*)
+  - 
+  
+  **具体领域大数据质量管理实践研究**
+  
+  政府大数据质量管理实践领域：
+  
+  - 围绕意大利五个宪政办公室发布的开放大数据质量，Ciancarini等基于W3C 标准、AGID 标准获得此类数据质量评价与优化方法。(*Ciancarini P, Poggi F, Russo D. Big data quality: a roadmap for open data[C]// Proceedings of the 2016 IEEE Second International Conference on Big Data Computing Service and Applications.IEEE, 2016: 210-215.*)
+  - 洪学海等从时间维、空间维、业务维3 个维度，构建形成大数据全景式数据质量测度模型。(*洪学海, 王志强, 杨青海. 面向共享的政府大数据质量标准化问题研究[J]. 大数据, 2017(3): 44-52.*)
+  - 基于已有数据质量评价维度和政府大数据特性，马一鸣构建形成我国政府大数据质量评价体系，提出政府数据增值性管理机制。(*马一鸣. 政府大数据质量评价体系构建研究[D]. 长春: 吉林大学, 2016.*)
+  
+  
+  医疗领域:
+  
+  - 在数据准确性、数据失效、系统软件等数据质量问题产生根源剖析基础上，Becker 等基于美国陆军医疗指挥部（MEDCOM） 的医疗操作数据系统（MODS）项目数据质量分析结果，在医疗领域大数据质量评价维度建构、质量测量、质量提升工具等方面获得进展。(*Becker D, King T D, McMullen B, et al. Big data quality case study preliminary findings[R]. U.S. Army Medcom Mods, 2013:1-54.*)
+  - Suraj Juddoo 的研究团队采用内部解释学循环研究方法，基于组织数据质量维度的层次结构框架， 揭示并确定健康大数据质量评价的核心维度(*Juddoo S, George C, Duquenoy P, et al. Data governance in the health industry: Investigating data quality dimensions within a big data context[J]. Applied System Innovation, 2018, 1(4): 43;*)(*Juddoo S, George C. Discovering the most important data qualitydimensions in health big data using latent semantic analysis[C]// Proceedings of the IEEE International Conference on Advances in Big Data, Computing and Data Communication Systems, Durban, South Africa, 2018.*)
+  - Hoffman提出通过数据审计、人力和技术解决方案、监管等健康大数据质量提升策略。(*Hoffman S. Medical big data and big data quality problems[J].Social Science Electronic Publishing, 2014: 289-316.*)
+  - 马国耀等基于“校验-反馈-优化”数据质量控制技术将数据质量改善过程落实到数据处理的各个阶段，提出卫生数据质量控制解决方案。(*马国耀, 孙勇韬, 马玉玲. 数据校验技术在医疗健康大数据质量控制中的应用分析[J]. 中国卫生信息管理杂志, 2016, 13(4):417-419.*)
+  
+  
+  **以上研究的不足**
+  
+  尽管过去有许多关于数据质量和数据质量保证的已发表论文，但大多数论文集中于常规数据质量和质量保证——传统数据仓库。 在研究工作中，迫切需要针对大数据和相关应用程序服务的质量研究问题和质量保证解决方案。 
+  
+  
+  
+  
+  ### 2．项目的研究内容、研究目标，以及拟解决的关键科学问题
+  
+  （此部分为重点阐述内容）；
+  
+  #### 2.1 研究内容
+  
+  什么是大数据质量？ 与数据质量一样吗？
+  影响大数据质量的关键因素是什么？
+  为什么我们的大数据质量较差？
+  如何验证大数据质量？
+  大数据质量保证计划在哪里？
+  控制大数据质量有哪些挑战和需求？
+  
+  #### 2.2 研究目标
+  
+  #### 2.3 拟解决的关键问题
+  
+  
+  ### 3．拟采取的研究方案及可行性分析
+  
+  （包括研究方法、技术路线、实验手段、关键技术等说明）；
+  
+  #### 3.1 研究方案
+  
+  ### 4．本项目的特色与创新之处；
+  
+  ### 5．年度研究计划及预期研究结果
+  
+  （包括拟组织的重要学术交流活动、国际合作与交流计划等）。
+  
+  
+  #### 5.1 年度研究计划
+  
+  #### 5.2 预期研究成果
+  
+  #### 5.3 国际合作
+  
+  ## （二）研究基础与工作条件
+  
+  ### 1．研究基础
+  
+  （与本项目相关的研究工作积累和已取得的研究工作成绩）
+  
+  
+  ### 2．工作条件
+  
+  （包括已具备的实验条件，尚缺少的实验条件和拟解决的途径，包括利用国家实验室、国家重点实验室和部门重点实验室等研究基地的计划与落实情况）
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
