@@ -1,5 +1,5 @@
 createdAt: "2019-11-22T12:41:19.618Z"
-updatedAt: "2019-11-22T13:43:28.455Z"
+updatedAt: "2019-11-24T13:17:08.944Z"
 type: "MARKDOWN_NOTE"
 folder: "8d283bc4c34b355efef1"
 title: "报告正文"
@@ -19,11 +19,11 @@ content: '''
   #### 1.1 研究意义 
   
   
-  随着不同领域中大数据应用程序的增加，大数据计算和服务已成为学术研究，行业界和政府服务中非常热门的研究和应用主题。根据IDC的预测1，大数据技术市场“到2017年将以27％的复合年增长率（CAGR）增长，达到324亿美元”（Chuanqi Tao and Jerry Gao. Quality Assurance for Big Data Application– Issues, Challenges, and Needs.）。如今，随着大数据科学，分析和技术的快速发展，越来越多的研究人员，企业和应用程序专业人员能够使用各种数据挖掘和机器学习算法，开源平台和工具以及云数据库技术，这表明大数据计算和应用程序服务为人们的日常生活带来了新的商机和需求高质量的大数据和服务应用程序可以帮助企业识别问题，改进流程，提高生产率，有效的定制支持，智能决策和优化解决方案。
+  随着不同领域中大数据应用程序的增加，大数据计算和服务已成为学术研究，行业界和政府服务中非常热门的研究和应用主题。根据IDC的预测1，大数据技术市场“到2017年将以27％的复合年增长率（CAGR）增长，达到324亿美元”（*Chuanqi Tao and Jerry Gao. Quality Assurance for Big Data Application– Issues, Challenges, and Needs.*）。如今，随着大数据科学，分析和技术的快速发展，越来越多的研究人员，企业和应用程序专业人员能够使用各种数据挖掘和机器学习算法，开源平台和工具以及云数据库技术，这表明大数据计算和应用程序服务为人们的日常生活带来了新的商机和需求高质量的大数据和服务应用程序可以帮助企业识别问题，改进流程，提高生产率，有效的定制支持，智能决策和优化解决方案。
   
   
-  但是，由于生成的数据量巨大，到达数据的速度快以及异构数据的种类繁多，因此数据的质量还远远不够完美（Steve Sarsfield, ―How a Small Data Error Becomes a Big Data Quality Problem‖, September 3, 2012. Retrievable at: https://www.linkedin.com/grp/post/103526-162333712）
-  Wipro（[The Burgeoning Need for Big Data Assurance](https://www.wipro.com/applications/the-burgeoning-need-for-big-data-assurance/)）的调研发现，数据质量低下的主要原因包括：
+  但是，由于生成的数据量巨大，到达数据的速度快以及异构数据的种类繁多，因此数据的质量还远远不够完美（*Steve Sarsfield, ―How a Small Data Error Becomes a Big Data Quality Problem‖, September 3, 2012. Retrievable at: https://www.linkedin.com/grp/post/103526-162333712*）
+  Wipro（*[The Burgeoning Need for Big Data Assurance](https://www.wipro.com/applications/the-burgeoning-need-for-big-data-assurance/)*）的调研发现，数据质量低下的主要原因包括：
   
   - 大量的结构化和非结构化数据及其日益增长的复杂性
   - 组织内的数据存储问题
@@ -41,6 +41,8 @@ content: '''
   #### 1.2 国内外研究现状
   
   **国外**
+  
+  
   
   -  D. M. Strong, Y. W. Lee, R. Y. Wang, ―Data quality in context‖. Communications of the ACM, Vol.40, Issue 5, Pages: 103-110,1997.
   -  L. L. Pipino, Y. W. Lee, R. Y. Wang, ―Data quality assessment‖. Communications of the ACM, Vol.45, Issue 4, Pages: 211-218, 2002.
