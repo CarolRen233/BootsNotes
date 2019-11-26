@@ -1,5 +1,5 @@
 createdAt: "2019-11-24T12:57:35.493Z"
-updatedAt: "2019-11-24T13:10:46.091Z"
+updatedAt: "2019-11-24T14:04:18.562Z"
 type: "MARKDOWN_NOTE"
 folder: "94cf7218696b1536fc91"
 title: "Latex使用"
@@ -40,6 +40,18 @@ content: '''
   ~~~
   
   
+  
+  [LaTeX 文档:CTEX](http://www.ctex.org/OnlineDocuments)
+  [19LaTeX学习系列之---LaTeX的总结 - 简书](https://www.jianshu.com/p/1d99b3c883a6)
+  
+  
+  可能会出现的报错：
+  
+  1. *File `CJKutf8.sty' not found. \\begin*
+  解决方法：
+  ~~~
+  sudo apt-get install latex-cjk-*
+  ~~~
 '''
 linesHighlighted: []
 isStarred: false
