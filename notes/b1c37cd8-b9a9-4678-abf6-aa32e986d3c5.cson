@@ -1,18 +1,39 @@
 createdAt: "2019-11-29T04:18:06.971Z"
-updatedAt: "2019-11-29T04:18:47.707Z"
+updatedAt: "2019-11-29T05:56:36.850Z"
 type: "MARKDOWN_NOTE"
 folder: "ba78bd24b69f615562d5"
 title: "Machine Learning Individual Student Homework 2"
 tags: []
 content: '''
   # Machine Learning Individual Student Homework 2
-  
+  学生：任妍
+  学号：1901213094
   [TOC]
   
   ## 1. 数据分析和可视化
   
-  (方差/均值/协方差/分布/箱形图等)
+  1.1 展示方差、均值：
+  ![b93d5ba1.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/b93d5ba1.png)
+  
+  1.2 展示协方差：
+  ![e75366ad.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/e75366ad.png)
+  
+  1.3 展示箱形图：
+  ![634b7c56.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/4e036741.png)
+  
+  1.4 展示分布：
+  
+  ![Figure_2.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/8e539993.png)
+  
+  可以看出有几种的类别展示了相关性：
+  
+  - Milk and Groceries
+  - Milk and Detergents_Paper
+  - Grocery and Detergents_Paper
+  
+  
   ## 2. 算法介绍
+  
   
   (可以使用一种或多种算法)
   ## 3. 结果展示

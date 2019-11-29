@@ -1,5 +1,5 @@
 createdAt: "2019-11-19T11:58:38.833Z"
-updatedAt: "2019-11-19T11:59:18.829Z"
+updatedAt: "2019-11-29T04:33:42.786Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Git常见命令"
@@ -12,6 +12,21 @@ content: '''
   
   ~~~
   rm -rf .git
+  ~~~
+  
+  git lone 部分目录
+  
+  例如我们想要data-science-portfolio/customer_segments里面的内容
+  
+  ~~~
+  $$ mkdir data-science-portfolio
+  $$ cd data-science-portfolio
+  $$ git init
+  $$ git remote add -f origin https://github.com/sajal2692/data-science-portfolio.git
+  $$ git config core.sparsecheckout true 
+  $$ echo "customer_segments/*" >> .git/info/sparse-checkout
+  $$ git checkout master
+  $$ git pull origin master
   ~~~
   
   
