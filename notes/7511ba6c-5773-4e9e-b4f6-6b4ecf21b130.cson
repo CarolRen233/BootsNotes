@@ -1,5 +1,5 @@
 createdAt: "2019-11-24T12:57:35.493Z"
-updatedAt: "2019-11-24T14:04:18.562Z"
+updatedAt: "2019-11-29T02:35:43.952Z"
 type: "MARKDOWN_NOTE"
 folder: "94cf7218696b1536fc91"
 title: "Latex使用"
@@ -7,21 +7,18 @@ tags: []
 content: '''
   # Latex使用
   
-  Ubuntu系统下：
+  ## Ubuntu系统下安装Latex和编辑器：
   
-  安装texlive，
+  1. 安装texlive或其他
   
-  安装一个顺手的编辑器
+  2. 安装一个顺手的编辑器
   [有哪些好的 LaTeX 编辑器？ - 陈磊的回答 - 知乎](https://www.zhihu.com/question/19954023/answer/23121933)
-  
-  
   可以选择texstudio：
   
   ~~~
   sudo apt install texstudio
   ~~~
-  用下面的文档测试：
-  
+  3. 用下面的文档测试：
   ~~~
   \\documentclass{article}
   \\usepackage{CJKutf8}
@@ -33,25 +30,49 @@ content: '''
   		
   	\\end{CJK}
   ~~~
-  编辑器写完保存为.tex格式，然后用以下方式转为pdf
-  
+  4. 编辑器写完保存为.tex格式，然后用以下方式转为pdf
   ~~~
   xelatex test.tex
   ~~~
   
+  ## 安装需要的.sty宏包
   
+  找到类似以下路径：
+  /usr/local/texlive/texmf-local/tex/latex/local
+  将.sty文件放进去
+  
+  
+  
+  # 参考文档：
   
   [LaTeX 文档:CTEX](http://www.ctex.org/OnlineDocuments)
   [19LaTeX学习系列之---LaTeX的总结 - 简书](https://www.jianshu.com/p/1d99b3c883a6)
   
   
-  可能会出现的报错：
   
-  1. *File `CJKutf8.sty' not found. \\begin*
-  解决方法：
-  ~~~
-  sudo apt-get install latex-cjk-*
-  ~~~
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 '''
 linesHighlighted: []
 isStarred: false

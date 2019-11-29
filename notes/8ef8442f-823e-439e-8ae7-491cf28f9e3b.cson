@@ -1,16 +1,35 @@
 createdAt: "2019-11-26T12:31:23.008Z"
-updatedAt: "2019-11-26T12:32:37.909Z"
+updatedAt: "2019-11-27T05:52:48.612Z"
 type: "MARKDOWN_NOTE"
 folder: "ba78bd24b69f615562d5"
-title: "StarGAN阅读总结"
+title: "DiscoGAN阅读总结"
 tags: []
 content: '''
-  # StarGAN阅读总结
+  # DiscoGAN阅读总结
   
   学生：任妍
   学号：1901213094
   
   [TOC]
+  
+  ## 1. 介绍
+  
+  本次作业阅读分析的代码来自论文《[Learning to Discover Cross-Domain Relations with Generative Adversarial Networks](https://arxiv.org/pdf/1703.05192.pdf)》
+  
+  这篇论文要解决的问题是给定未配对的数据，发现跨领域数据之间的联系。模型是DiscoGAN，能够在不同领域的数据之间实现风格转移，却依然保留关键属性（例如方向和面部识别）
+  
+  论文的主要创新点和特点：
+  1. 模型训练时，并不需要完全精确匹配的成对数据，也不需要预训练
+  2. 模型有两个耦合的GAN，训练的时候固定住一个domain的图片，并让另一个domain的图片去表示它
+  
+  
+  ## 2. 代码逻辑
+  
+  
+  ## 3. 论文公式对应代码
+  
+  ## 4. 网络对应代码
+  
   
   
 '''
