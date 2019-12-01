@@ -1,0 +1,79 @@
+createdAt: "2019-12-01T02:10:01.070Z"
+updatedAt: "2019-12-01T04:59:55.281Z"
+type: "MARKDOWN_NOTE"
+folder: "ba78bd24b69f615562d5"
+title: "nlp related work"
+tags: []
+content: '''
+  # nlp related work
+  
+  et al.
+  
+  Paragraph Vector
+  - [1](http://proceedings.mlr.press/v32/le14.pdf) Le, Q., & Mikolov, T. (2014, January). Distributed representations of sentences and documents. In International conference on machine learning (pp. 1188-1196).
+  
+  - [2] Kim, Y. (2014). Convolutional neural networks for sentence classification. arXiv preprint arXiv:1408.5882.
+  
+  word2vec
+  - [3](https://arxiv.org/pdf/1301.3781.pdf) Mikolov, T., Chen, K., Corrado, G., & Dean, J. (2013). Efficient estimation of word representations in vector space. arXiv preprint arXiv:1301.3781.
+  
+  GloVe
+  - [4](https://www.aclweb.org/anthology/D14-1162.pdf) Pennington, J., Socher, R., & Manning, C. (2014, October). Glove: Global vectors for word representation. In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP) (pp. 1532-1543).
+  
+  Skip-thought
+  - [5](https://papers.nips.cc/paper/5950-skip-thought-vectors.pdf) Kiros, R., Zhu, Y., Salakhutdinov, R. R., Zemel, R., Urtasun, R., Torralba, A., & Fidler, S. (2015). Skip-thought vectors. In Advances in neural information processing systems (pp. 3294-3302).
+  
+  Bi-directional LSTM-CNNs-CRF
+  - [6](https://arxiv.org/pdf/1603.01354.pdf) Ma, X., & Hovy, E. (2016). End-to-end sequence labeling via bi-directional lstm-cnns-crf. arXiv preprint arXiv:1603.01354.
+  
+  End-To-End Memory Networks
+  - [7](https://papers.nips.cc/paper/5846-end-to-end-memory-networks.pdf) Sukhbaatar, S., Weston, J., & Fergus, R. (2015). End-to-end memory networks. In Advances in neural information processing systems (pp. 2440-2448).
+  
+  - [8] J. Weston, A. Bordes, S. Chopra, and T. Mikolov. Towards AI-complete question answering:A set of prerequisite toy tasks. arXiv preprint: 1502.05698, 2015
+  - [9] J. Weston, S. Chopra, and A. Bordes. Memory networks. In International Conference on Learning Representations (ICLR), 2015.
+  
+  
+  QANet
+  - [10](https://arxiv.org/pdf/1804.09541.pdf) Yu, A. W., Dohan, D., Luong, M. T., Zhao, R., Chen, K., Norouzi, M., & Le, Q. V. (2018). Qanet: Combining local convolution with global self-attention for reading comprehension. arXiv preprint arXiv:1804.09541.
+  **Word Representation**
+  
+  (介绍Paragraph Vector， Word2Vec， GloVe， Skip-thought(建立在Skip-gram基础上))
+  
+  Le et al. proposed Paragraph Vector method[1],  concatenating the paragraph vector with several word vectors from a paragraph and predict the following word in the given context. For huge data sets with billions of words, Word2Vec[3] takes a large corpus of text  as input and produces a vector space, in which word vectors are positioned in the vector space such that words that share common contexts in the corpus are located close to one another. GloVe[4] efficiently leverages statistical information by training only on the nonzero elements in a word-word cooccurrence matrix, rather than on the entire sparse matrix or on individual context windows in a large corpus. Another popular method is Skip-thought. It extend Skip-gram[3] to the field of sentence representation. Skip-thoughts make predictions directly between sentences, that is, replace the basic unit of words in Skip-gram with the basic unit of sentences
+  
+  
+  **Sequence Modeling**
+  
+  The aim of sequence modeling is to train a network on top of pre-trained word vectors for sentence-level tasks. Kim et al.[2] take a lead to use CNN to achieves multiple nlp benchmarks. Bi-directional LSTM-CNNs-CRF[6] ,a classical method for appling deep learning to sequence labeling tasks, exploit a neural network to encodes hidden layer information as input feature of CRF. The existing methods are basically improved on this method.
+  
+  
+  **Reading Comprehension**
+  
+  
+  End-To-End Memory Networks[7], build on Memory Networks[9],can be applied to tasks as diverse as (synthetic) question answering[8] and to language modeling. More specificly, a lot of effective approched are proposed to address SQuAD[] task such as QANet[10], BiDAF[11], and BERT[]. QANet[10] does not require recurrent networks: Its encoder consists exclusively of convolution and self-attention, where convolution models local interactions and self-attention models global interactions. BiDAF[11] use Query2Context attention and Context2Query attention to extract information between Query and Content.
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

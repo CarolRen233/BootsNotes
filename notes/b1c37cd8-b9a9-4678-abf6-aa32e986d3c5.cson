@@ -1,5 +1,5 @@
 createdAt: "2019-11-29T04:18:06.971Z"
-updatedAt: "2019-11-29T05:56:36.850Z"
+updatedAt: "2019-11-29T12:45:41.269Z"
 type: "MARKDOWN_NOTE"
 folder: "ba78bd24b69f615562d5"
 title: "Machine Learning Individual Student Homework 2"
@@ -13,33 +13,176 @@ content: '''
   ## 1. 数据分析和可视化
   
   1.1 展示方差、均值：
-  ![b93d5ba1.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/b93d5ba1.png)
+  
+  ![1ea166dc.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/1ea166dc.png)
   
   1.2 展示协方差：
-  ![e75366ad.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/e75366ad.png)
+  
+  ![567d15ec.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/567d15ec.png)
   
   1.3 展示箱形图：
-  ![634b7c56.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/4e036741.png)
   
-  1.4 展示分布：
+  ![71d7f78b.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/71d7f78b.png)
+  1.4 展示分布(散布矩阵(scatter matrix))：
   
-  ![Figure_2.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/8e539993.png)
+  ![cf56b613.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/cf56b613.png)
+  
   
   可以看出有几种的类别展示了相关性：
   
-  - Milk and Groceries
-  - Milk and Detergents_Paper
-  - Grocery and Detergents_Paper
+  - Milk和Groceries
+  - Milk和Detergents_Paper
+  - Grocery和Detergents_Paper
   
+  而且每个类别自身都是严重的右偏，其实从箱形图也能看得出来，大部分的数据都集中在前25%左右，而且能看到一些异常值在里面
   
   ## 2. 算法介绍
   
+  ### 2.1 数据处理
   
-  (可以使用一种或多种算法)
+  **特征缩放**
+  
+  由于数据右偏，不是很正态分布，所以需要进行特征缩放，这里采用了[Box-Cox test](https://scipy.github.io/devdocs/generated/scipy.stats.boxcox.html)的方法，这是一种幂次变换(power transfomation)方法。
+  
+  ~~~python
+  # Scale the data using the natural logarithm
+  log_data = data.apply(lambda x: np.log(x))
+  ~~~
+  
+  **查看结果**
+  
+  
+  看一下经过特征缩放之后的数据长什么样子，这里依然查看散布矩阵(scatter matrix)：
+  
+  ![3ac9cf11.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/3ac9cf11.png)
+  
+  然后再挑选一些example看一下（选了第26，176，392个数据）：
+  
+  没有进行特征缩放的数据：
+  
+  ![fe4999e0.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/fe4999e0.png)
+  
+  特征缩放之后的数据：
+  
+  ![b39c9125.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/b39c9125.png)
+  
+  
+  
+  **异常值检测**
+  
+  存在异常值会对结果产生影响，所以要把异常值找出来并剔除。这里采用的方法是Turkeys's Test，即Q1-k(Q3-Q1)为最小估计值，Q3+k(Q3-Q1)为最大估计值，这里k取1.5
+  
+  
+  然后发现第[128, 65, 66, 75, 154]个数据为异常值，去处之后还有435个正常数据
+  
+  
+  ### 2.2 PCA
+  
+  刚开始的数据是有6个维度的，将原始数据进行PCA转化之后,可以将其可视化出来
+  
+  ~~~python
+  from sklearn.decomposition import PCA
+  pca = PCA().fit(good_data)
+  ~~~
+  
+  ![download.png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/305da7f2.png)
+  
+  
+  之所以采用PCA，就是希望可以对数据进行降维，此处我们将数据降为2维
+  
+  ~~~python
+  pca = PCA(n_components=2).fit(good_data)
+  reduced_data = pca.transform(good_data)
+  reduced_data = pd.DataFrame(reduced_data, columns = ['Dimension 1', 'Dimension 2'])
+  ~~~
+  
+  ![download (1).png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/cd2361ee.png)
+  
+  
+  
+  ### 2.3 K-means Clustering
+  
+  接下来对进行聚类，假设我不知道最终要分成几类，就可以先预设一些值，然后测试哪个效果更好，可以用聚类评估算法-轮廓系数(Silhouette Coefficient)
+  
+  ~~~python
+  
+  n_clusters = [8,6,4,3,2]
+  
+  from sklearn.mixture import GMM
+  from sklearn.metrics import silhouette_score
+  
+  for n in n_clusters:
+      clusterer = GMM(n_components=n).fit(reduced_data)
+      preds = clusterer.predict(reduced_data)
+      centers = clusterer.means_
+      score = silhouette_score(reduced_data,preds)
+  ~~~
+  
+  
   ## 3. 结果展示
   
-  (展示聚类结果,评价效果)
+  
+  ![download (2).png](:storage/b1c37cd8-b9a9-4678-abf6-aa32e986d3c5/e93bab14.png)
+  
+  聚类效果如下，可以看到当分成2分类的时候结果较好
+  
+      The silhouette_score for 8 clusters is 0.31341457900627434
+      The silhouette_score for 6 clusters is 0.27492229823888403
+      The silhouette_score for 4 clusters is 0.3320370018279278
+      The silhouette_score for 3 clusters is 0.37245855864221816
+      The silhouette_score for 2 clusters is 0.41181886438624477
+  
+  
   ## 4. 分析思考
+  
+  
+  
+  1. 现实生活中的数据，往往有偏，所以需要一些处理，例如去除异常值，特征缩放等等
+  2. pca其实我觉得不太适合这里，因为我感觉pca适合维数更高的数据，但是当我没有降维直接采用聚类的时候，分类结果其实并不好，如下：
+  
+          The silhouette_score for 8 clusters is 0.014878075510750363
+         The silhouette_score for 6 clusters is 0.09281205731387607
+         The silhouette_score for 4 clusters is 0.13113472208812627
+         The silhouette_score for 3 clusters is 0.22167629052068316
+         The silhouette_score for 2 clusters is 0.34589080784361914
+  3. 写作业的时候的确发现，机器学习的算法可解释性更强
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
 '''
