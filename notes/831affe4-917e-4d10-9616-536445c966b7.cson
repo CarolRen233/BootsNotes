@@ -1,0 +1,35 @@
+createdAt: "2019-12-02T13:00:44.913Z"
+updatedAt: "2019-12-02T13:06:01.435Z"
+type: "MARKDOWN_NOTE"
+folder: "ba78bd24b69f615562d5"
+title: "2019.11.25-12.01_周报_任妍"
+content: '''
+  # 2019.11.25-12.01_周报_任妍
+  
+  [TOC]
+  
+  
+  ## 本周工作总结
+  
+  
+  1. 大数据质量保障模型
+  查阅资料，了解相关领域内容，调查国内外研究现状，撰写相关调研报告，根据过去的图像题注领域的注意力模型和韦伯差分模型来形成大数据质量保障的模型
+  2. NLP的相关研究
+  主要针对NLP领域的一些word embedding和sequence以及一些经典算法进行阅读，整理，撰写报告
+  
+  
+  
+  ## 本周遇到问题及解决方案
+  
+  初次使用Latex，一直报错，在ubuntu上下载了TexLive和TexStudio，发现还是一直报错，最终决定用网页版的来解决，发现网页版的overleaf好用多了
+  
+  
+  ## 下周计划
+  
+  1. NLP报告撰写
+  2. 关于一个小问题的思考，必须用全连接层吗？这层有什么变种吗？
+'''
+linesHighlighted: []
+tags: []
+isStarred: false
+isTrashed: false

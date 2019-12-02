@@ -1,5 +1,5 @@
 createdAt: "2019-12-01T02:10:01.070Z"
-updatedAt: "2019-12-01T04:59:55.281Z"
+updatedAt: "2019-12-01T05:03:00.731Z"
 type: "MARKDOWN_NOTE"
 folder: "ba78bd24b69f615562d5"
 title: "nlp related work"
@@ -35,6 +35,8 @@ content: '''
   
   QANet
   - [10](https://arxiv.org/pdf/1804.09541.pdf) Yu, A. W., Dohan, D., Luong, M. T., Zhao, R., Chen, K., Norouzi, M., & Le, Q. V. (2018). Qanet: Combining local convolution with global self-attention for reading comprehension. arXiv preprint arXiv:1804.09541.
+  
+  
   **Word Representation**
   
   (介绍Paragraph Vector， Word2Vec， GloVe， Skip-thought(建立在Skip-gram基础上))

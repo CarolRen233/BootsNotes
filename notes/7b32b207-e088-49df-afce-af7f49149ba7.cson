@@ -1,0 +1,735 @@
+createdAt: "2019-12-02T13:19:15.492Z"
+updatedAt: "2019-12-02T13:26:46.994Z"
+type: "SNIPPET_NOTE"
+folder: "94cf7218696b1536fc91"
+title: "AIHW2 report"
+tags: []
+description: '''
+  AIHW2 report
+  
+'''
+snippets: [
+  {
+    linesHighlighted: []
+    name: "neurips_2019.tex"
+    mode: "LaTeX"
+    content: '''
+      \\documentclass{article}
+      
+      % if you need to pass options to natbib, use, e.g.:
+      %     \\PassOptionsToPackage{numbers, compress}{natbib}
+      % before loading neurips_2019
+      
+      % ready for submission
+      % \\usepackage{neurips_2019}
+      
+      % to compile a preprint version, e.g., for submission to arXiv, add add the
+      % [preprint] option:
+      %     \\usepackage[preprint]{neurips_2019}
+      
+      % to compile a camera-ready version, add the [final] option, e.g.:
+           \\usepackage[final]{neurips_2019}
+      
+      % to avoid loading the natbib package, add option nonatbib:
+      %     \\usepackage[nonatbib]{neurips_2019}
+      
+      \\usepackage[utf8]{inputenc} % allow utf-8 input
+      \\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+      \\usepackage{hyperref}       % hyperlinks
+      \\usepackage{url}            % simple URL typesetting
+      \\usepackage{booktabs}       % professional-quality tables
+      \\usepackage{amsfonts}       % blackboard math symbols
+      \\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+      \\usepackage{microtype}      % microtypography
+      \\usepackage{graphicx}
+      \\usepackage{subfigure}
+      
+      \\title{Artificial Intelligence Homework on SQuAD}
+      
+      % The \\author macro works with any number of authors. There are two commands
+      % used to separate the names and addresses of multiple authors: \\And and \\AND.
+      %
+      % Using \\And between authors leaves it to LaTeX to determine where to break the
+      % lines. Using \\AND forces a line break at that point. So, if LaTeX puts 3 of 4
+      % authors names on the first line, and the last on the second line, try using
+      % \\AND instead of \\And before the third author name.
+      
+      \\author{%
+        Ren Yan \\\\
+        1901213094\\\\
+        \\texttt{1901213094@pku.edu.cn} \\\\
+        % examples of more authors
+        \\And
+        Wang Lin \\\\
+        1901213 \\\\
+        \\texttt{@pku.edu.cn} \\\\
+        \\And
+        Wang Shubo \\\\
+        190121 \\\\
+        \\texttt{@pku.edu.cn} \\\\
+      }
+      
+      
+      
+      
+      \\begin{document}
+      
+      \\maketitle
+      
+      \\begin{abstract}
+        ToDo
+      \\end{abstract}
+      
+      \\section{Introduction}
+      
+      ToDo
+      
+      \\section{Related Work}
+      
+      \\textbf{Word Representation}
+      
+      Le et al. proposed Paragraph Vector method\\citep{le2014distributed},  concatenating the paragraph vector with several word vectors from a paragraph and predict the following word in the given context. For huge data sets with billions of words, Word2Vec\\citep{mikolov2013efficient} takes a large corpus of text  as input and produces a vector space, in which word vectors are positioned in the vector space such that words that share common contexts in the corpus are located close to one another. GloVe\\citep{pennington2014glove} efficiently leverages statistical information by training only on the nonzero elements in a word-word cooccurrence matrix, rather than on the entire sparse matrix or on individual context windows in a large corpus. Another popular method is Skip-thought. It extend Skip-gram\\citep{mikolov2013efficient} to the field of sentence representation. Skip-thoughts make predictions directly between sentences, that is, replace the basic unit of words in Skip-gram with the basic unit of sentences
+      
+      \\textbf{Sequence Modeling}
+      
+      The aim of sequence modeling is to train a network on top of pre-trained word vectors for sentence-level tasks. Kim et al.\\citep{kim2014convolutional} take a lead to use CNN to achieves multiple nlp benchmarks. Bi-directional LSTM-CNNs-CRF\\citep{ma2016end} ,a classical method for appling deep learning to sequence labeling tasks, exploit a neural network to encodes hidden layer information as input feature of CRF. The existing methods are basically improved on this method.
+      
+      \\textbf{Reading Comprehension}
+      
+      End-To-End Memory Networks\\citep{sukhbaatar2015end}, build on Memory Networks\\citep{weston2014memory},can be applied to tasks as diverse as (synthetic) question answering\\citep{weston2015towards} and to language modeling. More specificly, a lot of effective approched are proposed to address SQuAD\\citep{rajpurkar2016squad} task such as QANet\\citep{yu2018qanet}, BiDAF\\citep{seo2016bidirectional}, and BERT\\citep{devlin2018bert}. QANet\\citep{yu2018qanet} does not require recurrent networks: Its encoder consists exclusively of convolution and self-attention, where convolution models local interactions and self-attention models global interactions. BiDAF\\citep{seo2016bidirectional} use Query2Context attention and Context2Query attention to extract information between Query and Content.
+      
+      \\section{Pre-Trained Contextualized Word Representation}
+      
+      We explore several pre-Trained contextualized word representation methods.Although distributed word representation can encode words in low dimensional space and reflect
+      correlation between different words, they cannot efficiently mine contextual information. To be specific, vectors produced by distributed word representation for one word is constant regardless of different context. To address this problem, researchers introduce contextualized word representations, which are pre-trained with large corpus in advance and then directly utilized just as conventional word representation or fine-tuned according to specific tasks. This is a kind of transfer learning and has shown promising performance in a wide range of NLP tasks including machine reading comprehension. Even a simple neural network model can perform well in answer prediction with these pre-trained word representation approaches
+      
+      \\textbf{CoVE}
+      
+      Inspired by successful case in computer vision, which transfers CNNs pre-trained on large supervised training corpus like ImageNet to other tasks, McCann et al.\\citep{MccannLearned} try to bring beneficial of transfer learning to NLP tasks. They firstly train LSTM encoders of the sequence-to-sequence models on a large-scale English-to-German translation dataset and then transfer the outputs of encoder to other NLP tasks. As Machine Translation (MT) require the model to encode words in the context, the outputs of encoder can be regarded as context vectors (CoVE). To deal with MRC problems, McCann et al. concatenate the outputs of MT encoder with word embeddings pre-trained by GloVe to represent the context and question and feed them through the coattention and dynamic decoder implemented in DCN\\citep{XiongDynamic}. DCN with CoVe outperforms the original one on SQuAD dataset, which illustrates the contribution of contextualized word representations to downstream tasks. However, pre-training CoVE requires a great deal of parallel corpus. Its performance will degrade if the training corpus is not adequate.
+      
+      \\textbf{ELMo}
+      
+      Embeddings from Language Models (ELMo), proposed by Peters et al. \\citep{PetersDeep}, is another contextualized word representation. ELMo’s representations differ from traditional word type embeddings in that each token is assigned a representation that is a function of the entire input sentence. They use vectors derived from a bidirectional LSTM that is trained with a coupled language model (LM) objective on a large text corpus. For this reason, they call them ELMo (Embeddings from Language Models) representations. Unlike previous approaches for learning contextualized word vectors (Peters et al., 2017; McCann et al., 2017), ELMo representations are deep, in the sense that they are a function of all of the internal layers of the biLM. More specifically, we learn a linear combination of the vectors stacked above each input word for each end task, which markedly improves performance over just using the top LSTM layer. Compared to CoVe, ELMo breaks the constraint of limited parallel corpus and can obtain richer word representations by collapsing outputs of all biLM layers into a single vector with a task specific weighting rather than just utilizing outputs of the top layer. Model evaluations illustrate that different levels of LSTM states can capture diverse syntactic and linguist information. When applying ELMo embeddings to MRC models, Peters et al. choose an improved version of Bi-DAF introduced by Clark and Gardner\\citep{ClarkSimple} as baseline and improve the state-of-the-art single model by 1.4$\\%$ on SQuAD dataset. ELMo, which can easily be integrated to existing models, shows promising performance on various NLP tasks, but it is limited in a way by the insufficient feature extraction capability of LSTM
+      
+      
+      \\textbf{GPT}
+      
+      GPT\\citep{radford2018improving}, short for Generative Pre-Training, is a semi-supervised approach combining unsupervised pre-training and supervised fine-tuning. Representations pre-trained by this method can transfer to various NLP tasks with little adaptation. The basic component of GPT is a multi-layer Transformer\\citep{vaswani2017attention} decoder which mainly use multi-head self-attention to train the language model and allow to capture longer semantic structure compared to RNN-based models. After training, the pre-trained parameters are fine-tuned for specific downstream tasks. In terms of MRC problems like multiple choice, Radford et al. concatenate the context and question with each possible answer and process such sequences with Transformer networks. Finally, they produce an output distribution over possible answers to predict correct answer. GPT achieves improvements of 5.7$\\%$ on RACE\\citep{lai2017race} dataset compared with state-of-the-art. Seeing the beneficial brought by contextualized word representations pre-trained on large-scale datasets, Radford et al. \\caption{radford2019language} propose GPT-2 later, which is pre-trained on larger corpus, WebText, with more than 1.5 billion parameters. Compared to the previous one, layers of Transformer architecture increase from 12 to 48. Moreover, single task training is substituted with multitask learning framework, which makes GPT-2 more generative. This improved version can show competitive performance even in zero-shot setting. However, Transformer architecture utilized in both GPT and GPT-2 is unidirectional (left-to-right), that cannot incorporate context from both directions. This may be the major shortcoming and limits its performance on downstream tasks.
+      
+      \\textbf{BERT}
+      
+      Considering the limitations of unidirectional architecture applied in previous pre-training models like GPT, Devlin et al. \\citep{devlin2018bert} propose a new one named BERT (Bidirectional Encoder Representation from Transformers) . With the masked language model (MLM) and next sentence prediction task, BERT is able to pre-train deep contextualized representations with bidirectional Transformer, encoding both left and right context to word representations. As Transformer architecture cannot extract sequential information, Devlin et al. add positional embeddings to encode position. Owing to bidirectional language model and Transformer architecture, BERT outperforms state-of-the-art models in eleven NLP tasks. In particular, for MRC tasks, BERT is so competitive that just utilizing BERT with simple answer prediction approaches can show promising performance. Despite of its outstanding performance, pre-training process of BERT is time and resource consuming which makes it nearly impossible to be pre-trained without abundant computational resources.
+      
+      
+      \\section{Model}
+      
+      \\begin{figure}[h!]
+      \\flushleft
+      \\includegraphics[scale=0.32]{SQuAD}
+      \\caption{Model}
+      \\label{fig:SQuAD}
+      \\end{figure}
+      
+      
+      \\section{Experiments}
+      In our experiments, we use F1 score and Exact Match(EM) score to evaluate models, which are also the official evaluation metrics. F1 score is the harmonic mean of precision and recall. And Exact Match score is a stricter metric - a binary measure (i.e. true/false) of whether the system output matches the ground truth answer exactly. 
+      
+      \\subsection{Dataset}
+      
+      This report uses CS224N default final project’s data split of SQuAD2.0 dataset for training and testing. 
+      SQuAD2.0 dataset is the latest version of the Stanford Question Answering Dataset (SQuAD). SQuAD 2.0 combines existing SQuAD data with over 50,000 unanswerable questions written adversarially by crowdworkers to look similar to answerable ones. To do well on SQuAD 2.0, systems must not only answer questions when possible, but also determine when no answer is supported by the paragraph and abstain from answering. Therefore, it’s a challenging task for existing models.
+      
+      The CS224N default final project’s data split of SQuAD2.0 dataset has three splits: train, dev and test. The train, development, and test data set have 129,941, 6078, and 5915 examples. Besides, there is only one answer to each question in the training set, but there might be many slightly different answers to the questions in the test set. Here is an example
+      
+      
+      \\begin{figure}[htbp]
+      \\centering
+      \\subfigure[An example of context]{
+      \\begin{minipage}[t]{0.25\\linewidth}
+      \\centering
+      \\includegraphics[width=1in]{111.eps}
+      %\\caption{fig2}
+      \\end{minipage}
+      }%
+      \\subfigure[pic4.]{
+      \\begin{minipage}[t]{0.25\\linewidth}
+      \\centering
+      \\includegraphics[width=1in]{111.eps}
+      %\\caption{fig2}
+      \\end{minipage}
+      }%
+      \\centering
+      \\caption{pics}
+      \\end{figure}
+      
+      
+      \\subsection{Evaluation method}
+      In our experiments, we use F1 score and Exact Match(EM) score to evaluate models, which are also the official evaluation metrics. F1 score is the harmonic mean of precision and recall. And Exact Match score is a stricter metric - a binary measure (i.e. true/false) of whether the system output matches the ground truth answer exactly. 
+      
+      \\subsection{Results}
+      
+      
+      \\begin{table}
+        \\caption{Sample table title}
+        \\label{sample-table}
+        \\centering
+        \\begin{tabular}{lll}
+          \\toprule
+          \\multicolumn{2}{c}{Part}                   \\\\
+          \\cmidrule(r){1-2}
+          Name     & Description     & Size ($\\mu$m) \\\\
+          \\midrule
+          Dendrite & Input terminal  & $\\sim$100     \\\\
+          Axon     & Output terminal & $\\sim$10      \\\\
+          Soma     & Cell body       & up to $10^6$  \\\\
+          \\bottomrule
+        \\end{tabular}
+      \\end{table}tal
+      
+      
+      The quantitative result is presented in Table~\\ref{sample-table}.
+      
+      \\section{Analysis}
+      
+      In our experiment, xlnet based model results in best performance with F1 score of and EM of on development set. Besides, non-pretrained contextual embedding (Non-PCE) models like BiDAF doesn’t perform as well as pretrained contextual embedding (PCE) models such as BERT base model and xlnet based model. Non-pretrained contextual embedding (Non-PCE) models needs more epoch to train, and performances get better  while BERT and XLNET based model reach performance cap within 3 epochs. And the performance
+      
+      
+      
+      
+      \\subsection{Conclusion}
+      
+      Large pretrained contextual embedding (PCE) model, a BERT based model and XLNET based model provide best performance among the models that have been tested. And xlnet based model performers slight higher than bert based model with F1 score of 73.77 and 72.95 on development set. BiDAF based model has lowest performances. But BERT and XLNET take very long time to train for each epoch, and reach performance cap within 3 epoch. On the other hand, Non-PCE models have lower initial performance, but can improve with more training epochs. Model size and the depth are the determination factors of model performance. Best model requires a long training time and large GPU RAM. This might be a bottle neck when applying state-of-the-art model into application.
+      
+      
+      
+      \\subsubsection*{Acknowledgments}
+      
+      Thanks Professor Jie Chen as well as AI teaching assistant Qian Ren who provided this wonderful course on NLP and Detailed explanations on course issues, which helps me understand fundamental of NLP and inspire me to explore industry application cases in my career.Secondly I would also like to thank PCL  which provide adequent GPUs so that makes this project possible
+      
+      
+      
+      \\bibliographystyle{plain}
+      \\bibliography{ref}
+      \\end{document}
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "ref.bib"
+    content: '''
+      @inproceedings{le2014distributed,
+        title={Distributed representations of sentences and documents},
+        author={Le, Quoc and Mikolov, Tomas},
+        booktitle={International conference on machine learning},
+        pages={1188--1196},
+        year={2014}
+      }
+      
+      @article{kim2014convolutional,
+        title={Convolutional neural networks for sentence classification},
+        author={Kim, Yoon},
+        journal={arXiv preprint arXiv:1408.5882},
+        year={2014}
+      }
+      
+      @article{mikolov2013efficient,
+        title={Efficient estimation of word representations in vector space},
+        author={Mikolov, Tomas and Chen, Kai and Corrado, Greg and Dean, Jeffrey},
+        journal={arXiv preprint arXiv:1301.3781},
+        year={2013}
+      }
+      
+      @inproceedings{pennington2014glove,
+        title={Glove: Global vectors for word representation},
+        author={Pennington, Jeffrey and Socher, Richard and Manning, Christopher},
+        booktitle={Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP)},
+        pages={1532--1543},
+        year={2014}
+      }
+      
+      @inproceedings{kiros2015skip,
+        title={Skip-thought vectors},
+        author={Kiros, Ryan and Zhu, Yukun and Salakhutdinov, Ruslan R and Zemel, Richard and Urtasun, Raquel and Torralba, Antonio and Fidler, Sanja},
+        booktitle={Advances in neural information processing systems},
+        pages={3294--3302},
+        year={2015}
+      }
+      
+      @article{ma2016end,
+        title={End-to-end sequence labeling via bi-directional lstm-cnns-crf},
+        author={Ma, Xuezhe and Hovy, Eduard},
+        journal={arXiv preprint arXiv:1603.01354},
+        year={2016}
+      }
+      
+      @inproceedings{sukhbaatar2015end,
+        title={End-to-end memory networks},
+        author={Sukhbaatar, Sainbayar and Weston, Jason and Fergus, Rob and others},
+        booktitle={Advances in neural information processing systems},
+        pages={2440--2448},
+        year={2015}
+      }
+      
+      @article{weston2015towards,
+        title={Towards ai-complete question answering: A set of prerequisite toy tasks},
+        author={Weston, Jason and Bordes, Antoine and Chopra, Sumit and Rush, Alexander M and van Merri{\\"e}nboer, Bart and Joulin, Armand and Mikolov, Tomas},
+        journal={arXiv preprint arXiv:1502.05698},
+        year={2015}
+      }
+      
+      @article{weston2014memory,
+        title={Memory networks},
+        author={Weston, Jason and Chopra, Sumit and Bordes, Antoine},
+        journal={arXiv preprint arXiv:1410.3916},
+        year={2014}
+      }
+      
+      @article{yu2018qanet,
+        title={Qanet: Combining local convolution with global self-attention for reading comprehension},
+        author={Yu, Adams Wei and Dohan, David and Luong, Minh-Thang and Zhao, Rui and Chen, Kai and Norouzi, Mohammad and Le, Quoc V},
+        journal={arXiv preprint arXiv:1804.09541},
+        year={2018}
+      }
+      
+      @article{rajpurkar2016squad,
+        title={Squad: 100,000+ questions for machine comprehension of text},
+        author={Rajpurkar, Pranav and Zhang, Jian and Lopyrev, Konstantin and Liang, Percy},
+        journal={arXiv preprint arXiv:1606.05250},
+        year={2016}
+      }
+      
+      @article{seo2016bidirectional,
+        title={Bidirectional attention flow for machine comprehension},
+        author={Seo, Minjoon and Kembhavi, Aniruddha and Farhadi, Ali and Hajishirzi, Hannaneh},
+        journal={arXiv preprint arXiv:1611.01603},
+        year={2016}
+      }
+      
+      @article{devlin2018bert,
+        title={Bert: Pre-training of deep bidirectional transformers for language understanding},
+        author={Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+        journal={arXiv preprint arXiv:1810.04805},
+        year={2018}
+      }
+      
+      @article{MccannLearned,
+        title={Learned in Translation: Contextualized Word Vectors},
+        author={Mccann, Bryan and Bradbury, James and Xiong, Caiming and Socher, Richard},
+      }
+      
+      
+      @article{XiongDynamic,
+        title={Dynamic Coattention Networks For Question Answering},
+        author={Xiong, Caiming and Zhong, Victor and Socher, Richard},
+      }
+      
+      @article{PetersDeep,
+        title={Deep contextualized word representations},
+        author={Peters, Matthew E. and Neumann, Mark and Iyyer, Mohit and Gardner, Matt and Clark, Christopher and Lee, Kenton and Zettlemoyer, Luke},
+      }
+      
+      @article{ClarkSimple,
+        title={Simple and Effective Multi-Paragraph Reading Comprehension},
+        author={Clark, Christopher and Gardner, Matt},
+      }
+      
+      @article{radford2018improving,
+        title={Improving language understanding by generative pre-training},
+        author={Radford, Alec and Narasimhan, Karthik and Salimans, Tim and Sutskever, Ilya},
+        journal={URL https://s3-us-west-2. amazonaws. com/openai-assets/researchcovers/languageunsupervised/language understanding paper. pdf},
+        year={2018}
+      }
+      
+      @inproceedings{vaswani2017attention,
+        title={Attention is all you need},
+        author={Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, {\\L}ukasz and Polosukhin, Illia},
+        booktitle={Advances in neural information processing systems},
+        pages={5998--6008},
+        year={2017}
+      }
+      
+      
+      @article{lai2017race,
+        title={Race: Large-scale reading comprehension dataset from examinations},
+        author={Lai, Guokun and Xie, Qizhe and Liu, Hanxiao and Yang, Yiming and Hovy, Eduard},
+        journal={arXiv preprint arXiv:1704.04683},
+        year={2017}
+      }
+      
+      @article{radford2019language,
+        title={Language models are unsupervised multitask learners},
+        author={Radford, Alec and Wu, Jeffrey and Child, Rewon and Luan, David and Amodei, Dario and Sutskever, Ilya},
+        journal={OpenAI Blog},
+        volume={1},
+        number={8},
+        year={2019}
+      }
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "neurips_2019.sty"
+    content: '''
+      % partial rewrite of the LaTeX2e package for submissions to the
+      % Conference on Neural Information Processing Systems (NeurIPS):
+      %
+      % - uses more LaTeX conventions
+      % - line numbers at submission time replaced with aligned numbers from
+      %   lineno package
+      % - \\nipsfinalcopy replaced with [final] package option
+      % - automatically loads times package for authors
+      % - loads natbib automatically; this can be suppressed with the
+      %   [nonatbib] package option
+      % - adds foot line to first page identifying the conference
+      % - adds preprint option for submission to e.g. arXiv
+      % - conference acronym modified
+      %
+      % Roman Garnett (garnett@wustl.edu) and the many authors of
+      % nips15submit_e.sty, including MK and drstrip@sandia
+      %
+      % last revision: March 2019
+      
+      \\NeedsTeXFormat{LaTeX2e}
+      \\ProvidesPackage{neurips_2019}[2019/03/13 NeurIPS 2019 submission/camera-ready style file]
+      
+      % declare final option, which creates camera-ready copy
+      \\newif\\if@neuripsfinal\\@neuripsfinalfalse
+      \\DeclareOption{final}{
+        \\@neuripsfinaltrue
+      }
+      
+      % declare nonatbib option, which does not load natbib in case of
+      % package clash (users can pass options to natbib via
+      % \\PassOptionsToPackage)
+      \\newif\\if@natbib\\@natbibtrue
+      \\DeclareOption{nonatbib}{
+        \\@natbibfalse
+      }
+      
+      % declare preprint option, which creates a preprint version ready for
+      % upload to, e.g., arXiv
+      \\newif\\if@preprint\\@preprintfalse
+      \\DeclareOption{preprint}{
+        \\@preprinttrue
+      }
+      
+      \\ProcessOptions\\relax
+      
+      % determine whether this is an anonymized submission
+      \\newif\\if@submission\\@submissiontrue
+      \\if@neuripsfinal\\@submissionfalse\\fi
+      \\if@preprint\\@submissionfalse\\fi
+      
+      % fonts
+      \\renewcommand{\\rmdefault}{ptm}
+      \\renewcommand{\\sfdefault}{phv}
+      
+      % change this every year for notice string at bottom
+      \\newcommand{\\@neuripsordinal}{33rd}
+      \\newcommand{\\@neuripsyear}{2019}
+      \\newcommand{\\@neuripslocation}{Vancouver, Canada}
+      
+      % handle tweaks for camera-ready copy vs. submission copy
+      \\if@preprint
+        \\newcommand{\\@noticestring}{%
+          Preprint. Under review.%
+        }
+      \\else
+        \\if@neuripsfinal
+          \\newcommand{\\@noticestring}{%
+            \\@neuripsordinal\\/ Conference on Neural Information Processing Systems
+            (NeurIPS \\@neuripsyear), \\@neuripslocation.%
+          }
+        \\else
+          \\newcommand{\\@noticestring}{%
+            Submitted to \\@neuripsordinal\\/ Conference on Neural Information
+            Processing Systems (NeurIPS \\@neuripsyear). Do not distribute.%
+          }
+      
+          % line numbers for submission
+          \\RequirePackage{lineno}
+          \\linenumbers
+      
+          % fix incompatibilities between lineno and amsmath, if required, by
+          % transparently wrapping linenomath environments around amsmath
+          % environments
+          \\AtBeginDocument{%
+            \\@ifpackageloaded{amsmath}{%
+              \\newcommand*\\patchAmsMathEnvironmentForLineno[1]{%
+                \\expandafter\\let\\csname old#1\\expandafter\\endcsname\\csname #1\\endcsname
+                \\expandafter\\let\\csname oldend#1\\expandafter\\endcsname\\csname end#1\\endcsname
+                \\renewenvironment{#1}%
+                                 {\\linenomath\\csname old#1\\endcsname}%
+                                 {\\csname oldend#1\\endcsname\\endlinenomath}%
+              }%
+              \\newcommand*\\patchBothAmsMathEnvironmentsForLineno[1]{%
+                \\patchAmsMathEnvironmentForLineno{#1}%
+                \\patchAmsMathEnvironmentForLineno{#1*}%
+              }%
+              \\patchBothAmsMathEnvironmentsForLineno{equation}%
+              \\patchBothAmsMathEnvironmentsForLineno{align}%
+              \\patchBothAmsMathEnvironmentsForLineno{flalign}%
+              \\patchBothAmsMathEnvironmentsForLineno{alignat}%
+              \\patchBothAmsMathEnvironmentsForLineno{gather}%
+              \\patchBothAmsMathEnvironmentsForLineno{multline}%
+            }{}
+          }
+        \\fi
+      \\fi
+      
+      % load natbib unless told otherwise
+      \\if@natbib
+        \\RequirePackage{natbib}
+      \\fi
+      
+      % set page geometry
+      \\usepackage[verbose=true,letterpaper]{geometry}
+      \\AtBeginDocument{
+        \\newgeometry{
+          textheight=9in,
+          textwidth=5.5in,
+          top=1in,
+          headheight=12pt,
+          headsep=25pt,
+          footskip=30pt
+        }
+        \\@ifpackageloaded{fullpage}
+          {\\PackageWarning{neurips_2019}{fullpage package not allowed! Overwriting formatting.}}
+          {}
+      }
+      
+      \\widowpenalty=10000
+      \\clubpenalty=10000
+      \\flushbottom
+      \\sloppy
+      
+      % font sizes with reduced leading
+      \\renewcommand{\\normalsize}{%
+        \\@setfontsize\\normalsize\\@xpt\\@xipt
+        \\abovedisplayskip      7\\p@ \\@plus 2\\p@ \\@minus 5\\p@
+        \\abovedisplayshortskip \\z@ \\@plus 3\\p@
+        \\belowdisplayskip      \\abovedisplayskip
+        \\belowdisplayshortskip 4\\p@ \\@plus 3\\p@ \\@minus 3\\p@
+      }
+      \\normalsize
+      \\renewcommand{\\small}{%
+        \\@setfontsize\\small\\@ixpt\\@xpt
+        \\abovedisplayskip      6\\p@ \\@plus 1.5\\p@ \\@minus 4\\p@
+        \\abovedisplayshortskip \\z@  \\@plus 2\\p@
+        \\belowdisplayskip      \\abovedisplayskip
+        \\belowdisplayshortskip 3\\p@ \\@plus 2\\p@   \\@minus 2\\p@
+      }
+      \\renewcommand{\\footnotesize}{\\@setfontsize\\footnotesize\\@ixpt\\@xpt}
+      \\renewcommand{\\scriptsize}{\\@setfontsize\\scriptsize\\@viipt\\@viiipt}
+      \\renewcommand{\\tiny}{\\@setfontsize\\tiny\\@vipt\\@viipt}
+      \\renewcommand{\\large}{\\@setfontsize\\large\\@xiipt{14}}
+      \\renewcommand{\\Large}{\\@setfontsize\\Large\\@xivpt{16}}
+      \\renewcommand{\\LARGE}{\\@setfontsize\\LARGE\\@xviipt{20}}
+      \\renewcommand{\\huge}{\\@setfontsize\\huge\\@xxpt{23}}
+      \\renewcommand{\\Huge}{\\@setfontsize\\Huge\\@xxvpt{28}}
+      
+      % sections with less space
+      \\providecommand{\\section}{}
+      \\renewcommand{\\section}{%
+        \\@startsection{section}{1}{\\z@}%
+                      {-2.0ex \\@plus -0.5ex \\@minus -0.2ex}%
+                      { 1.5ex \\@plus  0.3ex \\@minus  0.2ex}%
+                      {\\large\\bf\\raggedright}%
+      }
+      \\providecommand{\\subsection}{}
+      \\renewcommand{\\subsection}{%
+        \\@startsection{subsection}{2}{\\z@}%
+                      {-1.8ex \\@plus -0.5ex \\@minus -0.2ex}%
+                      { 0.8ex \\@plus  0.2ex}%
+                      {\\normalsize\\bf\\raggedright}%
+      }
+      \\providecommand{\\subsubsection}{}
+      \\renewcommand{\\subsubsection}{%
+        \\@startsection{subsubsection}{3}{\\z@}%
+                      {-1.5ex \\@plus -0.5ex \\@minus -0.2ex}%
+                      { 0.5ex \\@plus  0.2ex}%
+                      {\\normalsize\\bf\\raggedright}%
+      }
+      \\providecommand{\\paragraph}{}
+      \\renewcommand{\\paragraph}{%
+        \\@startsection{paragraph}{4}{\\z@}%
+                      {1.5ex \\@plus 0.5ex \\@minus 0.2ex}%
+                      {-1em}%
+                      {\\normalsize\\bf}%
+      }
+      \\providecommand{\\subparagraph}{}
+      \\renewcommand{\\subparagraph}{%
+        \\@startsection{subparagraph}{5}{\\z@}%
+                      {1.5ex \\@plus 0.5ex \\@minus 0.2ex}%
+                      {-1em}%
+                      {\\normalsize\\bf}%
+      }
+      \\providecommand{\\subsubsubsection}{}
+      \\renewcommand{\\subsubsubsection}{%
+        \\vskip5pt{\\noindent\\normalsize\\rm\\raggedright}%
+      }
+      
+      % float placement
+      \\renewcommand{\\topfraction      }{0.85}
+      \\renewcommand{\\bottomfraction   }{0.4}
+      \\renewcommand{\\textfraction     }{0.1}
+      \\renewcommand{\\floatpagefraction}{0.7}
+      
+      \\newlength{\\@neuripsabovecaptionskip}\\setlength{\\@neuripsabovecaptionskip}{7\\p@}
+      \\newlength{\\@neuripsbelowcaptionskip}\\setlength{\\@neuripsbelowcaptionskip}{\\z@}
+      
+      \\setlength{\\abovecaptionskip}{\\@neuripsabovecaptionskip}
+      \\setlength{\\belowcaptionskip}{\\@neuripsbelowcaptionskip}
+      
+      % swap above/belowcaptionskip lengths for tables
+      \\renewenvironment{table}
+        {\\setlength{\\abovecaptionskip}{\\@neuripsbelowcaptionskip}%
+         \\setlength{\\belowcaptionskip}{\\@neuripsabovecaptionskip}%
+         \\@float{table}}
+        {\\end@float}
+      
+      % footnote formatting
+      \\setlength{\\footnotesep }{6.65\\p@}
+      \\setlength{\\skip\\footins}{9\\p@ \\@plus 4\\p@ \\@minus 2\\p@}
+      \\renewcommand{\\footnoterule}{\\kern-3\\p@ \\hrule width 12pc \\kern 2.6\\p@}
+      \\setcounter{footnote}{0}
+      
+      % paragraph formatting
+      \\setlength{\\parindent}{\\z@}
+      \\setlength{\\parskip  }{5.5\\p@}
+      
+      % list formatting
+      \\setlength{\\topsep       }{4\\p@ \\@plus 1\\p@   \\@minus 2\\p@}
+      \\setlength{\\partopsep    }{1\\p@ \\@plus 0.5\\p@ \\@minus 0.5\\p@}
+      \\setlength{\\itemsep      }{2\\p@ \\@plus 1\\p@   \\@minus 0.5\\p@}
+      \\setlength{\\parsep       }{2\\p@ \\@plus 1\\p@   \\@minus 0.5\\p@}
+      \\setlength{\\leftmargin   }{3pc}
+      \\setlength{\\leftmargini  }{\\leftmargin}
+      \\setlength{\\leftmarginii }{2em}
+      \\setlength{\\leftmarginiii}{1.5em}
+      \\setlength{\\leftmarginiv }{1.0em}
+      \\setlength{\\leftmarginv  }{0.5em}
+      \\def\\@listi  {\\leftmargin\\leftmargini}
+      \\def\\@listii {\\leftmargin\\leftmarginii
+                    \\labelwidth\\leftmarginii
+                    \\advance\\labelwidth-\\labelsep
+                    \\topsep  2\\p@ \\@plus 1\\p@    \\@minus 0.5\\p@
+                    \\parsep  1\\p@ \\@plus 0.5\\p@ \\@minus 0.5\\p@
+                    \\itemsep \\parsep}
+      \\def\\@listiii{\\leftmargin\\leftmarginiii
+                    \\labelwidth\\leftmarginiii
+                    \\advance\\labelwidth-\\labelsep
+                    \\topsep    1\\p@ \\@plus 0.5\\p@ \\@minus 0.5\\p@
+                    \\parsep    \\z@
+                    \\partopsep 0.5\\p@ \\@plus 0\\p@ \\@minus 0.5\\p@
+                    \\itemsep \\topsep}
+      \\def\\@listiv {\\leftmargin\\leftmarginiv
+                    \\labelwidth\\leftmarginiv
+                    \\advance\\labelwidth-\\labelsep}
+      \\def\\@listv  {\\leftmargin\\leftmarginv
+                    \\labelwidth\\leftmarginv
+                    \\advance\\labelwidth-\\labelsep}
+      \\def\\@listvi {\\leftmargin\\leftmarginvi
+                    \\labelwidth\\leftmarginvi
+                    \\advance\\labelwidth-\\labelsep}
+      
+      % create title
+      \\providecommand{\\maketitle}{}
+      \\renewcommand{\\maketitle}{%
+        \\par
+        \\begingroup
+          \\renewcommand{\\thefootnote}{\\fnsymbol{footnote}}
+          % for perfect author name centering
+          \\renewcommand{\\@makefnmark}{\\hbox to \\z@{$^{\\@thefnmark}$\\hss}}
+          % The footnote-mark was overlapping the footnote-text,
+          % added the following to fix this problem               (MK)
+          \\long\\def\\@makefntext##1{%
+            \\parindent 1em\\noindent
+            \\hbox to 1.8em{\\hss $\\m@th ^{\\@thefnmark}$}##1
+          }
+          \\thispagestyle{empty}
+          \\@maketitle
+          \\@thanks
+          \\@notice
+        \\endgroup
+        \\let\\maketitle\\relax
+        \\let\\thanks\\relax
+      }
+      
+      % rules for title box at top of first page
+      \\newcommand{\\@toptitlebar}{
+        \\hrule height 4\\p@
+        \\vskip 0.25in
+        \\vskip -\\parskip%
+      }
+      \\newcommand{\\@bottomtitlebar}{
+        \\vskip 0.29in
+        \\vskip -\\parskip
+        \\hrule height 1\\p@
+        \\vskip 0.09in%
+      }
+      
+      % create title (includes both anonymized and non-anonymized versions)
+      \\providecommand{\\@maketitle}{}
+      \\renewcommand{\\@maketitle}{%
+        \\vbox{%
+          \\hsize\\textwidth
+          \\linewidth\\hsize
+          \\vskip 0.1in
+          \\@toptitlebar
+          \\centering
+          {\\LARGE\\bf \\@title\\par}
+          \\@bottomtitlebar
+          \\if@submission
+            \\begin{tabular}[t]{c}\\bf\\rule{\\z@}{24\\p@}
+              Anonymous Author(s) \\\\
+              Affiliation \\\\
+              Address \\\\
+              \\texttt{email} \\\\
+            \\end{tabular}%
+          \\else
+            \\def\\And{%
+              \\end{tabular}\\hfil\\linebreak[0]\\hfil%
+              \\begin{tabular}[t]{c}\\bf\\rule{\\z@}{24\\p@}\\ignorespaces%
+            }
+            \\def\\AND{%
+              \\end{tabular}\\hfil\\linebreak[4]\\hfil%
+              \\begin{tabular}[t]{c}\\bf\\rule{\\z@}{24\\p@}\\ignorespaces%
+            }
+            \\begin{tabular}[t]{c}\\bf\\rule{\\z@}{24\\p@}\\@author\\end{tabular}%
+          \\fi
+          \\vskip 0.3in \\@minus 0.1in
+        }
+      }
+      
+      % add conference notice to bottom of first page
+      \\newcommand{\\ftype@noticebox}{8}
+      \\newcommand{\\@notice}{%
+        % give a bit of extra room back to authors on first page
+        \\enlargethispage{2\\baselineskip}%
+        \\@float{noticebox}[b]%
+          \\footnotesize\\@noticestring%
+        \\end@float%
+      }
+      
+      % abstract styling
+      \\renewenvironment{abstract}%
+      {%
+        \\vskip 0.075in%
+        \\centerline%
+        {\\large\\bf Abstract}%
+        \\vspace{0.5ex}%
+        \\begin{quote}%
+      }
+      {
+        \\par%
+        \\end{quote}%
+        \\vskip 1ex%
+      }
+      
+      \\endinput
+    '''
+  }
+]
+isStarred: false
+isTrashed: false
