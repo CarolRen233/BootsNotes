@@ -1,5 +1,5 @@
 createdAt: "2019-11-19T11:24:37.453Z"
-updatedAt: "2019-11-23T02:36:48.828Z"
+updatedAt: "2019-12-02T05:52:23.832Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "N-shot Contents"
@@ -34,3 +34,4 @@ content: '''
 linesHighlighted: []
 isStarred: false
 isTrashed: false
+isPinned: true

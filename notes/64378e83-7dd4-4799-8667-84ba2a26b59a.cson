@@ -1,5 +1,5 @@
 createdAt: "2019-11-15T05:51:02.834Z"
-updatedAt: "2019-11-15T05:51:19.198Z"
+updatedAt: "2019-12-05T05:15:51.760Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "常见Errors"
@@ -7,7 +7,7 @@ tags: []
 content: '''
   常见Errors
   
-  ##Jupyter Notebook
+  ## Jupyter Notebook
   
   当jupyter notebook使用parser=argparse.ArgumentParser()报出此等错误：
   An exception has occurred, use %tb to see the full traceback.
@@ -16,6 +16,55 @@ content: '''
   ~~~
   opt=parser.parse_args(args=[])#添加args=[]
   ~~~
+  
+  
+  
+  
+  ## Conda
+  
+  conda 安装包的时候，PackagesNotFoundError: The following packages are not available from current channels
+  
+  
+  ~~~
+  anaconda search -t conda 要安装的包
+  conda install -c https://conda.anaconda.org/列表中对应的Name 要安装的包
+  还不行就 pip install 要安装的包
+  ~~~
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
 '''

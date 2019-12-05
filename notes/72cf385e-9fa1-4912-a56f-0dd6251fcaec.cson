@@ -1,0 +1,58 @@
+createdAt: "2019-12-05T09:41:29.866Z"
+updatedAt: "2019-12-05T10:10:46.717Z"
+type: "MARKDOWN_NOTE"
+folder: "ba78bd24b69f615562d5"
+title: "CV"
+tags: []
+content: '''
+  CV
+  
+  由于color颜色不够会报错
+  
+  Traceback (most recent call last):
+    File "detect1.py", line 112, in <module>
+      bbox_colors = random.sample(colors, n_cls_preds)
+    File "/root/anaconda3/lib/python3.7/random.py", line 321, in sample
+      raise ValueError("Sample larger than population or is negative")
+  ValueError: Sample larger than population or is negative
+  
+  
+  所以修改
+  
+  ~~~
+  bbox_colors = random.sample(colors, n_cls_preds)
+  ~~~
+  
+  
+  n_cls_preds = 10641
+  
+  而之前的
+  
+  
+  (0) Image: 'data/samples/dog.jpg'
+  number of classes in the image 3
+          + Label: dog, Conf: 0.99335
+          + Label: bicycle, Conf: 0.99981
+          + Label: truck, Conf: 0.94229
+  (1) Image: 'data/samples/eagle.jpg'
+  number of classes in the image 1
+          + Label: bird, Conf: 0.99703
+  (2) Image: 'data/samples/field.jpg'
+  number of classes in the image 3
+          + Label: person, Conf: 0.99996
+          + Label: horse, Conf: 0.99977
+          + Label: dog, Conf: 0.99409
+  (3) Image: 'data/samples/giraffe.jpg'
+  number of classes in the image 2
+          + Label: giraffe, Conf: 0.99959
+          + Label: zebra, Conf: 0.97958
+  
+  
+  
+  原来print (detections.size()) 是[3,7]
+  
+  现在是torch.Size([10647, 85])
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,5 +1,5 @@
 createdAt: "2019-11-24T12:57:35.493Z"
-updatedAt: "2019-11-29T02:35:43.952Z"
+updatedAt: "2019-12-02T21:05:58.907Z"
 type: "MARKDOWN_NOTE"
 folder: "94cf7218696b1536fc91"
 title: "Latex使用"
@@ -76,4 +76,4 @@ content: '''
 '''
 linesHighlighted: []
 isStarred: false
-isTrashed: false
+isTrashed: true

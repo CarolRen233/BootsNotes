@@ -1,5 +1,5 @@
 createdAt: "2019-11-24T13:04:41.165Z"
-updatedAt: "2019-11-24T13:04:43.920Z"
+updatedAt: "2019-12-02T21:05:54.303Z"
 type: "MARKDOWN_NOTE"
 folder: "94cf7218696b1536fc91"
 title: "\\documentclass{ctexart}"
@@ -13,4 +13,4 @@ content: '''
 '''
 linesHighlighted: []
 isStarred: false
-isTrashed: false
+isTrashed: true
