@@ -1,0 +1,67 @@
+createdAt: "2019-12-10T09:28:55.683Z"
+updatedAt: "2019-12-10T09:36:23.588Z"
+type: "MARKDOWN_NOTE"
+folder: "ba78bd24b69f615562d5"
+title: "YOLO3代码修改"
+content: '''
+  # YOLO3代码修改
+  
+  学生：任妍
+  学号：1901213094
+  
+  [TOC]
+  
+  ## 1. 代码修改
+  
+  修改了./utils/utils.py文件
+  
+  将
+  
+  ~~~python
+          while detections.size(0):
+              large_overlap = bbox_iou(detections[0, :4].unsqueeze(0), detections[:, :4]) > nms_thres
+              label_match = detections[0, -1] == detections[:, -1]
+              # Indices of boxes with lower confidence scores, large IOUs and matching labels
+              invalid = large_overlap & label_match
+              weights = detections[invalid, 4:5]
+              # Merge overlapping bboxes by order of confidence
+              detections[0, :4] = (weights * detections[invalid, :4]).sum(0) / weights.sum()
+              keep_boxes += [detections[0]]
+              detections = detections[~invalid]
+  ~~~
+  
+  改为
+  
+  ~~~python
+          for i in range(detections.size(0)):
+              print (i)
+              keep_boxes += [detections[i]]
+  ~~~
+  
+  
+  
+  ## 2. 结果展示
+  
+  
+  
+  
+  
+  
+  image | 没有nms |  有nms  
+  -|-|-
+  dog |  | 5 |
+  eagle |  | 6 |
+  field |  | 7 |
+  messi |  | 7 |
+  street | | 7 |
+  
+  
+  
+  
+  
+  
+'''
+linesHighlighted: []
+tags: []
+isStarred: false
+isTrashed: false
