@@ -1,0 +1,57 @@
+createdAt: "2019-12-12T09:07:52.172Z"
+updatedAt: "2019-12-12T09:08:55.630Z"
+type: "MARKDOWN_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "Experiments Results"
+tags: []
+content: '''
+  ## Experiments Results
+  
+  用这些参数
+  ~~~
+  python main.py --model ResNet10 \\
+    --traincfg base_classes_train_cub_template.yaml \\
+    --valcfg base_classes_val_cub_template.yaml \\
+    --print_freq 10 --save_freq 10 \\
+    --checkpoint_dir checkpoints/ResNet10_base_cub_cos \\
+    --gpu 0 --num_classes 200 --step_size1 130 --step_size2 150 --stop_epoch 170 --is_cosine
+  ~~~
+  得到的结果
+  ~~~
+  Epoch 169/170 | Batch 170/188 | Loss 0.565152 | Data time 0.002330 | SGD time 0.012071
+  0.001
+  Epoch 169/170 | Batch 180/188 | Loss 0.569590 | Data time 0.002203 | SGD time 0.011964
+  Epoch 169/170 | Batch 0/30 | Top-1 0.680000 | Top-5 0.890000 | Data time 1.183203 | Test time 0.030048
+  Epoch 169/170 | Batch 10/30 | Top-1 0.669091 | Top-5 0.883636 | Data time 1.399972 | Test time 0.032328
+  Epoch 169/170 | Batch 20/30 | Top-1 0.675238 | Top-5 0.882857 | Data time 1.837559 | Test time 0.031508
+  Epoch 169/170 | Batch 29/30 | Top-1 0.670572 | Top-5 0.880772 | Data time 2.140799 | Test time 0.030126
+  
+  ~~~
+  
+  
+  
+  ****
+  
+  用这些
+  
+  ~~~
+  python ./main.py --model ResNet10 \\
+    --traincfg base_classes_train_cub_template.yaml \\
+    --valcfg base_classes_val_cub_template.yaml \\
+    --print_freq 10 --save_freq 10 \\
+    --checkpoint_dir checkpoints/ResNet10_cub_cos_finetune \\
+    --gpu 0 --num_classes 200 --step_size1 130 --step_size2 150 --stop_epoch 170 --is_cosine \\
+    --resume_file checkpoints/ResNet10_base_cub_cos/169.tar
+  ~~~
+  
+  得到的结果
+  
+  ~~~
+  
+  
+  ~~~
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

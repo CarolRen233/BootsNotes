@@ -1,0 +1,158 @@
+createdAt: "2019-12-11T07:33:44.073Z"
+updatedAt: "2019-12-11T07:35:07.223Z"
+type: "MARKDOWN_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "comp_feats_release README"
+tags: []
+content: '''
+  # comp_feats_release README
+  
+  This code uses [pytorch](http://pytorch.org/), [numpy](http://www.numpy.org/), [tensorboard](https://www.tensorflow.org/guide/summaries_and_tensorboard), [tensorboardX](https://github.com/lanpa/tensorboardX), and [h5py](http://www.h5py.org/). It requires GPUs and Cuda.
+  
+  ## Running the code
+  
+  Running a low-shot learning experiment will involve three or four steps:
+  1.  Train a ConvNet representation
+  2.  Save features from the ConvNet
+  3.  Use saved features to train and test on the low-shot learning benchmark.
+  Each step is described below.
+  
+  
+  ### Training a ConvNet representation
+  To train the ConvNet, we first need to specify the training and validation sets.
+  The training and validation datasets, together with data-augmentation and preprocessing steps, are specified through yaml files: see `base_classes_train_cub_template.yaml` and `base_classes_val_cub_template.yaml` for CUB.
+  You will need to specify the path to the directory containing CUB in each file.
+  
+  The main entry point for training a ConvNet representation is `main.py`. For example, to train a ResNet10 representation with the cosine classifier, run:
+  
+      python ./main.py --model ResNet10 \\
+        --traincfg base_classes_train_cub_template.yaml \\
+        --valcfg base_classes_val_cub_template.yaml \\
+        --print_freq 10 --save_freq 10 \\
+        --checkpoint_dir checkpoints/ResNet10_base_cub_cos \\
+        --gpu 0 --num_classes 200 --step_size1 130 --step_size2 150 --stop_epoch 170 --is_cosine
+  
+  ~~~
+  python main.py --model ResNet10 \\
+    --traincfg base_classes_train_cub_template.yaml \\
+    --valcfg base_classes_val_cub_template.yaml \\
+    --print_freq 10 --save_freq 10 \\
+    --checkpoint_dir checkpoints/ResNet10_base_cub_cos \\
+    --gpu 0 --num_classes 200 --step_size1 130 --step_size2 150 --stop_epoch 170 --is_cosine
+  ~~~
+  
+  Here, `checkpoint_dir` is a cache directory to save the checkpoints.
+  
+  The model checkpoints will be saved as epoch-number.tar. Training runs for 170 epochs, so the final model saved will be `169.tar`.
+  
+  As described in the paper, you should then either finetune the baseline model for another 170 epochs:
+  
+      python ./main.py --model ResNet10 \\
+        --traincfg base_classes_train_cub_template.yaml \\
+        --valcfg base_classes_val_cub_template.yaml \\
+        --print_freq 10 --save_freq 10 \\
+        --checkpoint_dir checkpoints/ResNet10_cub_cos_finetune \\
+        --gpu 0 --num_classes 200 --step_size1 130 --step_size2 150 --stop_epoch 170 --is_cosine \\
+        --resume_file checkpoints/ResNet10_base_cub_cos/169.tar
+  
+  Or train the soft compositional variant by changing `use_attributes` flag in the yaml files to True and running:
+  
+      python ./main.py --model ResNet10 \\
+        --traincfg base_classes_train_cub_template.yaml \\
+        --valcfg base_classes_val_cub_template.yaml \\
+        --print_freq 10 --save_freq 10 \\
+        --checkpoint_dir checkpoints/ResNet10_cub_cos_finetune_comp15_orth00035 \\
+        --gpu 0 --num_classes 200 --step_size1 130 --step_size2 150 --stop_epoch 170 --is_cosine \\
+        --resume_file checkpoints/ResNet10_base_cub_cos/169.tar \\
+        --attr_weight 15 --orth_weight 0.00035 --is_soft
+  
+  
+  ### Saving features from the ConvNet
+  The next step is to save features from the trained ConvNet. This is fairly straightforward: first, create a directory to save the features in, and then save the features for the train set and the validation set. Thus, for the compositional ResNet10 model trained above:
+      
+      python ./save_features.py --cfg train_cub_save_data.yaml \\
+      --outfile features/ResNet10_base_cub_cos_finetune_comp15_maskneg80_orth00035/train.hdf5 \\
+      --modelfile checkpoints/ResNet10_base_cub_cos_finetune_comp15_maskneg80_orth00035/169.tar \\
+      --model ResNet10 --gpu 0 --num_classes 200
+  
+      python ./save_features.py \\
+        --cfg val_cub_save_data.yaml \\
+        --outfile features/ResNet10_base_cub_cos_finetune_comp15_maskneg80_orth00035/val.hdf5 \\
+        --modelfile checkpoints/ResNet10_base_cub_cos_finetune_comp15_maskneg80_orth00035/169.tar \\
+        --model ResNet10 --gpu 0 --num_classes 200
+  
+  
+  ### Running the low shot benchmark
+  The benchmark tests with 4 different settings for the number of novel category examples
+  _n_ = {1,2,5,10}.
+  The benchmark is organized into 5 experiments, with each experiment corresponding to a fixed choice of _n_ examples for each category.
+  
+  The main entry point for running the low shot benchmark is `low_shot.py`, which will run the experiments and average the results:
+      
+      python ./low_shot.py --lowshotmeta label_idx_cub.json \\
+      --experimentpath experiment_cfgs/splitfile_cub_{:d}.json \\
+      --trainfile features/ResNet10_base_cub_cos_finetune_comp15_maskneg80_orth00035/train.hdf5 \\
+      --testfile features/ResNet10_base_cub_cos_finetune_comp15_maskneg80_orth00035/val.hdf5 \\
+      --outdir results --lr 0.1 --wd 0.0 --testsetup 1 --gpu 0 --batchsize 1000 --maxiter 40 --is_cosine
+  
+  Alternatively, ypu can directly evaluate the model from our paper:
+  
+      python ./low_shot.py --lowshotmeta label_idx_cub.json \\
+      --experimentpath experiment_cfgs/splitfile_cub_{:d}.json \\
+      --trainfile features/ResNet10_cub200_cos_comp_orth/train.hdf5 \\
+      --testfile features/ResNet10_cub200_cos_comp_orth/val.hdf5 \\
+      --outdir results --lr 0.1 --wd 0.0 --testsetup 1 --gpu 0 --batchsize 1000 --maxiter 40 --is_cosine
+  
+  
+  For the other datasets the process is analogous. We list the corresponding commands below:
+  
+  SUN
+  
+  ResNet10
+  python ./main.py --model ResNet10 --traincfg base_classes_train_sun_template.yaml --valcfg base_classes_val_sun_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet10_base_sun_cos --gpu 0 --num_classes 395 --step_size1 60 --step_size2 120 --stop_epoch 180 --is_cosine
+  
+  python ./main.py --model ResNet10 --traincfg base_classes_train_sun_template.yaml --valcfg base_classes_val_sun_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet10_sun_cos_finetune --gpu 0 --num_classes 395 --step_size1 30 --step_size2 60 --stop_epoch 90 --is_cosine --resume_file checkpoints/ResNet10_base_sun_cos/179.tar
+  
+  python ./main.py --model ResNet10 --traincfg base_classes_train_sun_template.yaml --valcfg base_classes_val_sun_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet10_sun_cos_finetune_comp25_orth0025 --gpu 0 --num_classes 395 --step_size1 30 --step_size2 60 --stop_epoch 90 --is_cosine --resume_file checkpoints/ResNet10_base_sun_cos/179.tar --attr_weight 25 --orth_weight 0.0025 --is_soft
+  
+  
+  ResNet18
+  python ./main.py --model ResNet18 --traincfg base_classes_train_sun_template.yaml --valcfg base_classes_val_sun_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet18_base_sun_cos --gpu 0 1 --num_classes 395 --step_size1 30 --step_size2 60 --stop_epoch 90 --is_cosine
+  
+  python ./main.py --model ResNet18 --traincfg base_classes_train_sun_template.yaml --valcfg base_classes_val_sun_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet18_base_sun_cos_finetune --gpu 0 1 --num_classes 395 --step_size1 30 --step_size2 40 --stop_epoch 50 --is_cosine --resume_file checkpoints/ResNet18_base_sun_cos/89.tar
+  
+  python ./main.py --model ResNet18 --traincfg base_classes_train_sun_template.yaml --valcfg base_classes_val_sun_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet18_base_sun_cos_comp100_orth01 --gpu 0 1 --num_classes 395 --step_size1 30 --step_size2 40 --stop_epoch 50 --is_cosine --resume_file checkpoints/ResNet18_base_sun_cos/89.tar  --attr_weight 100 --orth_weight 0.01 --is_soft
+  
+  
+  ResNet34
+  python ./main.py --model ResNet34 --traincfg base_classes_train_sun_template.yaml --valcfg base_classes_val_sun_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet34_base_sun_cos --gpu 0 1 --num_classes 395 --step_size1 30 --step_size2 60 --stop_epoch 90 --is_cosine
+  
+  python ./main.py --model ResNet34 --traincfg base_classes_train_sun_template.yaml --valcfg base_classes_val_sun_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet34_base_sun_cos_finetune --gpu 0 1 --num_classes 395 --step_size1 30 --step_size2 40 --stop_epoch 50 --is_cosine --resume_file checkpoints/ResNet34_base_sun_cos/89.tar
+  
+  python ./main.py --model ResNet34 --traincfg base_classes_train_sun_template.yaml --valcfg base_classes_val_sun_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet34_base_sun_cos_comp100_orth01 --gpu 0 1 --num_classes 395 --step_size1 30 --step_size2 40 --stop_epoch 50 --is_cosine --resume_file checkpoints/ResNet34_base_sun_cos/89.tar  --attr_weight 50 --orth_weight 0.005 --is_soft
+  
+  
+  python ./save_features.py --cfg val_sun_save_data.yaml --outfile features/ResNet10_sun_cos_finetune_comp25_orth0025/val.hdf5 --modelfile checkpoints/ResNet10_sun_cos_finetune_comp25_orth0025/49.tar --model ResNet10 --gpu 0 --num_classes 395
+  python ./save_features.py --cfg train_sun_save_data.yaml --outfile features/ResNet10_sun_cos_finetune_comp25_orth0025/train.hdf5 --modelfile checkpoints/ResNet10_sun_cos_finetune_comp25_orth0025/49.tar --model ResNet10 --gpu 0 --num_classes 395
+  
+  
+  python ./low_shot.py --lowshotmeta label_idx_sun.json --experimentpath experiment_cfgs/splitfile_sun_{:d}.json --trainfile features/ResNet10_sun_cos_finetune_comp25_orth0025/train.hdf5 --testfile features/ResNet10_sun_cos_finetune_comp25_orth0025/val.hdf5 --outdir results --lr 0.1 --wd 0.0 --testsetup 1 --gpu 0 --batchsize 1000 --maxiters 100 --is_cosine
+  
+  
+  ImageNet
+  
+  python ./main.py --model ResNet10 --traincfg base_classes_train_template.yaml --valcfg base_classes_val_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet10_base_imnet_cos --gpu 0 --num_classes 1000 --step_size1 30 --step_size2 60 --stop_epoch 90 --is_cosine
+  
+  python ./main.py --model ResNet10 --traincfg base_classes_train_template.yaml --valcfg base_classes_val_template.yaml --print_freq 10 --save_freq 10 --checkpoint_dir checkpoints/ResNet10_base_imnet_cos_comp8_orth001 --gpu 0 --num_classes 1000 --step_size1 30 --step_size2 60 --stop_epoch 90 --is_cosine --resume_file checkpoints/ResNet10_base_imnet_cos/89.tar  --attr_weight 8 --orth_weight 0.001 --is_soft
+  
+  
+  python ./save_features.py --cfg val_save_data.yaml --outfile features/ResNet10_base_imnet_cos_comp8_orth001/val.hdf5 --modelfile checkpoints/ResNet10_base_imnet_cos_comp8_orth001/89.tar --model ResNet10 --gpu 0 --num_classes 1000
+  python ./save_features.py --cfg train_save_data.yaml --outfile features/ResNet10_base_imnet_cos_comp8_orth001/train.hdf5 --modelfile checkpoints/ResNet10_base_imnet_cos_comp8_orth001/89.tar --model ResNet10 --gpu 0 --num_classes 1000
+  
+  
+  python ./low_shot.py --lowshotmeta label_idx.json --experimentpath experiment_cfgs/splitfile_{:d}.json --trainfile features/ResNet10_base_imnet_cos_comp8_orth001/train.hdf5 --testfile features/ResNet10_base_imnet_cos_comp8_orth001/val.hdf5 --outdir results --lr 0.1 --wd 0.0 --testsetup 1 --gpu 0 --batchsize 1000 --maxiters 100 --is_cosine
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

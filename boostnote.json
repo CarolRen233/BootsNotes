@@ -16,11 +16,6 @@
       "name": "Memo"
     },
     {
-      "key": "f1fd0a362703e39f5960",
-      "color": "#E8D252",
-      "name": "CV"
-    },
-    {
       "key": "8d283bc4c34b355efef1",
       "color": "#3FD941",
       "name": "BigData"
@@ -29,6 +24,11 @@
       "key": "94cf7218696b1536fc91",
       "color": "#E8D252",
       "name": "AI"
+    },
+    {
+      "key": "f1fd0a362703e39f5960",
+      "color": "#E8D252",
+      "name": "CV"
     }
   ],
   "version": "1.0"

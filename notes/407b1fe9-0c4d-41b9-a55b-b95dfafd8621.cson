@@ -1,15 +1,12 @@
 createdAt: "2019-12-10T09:28:55.683Z"
-updatedAt: "2019-12-10T09:36:23.588Z"
+updatedAt: "2019-12-10T03:37:12.531Z"
 type: "MARKDOWN_NOTE"
 folder: "ba78bd24b69f615562d5"
 title: "YOLO3代码修改"
 content: '''
   # YOLO3代码修改
   
-  学生：任妍
-  学号：1901213094
-  
-  [TOC]
+  学生：任妍-1901213094
   
   ## 1. 代码修改
   
@@ -42,18 +39,13 @@ content: '''
   
   ## 2. 结果展示
   
-  
-  
-  
-  
-  
-  image | 没有nms |  有nms  
-  -|-|-
-  dog |  | 5 |
-  eagle |  | 6 |
-  field |  | 7 |
-  messi |  | 7 |
-  street | | 7 |
+  image |  |
+  |-|-|
+  | street| ![street.PNG](:storage\\407b1fe9-0c4d-41b9-a55b-b95dfafd8621\\286ca0d3.PNG)|
+  |room |![room.PNG](:storage\\407b1fe9-0c4d-41b9-a55b-b95dfafd8621\\45d57f08.PNG) |
+  |person |![person.PNG](:storage\\407b1fe9-0c4d-41b9-a55b-b95dfafd8621\\b49ebbb5.PNG) |
+  |messi |![messi.PNG](:storage\\407b1fe9-0c4d-41b9-a55b-b95dfafd8621\\7cf68905.PNG) |
+  |horses | ![horses.PNG](:storage\\407b1fe9-0c4d-41b9-a55b-b95dfafd8621\\81754d06.PNG)|
   
   
   
