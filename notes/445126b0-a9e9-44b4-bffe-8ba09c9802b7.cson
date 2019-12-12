@@ -1,5 +1,5 @@
 createdAt: "2019-12-12T09:07:52.172Z"
-updatedAt: "2019-12-12T09:08:55.630Z"
+updatedAt: "2019-12-12T09:22:58.741Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Experiments Results"
@@ -47,9 +47,37 @@ content: '''
   得到的结果
   
   ~~~
-  
+  Epoch 169/170 | Batch 180/188 | Loss 0.469497 | Data time 0.015024 | SGD time 0.012802
+  Epoch 169/170 | Batch 0/30 | Top-1 0.620000 | Top-5 0.860000 | Data time 1.859070 | Test time 0.028805
+  Epoch 169/170 | Batch 10/30 | Top-1 0.681818 | Top-5 0.889091 | Data time 2.029923 | Test time 0.026011
+  Epoch 169/170 | Batch 20/30 | Top-1 0.692857 | Top-5 0.893810 | Data time 2.408123 | Test time 0.024396
+  Epoch 169/170 | Batch 29/30 | Top-1 0.693660 | Top-5 0.888353 | Data time 2.751215 | Test time 0.023144
   
   ~~~
+  
+  
+  ****
+  
+  
+  use_attribute = True 在train和val都改了的情况下
+  
+  用参数
+  
+  ~~~
+  python ./main.py --model ResNet10 \\
+    --traincfg base_classes_train_cub_template.yaml \\
+    --valcfg base_classes_val_cub_template.yaml \\
+    --print_freq 10 --save_freq 10 \\
+    --checkpoint_dir checkpoints/ResNet10_cub_cos_finetune_comp15_orth00035 \\
+    --gpu 0 --num_classes 200 --step_size1 130 --step_size2 150 --stop_epoch 170 --is_cosine \\
+    --resume_file checkpoints/ResNet10_base_cub_cos/169.tar \\
+    --attr_weight 15 --orth_weight 0.00035 --is_soft
+  ~~~
+  
+  得到的结果
+  
+  
+  
   
 '''
 linesHighlighted: []
