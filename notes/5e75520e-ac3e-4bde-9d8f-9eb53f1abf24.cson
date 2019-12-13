@@ -1,5 +1,5 @@
 createdAt: "2019-12-11T07:33:44.073Z"
-updatedAt: "2019-12-11T07:35:07.223Z"
+updatedAt: "2019-12-13T05:42:07.316Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "comp_feats_release README"
@@ -82,6 +82,20 @@ content: '''
         --model ResNet10 --gpu 0 --num_classes 200
   
   
+  ~~~
+  
+  python ./save_features.py --cfg train_cub_save_data.yaml \\
+      --outfile features/ResNet10_cub_cos_finetune_comp15_orth00035/train.hdf5 \\
+      --modelfile checkpoints/ResNet10_cub_cos_finetune_comp15_orth00035/169.tar \\
+      --model ResNet10 --gpu 0 --num_classes 200
+  
+  python ./save_features.py \\
+        --cfg val_cub_save_data.yaml \\
+        --outfile features/ResNet10_cub_cos_finetune_comp15_orth00035/val.hdf5 \\
+        --modelfile checkpoints/ResNet10_cub_cos_finetune_comp15_orth00035/169.tar \\
+        --model ResNet10 --gpu 0 --num_classes 200
+  ~~~
+  
   ### Running the low shot benchmark
   The benchmark tests with 4 different settings for the number of novel category examples
   _n_ = {1,2,5,10}.
@@ -94,8 +108,17 @@ content: '''
       --trainfile features/ResNet10_base_cub_cos_finetune_comp15_maskneg80_orth00035/train.hdf5 \\
       --testfile features/ResNet10_base_cub_cos_finetune_comp15_maskneg80_orth00035/val.hdf5 \\
       --outdir results --lr 0.1 --wd 0.0 --testsetup 1 --gpu 0 --batchsize 1000 --maxiter 40 --is_cosine
+      
+  ~~~
+  python ./low_shot.py --lowshotmeta label_idx_cub.json \\
+      --experimentpath experiment_cfgs/splitfile_cub_{:d}.json \\
+      --trainfile features/ResNet10_cub_cos_finetune_comp15_orth00035/train.hdf5 \\
+      --testfile features/ResNet10_cub_cos_finetune_comp15_orth00035/val.hdf5 \\
+      --outdir results --lr 0.1 --wd 0.0 --testsetup 1 --gpu 0 --batchsize 1000 --maxiter 40 --is_cosine
   
-  Alternatively, ypu can directly evaluate the model from our paper:
+  ~~~
+  
+  Alternatively, you can directly evaluate the model from our paper:
   
       python ./low_shot.py --lowshotmeta label_idx_cub.json \\
       --experimentpath experiment_cfgs/splitfile_cub_{:d}.json \\

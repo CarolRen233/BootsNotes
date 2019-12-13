@@ -1,5 +1,5 @@
 createdAt: "2019-12-12T09:07:52.172Z"
-updatedAt: "2019-12-12T09:22:58.741Z"
+updatedAt: "2019-12-13T04:48:30.639Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Experiments Results"
@@ -75,6 +75,16 @@ content: '''
   ~~~
   
   得到的结果
+  
+  ~~~
+  Epoch 169/170 | Batch 530/581 | Top-1 0.715254 | Top-5 0.907345 | Data time 8.331012 | Test time 0.003231
+  Epoch 169/170 | Batch 540/581 | Top-1 0.717190 | Top-5 0.907579 | Data time 8.474721 | Test time 0.003223
+  Epoch 169/170 | Batch 550/581 | Top-1 0.719056 | Top-5 0.907804 | Data time 8.618003 | Test time 0.003211
+  Epoch 169/170 | Batch 560/581 | Top-1 0.718360 | Top-5 0.907308 | Data time 8.761394 | Test time 0.003207
+  Epoch 169/170 | Batch 570/581 | Top-1 0.719790 | Top-5 0.908231 | Data time 8.904616 | Test time 0.003201
+  Epoch 169/170 | Batch 580/581 | Top-1 0.720193 | Top-5 0.908339 | Data time 9.047733 | Test time 0.003196
+  ~~~
+  
   
   
   

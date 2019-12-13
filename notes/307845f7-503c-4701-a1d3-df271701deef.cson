@@ -1,0 +1,27 @@
+createdAt: "2019-12-13T05:15:06.994Z"
+updatedAt: "2019-12-13T05:18:00.350Z"
+type: "MARKDOWN_NOTE"
+folder: "0c8dbf9ec6d493d3fd38"
+title: "服务器常见问题"
+tags: []
+content: '''
+  ### 服务器常见问题
+  
+  
+  #### 查看cuda版本
+  
+      nvcc -V
+  
+  或者
+  
+      cat /usr/local/cuda/version.txt
+  #### 查看pytorch版本
+  
+      import torch
+      print(torch.__version__)
+      
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
