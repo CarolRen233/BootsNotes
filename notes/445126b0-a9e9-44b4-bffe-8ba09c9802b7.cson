@@ -1,5 +1,5 @@
 createdAt: "2019-12-12T09:07:52.172Z"
-updatedAt: "2019-12-13T05:52:20.196Z"
+updatedAt: "2019-12-13T09:24:18.236Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Experiments Results"
@@ -184,6 +184,7 @@ content: '''
   Novel classes: 100
   0: 7.013532
   here
+  [0.43423237 0.78319502 0.7184011  0.90840799 0.46993441 0.76002761]
   ~~~
   
   
