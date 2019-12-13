@@ -1,5 +1,5 @@
 createdAt: "2019-12-12T09:07:52.172Z"
-updatedAt: "2019-12-13T04:48:30.639Z"
+updatedAt: "2019-12-13T05:52:20.196Z"
 type: "MARKDOWN_NOTE"
 folder: "f1fd0a362703e39f5960"
 title: "Experiments Results"
@@ -85,6 +85,106 @@ content: '''
   Epoch 169/170 | Batch 580/581 | Top-1 0.720193 | Top-5 0.908339 | Data time 9.047733 | Test time 0.003196
   ~~~
   
+  
+  ****
+  运行
+  ~~~
+  python ./low_shot.py --lowshotmeta label_idx_cub.json \\
+      --experimentpath experiment_cfgs/splitfile_cub_{:d}.json \\
+      --trainfile features/ResNet10_cub_cos_finetune_comp15_orth00035/train.hdf5 \\
+      --testfile features/ResNet10_cub_cos_finetune_comp15_orth00035/val.hdf5 \\
+      --outdir results --lr 0.1 --wd 0.0 --testsetup 1 --gpu 0 --batchsize 1000 --maxiter 40 --is_cosine
+  ~~~
+  
+  
+  得到的结果
+  
+  ~~~
+  
+  Base classes: 100
+  Novel classes: 100
+  0: 7.016622
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 6.979768
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 7.031762
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 7.023350
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 7.065976
+  here
+  [0.21832642 0.50753804 0.71826327 0.90820124 0.38363825 0.62257508]
+  Base classes: 100
+  Novel classes: 100
+  0: 6.979389
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 6.987577
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 7.004470
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 6.978745
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 6.987927
+  here
+  [0.28506224 0.61307054 0.71929704 0.90661613 0.40583362 0.67490507]
+  Base classes: 100
+  Novel classes: 100
+  0: 7.024189
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 6.927796
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 6.981113
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 7.040362
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 6.999868
+  here
+  [0.3791148  0.73250346 0.71847002 0.90813232 0.44811874 0.73576113]
+  Base classes: 100
+  Novel classes: 100
+  0: 7.000074
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 6.987567
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 7.004654
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 6.984704
+  here
+  Base classes: 100
+  Novel classes: 100
+  0: 7.013532
+  here
+  ~~~
   
   
   
