@@ -1,11 +1,23 @@
 createdAt: "2019-12-13T05:15:06.994Z"
-updatedAt: "2019-12-13T05:18:00.350Z"
+updatedAt: "2020-01-02T08:08:05.896Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "服务器常见问题"
 tags: []
 content: '''
   ### 服务器常见问题
+  
+  ### 安装anaconda和pytorch
+  
+  官网找到下载的地方，然后复制下载地址，用wget [url]来下载安装包，然后bash 这个安装包
+  
+  然后添加到路径
+  ~~~
+  echo ‘export PATH="~/anaconda2/bin:$PATH"’ >> ~/.bashrc
+  source ~/.bashrc
+  ~~~
+  
+  下载pytorch的时候在官网找到下载命令，然后-c后面变成清华镜像
   
   
   #### 查看cuda版本
@@ -19,6 +31,10 @@ content: '''
   
       import torch
       print(torch.__version__)
+      
+  #### 查看GPU使用情况
+  
+      watch -n 0.1 nvidia-smi
       
   
 '''

@@ -1,0 +1,14 @@
+createdAt: "2020-01-02T08:22:50.479Z"
+updatedAt: "2020-01-02T08:28:01.431Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Camelyon16"
+tags: []
+content: '''
+  # Camelyon16
+  
+  镜像：172.168.202.50:5000/user-images/pcl_mia
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

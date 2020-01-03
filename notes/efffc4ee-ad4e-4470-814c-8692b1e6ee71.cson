@@ -1,5 +1,5 @@
 createdAt: "2019-11-15T05:51:30.930Z"
-updatedAt: "2019-11-29T02:53:08.246Z"
+updatedAt: "2019-12-17T02:39:29.068Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "ubuntu 常见命令"
@@ -52,9 +52,13 @@ content: '''
   
   #### 复制文件到指定目录
   
-  ~~~
-  cp -r kfbreader_linux ~/workspace/renyan/tianchi/baseline/retinanet
-  ~~~
+  
+      cp -r kfbreader_linux ~/workspace/renyan/tianchi/baseline/retinanet
+  
+  
+  复制整个文件夹到指定目录
+  
+      cp -ri /home/server/tomcat/* /home/server/test/
   
   #### 安装文件
   ~~~

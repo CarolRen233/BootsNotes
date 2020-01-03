@@ -29,6 +29,11 @@
       "key": "f1fd0a362703e39f5960",
       "color": "#E8D252",
       "name": "CV"
+    },
+    {
+      "key": "17ec6a2700afef60a17d",
+      "color": "#30D5C8",
+      "name": "camelyon16"
     }
   ],
   "version": "1.0"
