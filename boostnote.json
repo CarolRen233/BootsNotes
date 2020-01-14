@@ -3,7 +3,7 @@
     {
       "key": "0c8dbf9ec6d493d3fd38",
       "color": "#3FD941",
-      "name": "Ubuntu相关"
+      "name": "Command"
     },
     {
       "key": "ba78bd24b69f615562d5",
@@ -16,16 +16,6 @@
       "name": "Memo"
     },
     {
-      "key": "8d283bc4c34b355efef1",
-      "color": "#3FD941",
-      "name": "BigData"
-    },
-    {
-      "key": "94cf7218696b1536fc91",
-      "color": "#E8D252",
-      "name": "AI"
-    },
-    {
       "key": "f1fd0a362703e39f5960",
       "color": "#E8D252",
       "name": "CV"
@@ -34,6 +24,11 @@
       "key": "17ec6a2700afef60a17d",
       "color": "#30D5C8",
       "name": "camelyon16"
+    },
+    {
+      "key": "99257779ddb9d71c9f1f",
+      "color": "#30D5C8",
+      "name": "ML"
     }
   ],
   "version": "1.0"

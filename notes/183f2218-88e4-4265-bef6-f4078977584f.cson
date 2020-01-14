@@ -1,0 +1,38 @@
+createdAt: "2020-01-09T02:30:10.076Z"
+updatedAt: "2020-01-13T03:23:22.804Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Competition Introduction"
+tags: []
+content: '''
+  # Competition Introduction
+  
+  
+  [toc]
+  
+  ## 1. Overview
+  - 推进自动检测H&E染色的淋巴结切片中乳腺癌转移程度的算法
+  - 数据集来源乳腺癌患者的前哨淋巴结
+  - 比赛中重点关注淋巴结数字化图像中微小（micro-）和宏观（macro-）转移的检测。
+  
+  
+  
+  ## 2. Dataset
+  
+  - The tumor slides for training are named as Tumor_XXX.tif, where XXX ranges from 001 to 110. 
+  - The normal slides for training are named as Normal_XXX.tif, where XXX ranges from 001 to 160. 
+  - The slides for testing are named as Test_XXX.tif where XXX ranges from 001 to 130
+  
+  
+  
+  ## Evaluation
+  
+  [CAMELYON16 - Evaluation](https://camelyon16.grand-challenge.org/Evaluation/)
+  
+  
+  [Camelyon16学习补充知识：什么是ROC和FROC曲线？ - 知乎](https://zhuanlan.zhihu.com/p/50750940)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

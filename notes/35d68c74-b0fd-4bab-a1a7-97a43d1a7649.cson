@@ -1,13 +1,62 @@
 createdAt: "2020-01-02T08:22:50.479Z"
-updatedAt: "2020-01-02T08:28:01.431Z"
+updatedAt: "2020-01-09T07:26:21.215Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
-title: "Camelyon16"
+title: "资料"
 tags: []
 content: '''
-  # Camelyon16
+  # 资料
   
-  镜像：172.168.202.50:5000/user-images/pcl_mia
+  #### 镜像：
+  172.168.202.50:5000/user-images/renq_01
+  
+  #### 比赛官网
+  [CAMELYON16 - Home](https://camelyon16.grand-challenge.org/Home/)
+  
+  #### 服务器
+  [Jupyter Notebook](http://192.168.203.26:62672/lab?)
+  
+  
+  #### 代码:
+  - [MedcineSegmentation](https://github.com/Ryanrenqian/MedcineSegmentation/invitations)
+  - [camelyon16](https://github.com/Ryanrenqian/camelyon16/invitations)
+  - [GitHub - baidu-research/NCRF: Cancer metastasis detection with neural conditional random field (NCRF)](https://github.com/baidu-research/NCRF)
+  
+  #### 数据：
+  /gdata/medical_dataset/CAMELYON16
+  
+  #### 文章：
+  
+  
+  
+  
+  #### 运行脚本：
+  
+  ~~~
+  set -x
+  ds=$1
+  test_image=dataset/CAMELYON16/testing/images
+  test_anno=dataset/CAMELYON16/training/images
+  train_image=dataset/CAMELYON16/testing/lesion_annotations
+  train_anno=dataset/CAMELYON16/training/lesion_annotations
+  save=dataset/wsi_otsu_${ds}/test/
+  mkdir -p $save
+  python /userhome/renqian/camelyon16/wsi_prepare/wsi_otsu.py -ir $test_image -ar $test_anno -sf $save -ds $ds &&\\
+  save==dataset/wsi_otsu_${ds}/train/ &&\\
+  mkdir -p $save &&\\
+  python /userhome/renqian/camelyon16/wsi_prepare/wsi_otsu.py -ir $train_image -ar $train_anno -sf $save -ds $ds  &&\\
+  save=dataset/wsi_mask_${ds}/test/  &&\\
+  mkdir -p $save  &&\\
+  python /userhome/renqian/camelyon16/wsi_prepare/wsi_mask.py -ir $test_image -ar $test_anno -sf $save -ds $ds  &&\\
+  save=dataset/wsi_mask_${ds}/train/  &&\\
+  mkdir -p $save  &&\\
+  python /userhome/renqian/camelyon16/wsi_prepare/wsi_mask.py -ir $train_image -ar $train_anno -sf $save -ds $ds 
+  ~~~
+  
+  #### 其他：
+  
+      apt-get install python3-openslide
+      cd /userhome/renqian && bash prepare_wsi.sh 8
 '''
 linesHighlighted: []
 isStarred: false

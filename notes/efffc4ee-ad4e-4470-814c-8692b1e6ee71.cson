@@ -1,11 +1,11 @@
 createdAt: "2019-11-15T05:51:30.930Z"
-updatedAt: "2019-12-17T02:39:29.068Z"
+updatedAt: "2020-01-13T04:54:27.603Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
-title: "ubuntu 常见命令"
+title: "Linux 常见命令"
 tags: []
 content: '''
-  ## ubuntu 常见命令
+  ## Linux 常见命令
   
   ### 文件处理
   
@@ -21,6 +21,9 @@ content: '''
   ~~~
   rm -rf few-shot-ctm
   ~~~
+  #### link文件
+  
+       ln -s source.file softlink.file 
   
   #### 显示文件夹里面有什么
   

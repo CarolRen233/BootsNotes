@@ -1,5 +1,5 @@
 createdAt: "2019-12-13T05:15:06.994Z"
-updatedAt: "2020-01-02T08:08:05.896Z"
+updatedAt: "2020-01-11T12:02:46.670Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "服务器常见问题"
@@ -9,11 +9,11 @@ content: '''
   
   ### 安装anaconda和pytorch
   
-  官网找到下载的地方，然后复制下载地址，用wget [url]来下载安装包，然后bash 这个安装包
+  官网找到下载的地方，然后复制下载地址，用wget [url]来下载安装包，然后bash这个安装包，路径记得选择一下
   
   然后添加到路径
   ~~~
-  echo ‘export PATH="~/anaconda2/bin:$PATH"’ >> ~/.bashrc
+  echo ‘export PATH="userhome/downloads/root/anaconda3/bin:$PATH"’ >> ~/.bashrc
   source ~/.bashrc
   ~~~
   

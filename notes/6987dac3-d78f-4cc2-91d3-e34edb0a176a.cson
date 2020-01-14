@@ -1,10 +1,10 @@
 createdAt: "2019-12-17T02:22:46.732Z"
-updatedAt: "2019-12-17T02:28:49.996Z"
+updatedAt: "2020-01-07T04:22:55.441Z"
 type: "MARKDOWN_NOTE"
 folder: "ba78bd24b69f615562d5"
-title: "2019.12.9-12.15_周报_任妍"
+title: "2019.12.30-2020.1.5_周报_任妍"
 content: '''
-  # 2019.12.9-12.15_周报_任妍
+  # 2019.12.30-2020.1.5_周报_任妍
   
   [TOC]
   
@@ -12,24 +12,24 @@ content: '''
   ## 本周工作总结
   
   
-  1. Latex文章撰写
-  学习使用Latex，尤其是Latex进行表格编辑，公式编辑，插入图片，插入参考文献和索引，以及中文版式的设置
-  2. 初步研究多模态领域
-  找到一篇多模态领域的文献综述《Multimodal Machine Learning: A Survey and Taxonomy》开始进行阅读
-  3. 进行few-shot的实验
-  在鹏城服务器上跑实验，学会了如何使用不同的gpu来并行跑不同的实验
+  1.  进行few-shot的实验
+  在鹏城服务器上跑实验，学习使用云脑
+  
+  2. ScanNet文章的精读
+  关于病灶分割的文章《ScanNet: A Fast and Dense Scanning Framework for Metastastic Breast Cancer Detection from Whole-Slide Image》文章精读，并请教任前相关问题
+  
+  
   
   
   
   ## 本周遇到问题及解决方案
-  本周遇到的问题更多的是代码方面的，在进行改代码的过程中，很多时候还是使用print的方式看看那些数据都是什么维度的，但是我更希望用pycharm的debug方式，所以又由此学会了如何利用pycharm连接远程服务器来修改代码
-  
+  本周遇到的问题主要是云脑的使用，发现云脑的使用和之前服务器的使用还是有区别的
   
   
   ## 下周计划
   
-  1. 数字信号的学习
-  2. 多模态领域的文献综述继续阅读
+  1. 政治作业复习
+  2. ScanNet调研
 '''
 linesHighlighted: []
 tags: []

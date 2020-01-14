@@ -1,5 +1,5 @@
 createdAt: "2019-11-19T11:58:38.833Z"
-updatedAt: "2019-11-29T04:33:42.786Z"
+updatedAt: "2020-01-11T12:04:36.010Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Git常见命令"
@@ -14,7 +14,7 @@ content: '''
   rm -rf .git
   ~~~
   
-  git lone 部分目录
+  git clone 部分目录
   
   例如我们想要data-science-portfolio/customer_segments里面的内容
   

@@ -1,5 +1,5 @@
 createdAt: "2019-12-05T05:13:56.022Z"
-updatedAt: "2019-12-05T05:14:06.417Z"
+updatedAt: "2020-01-11T12:32:28.828Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Conda"
@@ -8,6 +8,25 @@ content: '''
   # Conda
   
   
+  #### 环境管理
+  
+  创建环境
+  
+  ~~~
+  conda create -n py36 python=3.6 
+  ~~~
+  
+  安装包来自txt
+  
+  ~~~
+  conda install --yes --file requirements.txt
+  ~~~
+  
+  安装tensorboardX
+  
+  ~~~
+  conda install -c conda-forge tensorboardx 
+  ~~~
   
 '''
 linesHighlighted: []

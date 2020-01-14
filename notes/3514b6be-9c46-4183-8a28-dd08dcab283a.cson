@@ -1,5 +1,5 @@
 createdAt: "2019-11-15T05:53:13.187Z"
-updatedAt: "2020-01-02T06:16:40.814Z"
+updatedAt: "2020-01-14T03:46:01.620Z"
 type: "MARKDOWN_NOTE"
 folder: "6b4f122b9934a34de253"
 title: "Username & Password"
@@ -23,6 +23,11 @@ content: '''
   192.168.202.50
   account:reny_01
   pw:123456
+  
+  **Pycharm**
+  账号：CarolRen233
+  学校邮箱
+  3三%
 '''
 linesHighlighted: []
 isStarred: false
