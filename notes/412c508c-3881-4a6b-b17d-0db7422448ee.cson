@@ -1,10 +1,13 @@
 createdAt: "2020-01-14T03:24:44.240Z"
-updatedAt: "2020-01-14T03:25:35.052Z"
+updatedAt: "2020-01-17T09:40:24.921Z"
 type: "SNIPPET_NOTE"
 folder: "17ec6a2700afef60a17d"
-title: "NCRF/wsi/bin/train.py"
+title: "NCRF/wsi/bin"
 tags: []
-description: "NCRF/wsi/bin/train.py"
+description: '''
+  NCRF/wsi/bin
+  
+'''
 snippets: [
   {
     linesHighlighted: []
@@ -29,6 +32,8 @@ snippets: [
       # 获取当前脚本的路径
       sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
       
+      
+      #运行这段代码会发现，每次得到的随机数是固定的，如果使用多个GPU，应该使用torch.cuda.manual_seed_all()为所有的GPU设置种子
       torch.manual_seed(0)
       torch.cuda.manual_seed_all(0)
       
@@ -50,16 +55,44 @@ snippets: [
       
       def train_epoch(summary, summary_writer, cfg, model, loss_fn, optimizer,
                       dataloader_tumor, dataloader_normal):
+          
+          # model.train() tells your model that you are training the model. 
+          # So effectively  layers like dropout, batchnorm etc. which behave 
+          # different on the train and test procedures know what is going on 
+          # and hence can behave accordingly.
           model.train()
       
+          
+          # 这里首次定义了steps，就是dataloader_tumor的长度。这里是因为dalalodar里
+          # 面有一个定义的函数就是
+          \'''
+          def __len__(self):
+            return len(self.batch_sampler)
+          \'''
+          # 所以它其实是batch_sampler的长度，batch_sampler就是batch个索引，可以参考
+          # [pytorch学习笔记（十四）： DataLoader源码阅读_Keith-CSDN博客]
+          # (https://blog.csdn.net/u012436149/article/details/78545766)这篇文章，
+          # 总共有几个（batch个索引值），那么就是说明这个list有多长，也就是说经过steps步之后，
+          # 这个dataloader_tumor里面的数据就train完了，就像iteration的意思一样
           steps = len(dataloader_tumor)
+          
+          # 然后这里又定义了一些参数，batch size啊grid_size啊什么的，都是在dataloader的一个实例里面
+          # 设置好的
           batch_size = dataloader_tumor.batch_size
           grid_size = dataloader_tumor.dataset._grid_size
+          
+          # iter也是dataloader中的一个定义好的
+          \'''def __iter__(self):
+              return DataLoaderIter(self)\'''
+          # 所以它返回的其实是DataLoaderIter的实例，就是说会返回反复迭代的batch数据，也可以
+          # 参考一下看详细的代码
           dataiter_tumor = iter(dataloader_tumor)
           dataiter_normal = iter(dataloader_normal)
       
           time_now = time.time()
           for step in range(steps):
+              # 这里的next同样跟上面一样，会一轮一轮的返回batch大小的数据，data就是数据里面
+              # data，target就是是Tumor还是Normal吗？
               data_tumor, target_tumor = next(dataiter_tumor)
               data_tumor = Variable(data_tumor.cuda(async=True))
               target_tumor = Variable(target_tumor.cuda(async=True))
@@ -68,11 +101,15 @@ snippets: [
               data_normal = Variable(data_normal.cuda(async=True))
               target_normal = Variable(target_normal.cuda(async=True))
       
+              # 就是随机打乱一个batch_size * 2的序列
               idx_rand = Variable(
                   torch.randperm(batch_size * 2).cuda(async=True))
       
+              # torch.cat就是将两个张量拼接到一起，这里是随机拼接的
               data = torch.cat([data_tumor, data_normal])[idx_rand]
               target = torch.cat([target_tumor, target_normal])[idx_rand]
+              
+              # 然后用resnet18处理数据，loss_fn = BCEWithLogitsLoss().cuda()前面定义好的
               output = model(data)
               loss = loss_fn(output, target)
       
@@ -80,6 +117,7 @@ snippets: [
               loss.backward()
               optimizer.step()
       
+              # 然后概率值就是对output取sigmoid值得到的
               probs = output.sigmoid()
               predicts = (probs >= 0.5).type(torch.cuda.FloatTensor)
               acc_data = (predicts == target).type(
@@ -96,8 +134,10 @@ snippets: [
                       time.strftime("%Y-%m-%d %H:%M:%S"), summary['epoch'] + 1,
                       summary['step'] + 1, loss_data, acc_data, time_spent))
       
+              # 给tensorboard的step+1
               summary['step'] += 1
       
+              # 每隔100个就记录一次
               if summary['step'] % cfg['log_every'] == 0:
                   summary_writer.add_scalar('train/loss', loss_data, summary['step'])
                   summary_writer.add_scalar('train/acc', acc_data, summary['step'])
@@ -150,33 +190,44 @@ snippets: [
       
       
       def run(args):
+          # NCRF/configs/中有两个configuration的json文件，一个不使用crf的base的文件，还有一个使用crf的文件，这里就是用哪个，就把哪个json格式数据转换为字典
           with open(args.cfg_path) as f:
               cfg = json.load(f)
-      
+          
+          # 这个就是checkpoints要保存的路径，如果没有这个路径那么就重新创建一个
           if not os.path.exists(args.save_path):
               os.mkdir(args.save_path)
       
+          # 在save_path的路径下面对一个Python数据类型列表进行json格式的编码，就是又保存了一个json文件用于代表本次的运行的configuration是什么
           with open(os.path.join(args.save_path, 'cfg.json'), 'w') as f:
               json.dump(cfg, f, indent=1)
       
+              
+              
+          # 这一部分就是gpu的设置
           os.environ["CUDA_VISIBLE_DEVICES"] = args.device_ids
           num_GPU = len(args.device_ids.split(','))
           batch_size_train = cfg['batch_size'] * num_GPU
           batch_size_valid = cfg['batch_size'] * num_GPU * 2
           num_workers = args.num_workers * num_GPU
       
+          
+          # 然后image_size就是准备切成9块的那部分，但是其实我们可以直接把一整块送进GPU，所以不需要切分成9块
           if cfg['image_size'] % cfg['patch_size'] != 0:
                   raise Exception('Image size / patch size != 0 : {} / {}'.
                                   format(cfg['image_size'], cfg['patch_size']))
       
           patch_per_side = cfg['image_size'] // cfg['patch_size']
           grid_size = patch_per_side * patch_per_side
+          
+          # DataParallel并行计算只存在在前向传播
           model = MODELS[cfg['model']](num_nodes=grid_size, use_crf=cfg['use_crf'])
           model = DataParallel(model, device_ids=None)
           model = model.cuda()
           loss_fn = BCEWithLogitsLoss().cuda()
           optimizer = SGD(model.parameters(), lr=cfg['lr'], momentum=cfg['momentum'])
       
+          #这里的dataset也要改一下
           dataset_tumor_train = GridImageDataset(cfg['data_path_tumor_train'],
                                                  cfg['json_path_train'],
                                                  cfg['image_size'],
@@ -197,7 +248,7 @@ snippets: [
                                                   cfg['image_size'],
                                                   cfg['patch_size'],
                                                   crop_size=cfg['crop_size'])
-      
+          # 这里就是dataloader，按照batch为10进行load
           dataloader_tumor_train = DataLoader(dataset_tumor_train,
                                               batch_size=batch_size_train,
                                               num_workers=num_workers)
@@ -210,22 +261,31 @@ snippets: [
           dataloader_normal_valid = DataLoader(dataset_normal_valid,
                                                batch_size=batch_size_valid,
                                                num_workers=num_workers)
-      
+          
+          # tensorboard的设置
           summary_train = {'epoch': 0, 'step': 0}
           summary_valid = {'loss': float('inf'), 'acc': 0}
+          #将会保存在save地址里面
           summary_writer = SummaryWriter(args.save_path)
           loss_valid_best = float('inf')
+          
+          # cfg['epoch']在NCRF/configs/里面的设置好了，为20
           for epoch in range(cfg['epoch']):
+            
+              # train_epoch为前面定义好的函数，开始训练
               summary_train = train_epoch(summary_train, summary_writer, cfg, model,
                                           loss_fn, optimizer,
                                           dataloader_tumor_train,
                                           dataloader_normal_train)
+              # 保存checkpoint
               torch.save({'epoch': summary_train['epoch'],
                           'step': summary_train['step'],
                           'state_dict': model.module.state_dict()},
                          os.path.join(args.save_path, 'train.ckpt'))
       
+              
               time_now = time.time()
+              # 开始validation
               summary_valid = valid_epoch(summary_valid, cfg, model, loss_fn,
                                           dataloader_tumor_valid,
                                           dataloader_normal_valid)
@@ -266,6 +326,178 @@ snippets: [
           main()
       
     '''
+  }
+  {
+    linesHighlighted: []
+    name: "patch_gen.py"
+    mode: "Python"
+    content: '''
+      import sys
+      import os
+      import argparse
+      import logging
+      import time
+      from shutil import copyfile
+      from multiprocessing import Pool, Value, Lock
+      
+      import openslide
+      
+      sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
+      
+      parser = argparse.ArgumentParser(description='Generate patches from a given '
+                                       'list of coordinates')
+      parser.add_argument('wsi_path', default=None, metavar='WSI_PATH', type=str,
+                          help='Path to the input directory of WSI files')
+      parser.add_argument('coords_path', default=None, metavar='COORDS_PATH',
+                          type=str, help='Path to the input list of coordinates')
+      parser.add_argument('patch_path', default=None, metavar='PATCH_PATH', type=str,
+                          help='Path to the output directory of patch images')
+      parser.add_argument('--patch_size', default=768, type=int, help='patch size, '
+                          'default 768')
+      parser.add_argument('--level', default=0, type=int, help='level for WSI, to '
+                          'generate patches, default 0')
+      parser.add_argument('--num_process', default=5, type=int,
+                          help='number of mutli-process, default 5')
+      
+      count = Value('i', 0)
+      # 管理多线程
+      lock = Lock()
+      
+      
+      def process(opts):
+         
+          # Tumor_024,25417,127565 that the last two numbers are (x, y) 
+          # coordinates of the center of each patch at level 0
+          # 就是那个坐标文件里面储存的就是原图大小下的patch的中心点的坐标
+          i, pid, x_center, y_center, args = opts
+          x = int(int(x_center) - args.patch_size / 2)
+          y = int(int(y_center) - args.patch_size / 2)
+          
+          # pid就是coords里面的类似Tumor_028格式的编号，对应wsi的编号
+          wsi_path = os.path.join(args.wsi_path, pid + '.tif')
+          # 就是简单的打开这张wsi的图片
+          slide = openslide.OpenSlide(wsi_path)
+          # read_region(location, level, size)，这里读取的location应该是从
+          # 左上角的这个点开始读取的，level就是放大倍数，size是在这个方法倍数
+          # 下的尺寸，选取这样一个大小尺寸的patch。返回的是一个RGBA图像，其中A
+          # 指的是alpha通道一般用作不透明度参数，这里只要RGB
+          img = slide.read_region(
+              (x, y), args.level,
+              (args.patch_size, args.patch_size)).convert('RGB')
+      
+          # 要把每张patch保存下来
+          img.save(os.path.join(args.patch_path, str(i) + '.png'))
+      
+          global lock
+          global count
+      
+          with lock:
+              count.value += 1
+              if (count.value) % 100 == 0:
+                  logging.info('{}, {} patches generated...'
+                               .format(time.strftime("%Y-%m-%d %H:%M:%S"),
+                                       count.value))
+      
+      
+      def run(args):
+        
+          # 日志
+          logging.basicConfig(level=logging.INFO)
+      
+          if not os.path.exists(args.patch_path):
+              os.mkdir(args.patch_path)
+      
+          # 就是在生成patch的那个文件夹的路径下面，粘贴一个list.txt的文件，这里一次性打开
+          # 一个坐标文件哦
+          copyfile(args.coords_path, os.path.join(args.patch_path, 'list.txt'))
+      
+          opts_list = []
+          infile = open(args.coords_path)
+          for i, line in enumerate(infile):
+              # pid: picture id，然后是xy坐标
+              pid, x_center, y_center = line.strip('\\n').split(',')
+              opts_list.append((i, pid, x_center, y_center, args))
+          infile.close()
+      
+          #多线程操作，process函数对opts_list的list进行操作
+          pool = Pool(processes=args.num_process)
+          pool.map(process, opts_list)
+      
+      
+      def main():
+          args = parser.parse_args()
+          run(args)
+      
+      
+      if __name__ == '__main__':
+          main()
+      
+    '''
+  }
+  {
+    name: "tissue_mask.py"
+    mode: "Python"
+    content: '''
+      import sys
+      import os
+      import argparse
+      import logging
+      
+      import numpy as np
+      import openslide
+      from skimage.color import rgb2hsv
+      from skimage.filters import threshold_otsu
+      
+      sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
+      
+      parser = argparse.ArgumentParser(description='Get tissue mask of WSI and save'
+                                       ' it in npy format')
+      parser.add_argument('wsi_path', default=None, metavar='WSI_PATH', type=str,
+                          help='Path to the WSI file')
+      parser.add_argument('npy_path', default=None, metavar='NPY_PATH', type=str,
+                          help='Path to the output npy mask file')
+      parser.add_argument('--level', default=6, type=int, help='at which WSI level'
+                          ' to obtain the mask, default 6')
+      parser.add_argument('--RGB_min', default=50, type=int, help='min value for RGB'
+                          ' channel, default 50')
+      
+      
+      def run(args):
+          logging.basicConfig(level=logging.INFO)
+      
+          slide = openslide.OpenSlide(args.wsi_path)
+      
+          # note the shape of img_RGB is the transpose of slide.level_dimensions
+          img_RGB = np.transpose(np.array(slide.read_region((0, 0),
+                                 args.level,
+                                 slide.level_dimensions[args.level]).convert('RGB')),
+                                 axes=[1, 0, 2])
+      
+          img_HSV = rgb2hsv(img_RGB)
+      
+          background_R = img_RGB[:, :, 0] > threshold_otsu(img_RGB[:, :, 0])
+          background_G = img_RGB[:, :, 1] > threshold_otsu(img_RGB[:, :, 1])
+          background_B = img_RGB[:, :, 2] > threshold_otsu(img_RGB[:, :, 2])
+          tissue_RGB = np.logical_not(background_R & background_G & background_B)
+          tissue_S = img_HSV[:, :, 1] > threshold_otsu(img_HSV[:, :, 1])
+          min_R = img_RGB[:, :, 0] > args.RGB_min
+          min_G = img_RGB[:, :, 1] > args.RGB_min
+          min_B = img_RGB[:, :, 2] > args.RGB_min
+      
+          tissue_mask = tissue_S & tissue_RGB & min_R & min_G & min_B
+      
+          np.save(args.npy_path, tissue_mask)
+      
+      
+      def main():
+          args = parser.parse_args()
+          run(args)
+      
+      
+      if __name__ == '__main__':
+          main()
+    '''
+    linesHighlighted: []
   }
 ]
 isStarred: false

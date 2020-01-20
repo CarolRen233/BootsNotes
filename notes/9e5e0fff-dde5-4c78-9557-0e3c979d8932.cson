@@ -1,0 +1,491 @@
+createdAt: "2020-01-17T08:11:55.003Z"
+updatedAt: "2020-01-17T09:30:33.579Z"
+type: "SNIPPET_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "NCRF/wsi/data"
+tags: []
+description: "NCRF/wsi/data"
+snippets: [
+  {
+    linesHighlighted: []
+    name: "image_producer.py"
+    mode: "Python"
+    content: '''
+      import os
+      
+      import numpy as np
+      from torch.utils.data import Dataset
+      from PIL import Image
+      
+      np.random.seed(0)
+      
+      from torchvision import transforms  # noqa
+      
+      from wsi.data.annotation import Annotation  # noqa
+      
+      
+      class GridImageDataset(Dataset):
+          """
+          Data producer that generate a square grid, e.g. 3x3, of patches and their
+          corresponding labels from pre-sampled images.
+          """
+          def __init__(self, data_path, json_path, img_size, patch_size,
+                       crop_size=224, normalize=True):
+              """
+              Initialize the data producer.
+      
+              Arguments:
+                  data_path: string, path to pre-sampled images using patch_gen.py
+                  json_path: string, path to the annotations in json format
+                  img_size: int, size of pre-sampled images, e.g. 768
+                  patch_size: int, size of the patch, e.g. 256
+                  crop_size: int, size of the final crop that is feed into a CNN,
+                      e.g. 224 for ResNet
+                  normalize: bool, if normalize the [0, 255] pixel values to [-1, 1],
+                      mostly False for debuging purpose
+              """
+              self._data_path = data_path
+              self._json_path = json_path
+              self._img_size = img_size
+              self._patch_size = patch_size
+              self._crop_size = crop_size
+              self._normalize = normalize
+              self._color_jitter = transforms.ColorJitter(64.0/255, 0.75, 0.25, 0.04)
+              self._preprocess()
+      
+          def _preprocess(self):
+              if self._img_size % self._patch_size != 0:
+                  raise Exception('Image size / patch size != 0 : {} / {}'.
+                                  format(self._img_size, self._patch_size))
+      
+              self._patch_per_side = self._img_size // self._patch_size
+              self._grid_size = self._patch_per_side * self._patch_per_side
+      
+              self._pids = list(map(lambda x: x.strip('.json'),
+                                    os.listdir(self._json_path)))
+      
+              self._annotations = {}
+              for pid in self._pids:
+                  pid_json_path = os.path.join(self._json_path, pid + '.json')
+                  anno = Annotation()
+                  anno.from_json(pid_json_path)
+                  self._annotations[pid] = anno
+      
+              self._coords = []
+              f = open(os.path.join(self._data_path, 'list.txt'))
+              for line in f:
+                  pid, x_center, y_center = line.strip('\\n').split(',')[0:3]
+                  x_center, y_center = int(x_center), int(y_center)
+                  self._coords.append((pid, x_center, y_center))
+              f.close()
+      
+              self._num_image = len(self._coords)
+      
+          def __len__(self):
+              return self._num_image
+      
+          def __getitem__(self, idx):
+              pid, x_center, y_center = self._coords[idx]
+      
+              x_top_left = int(x_center - self._img_size / 2)
+              y_top_left = int(y_center - self._img_size / 2)
+      
+              # the grid of labels for each patch
+              label_grid = np.zeros((self._patch_per_side, self._patch_per_side),
+                                    dtype=np.float32)
+              for x_idx in range(self._patch_per_side):
+                  for y_idx in range(self._patch_per_side):
+                      # (x, y) is the center of each patch
+                      x = x_top_left + int((x_idx + 0.5) * self._patch_size)
+                      y = y_top_left + int((y_idx + 0.5) * self._patch_size)
+      
+                      if self._annotations[pid].inside_polygons((x, y), True):
+                          label = 1
+                      else:
+                          label = 0
+      
+                      # extracted images from WSI is transposed with respect to
+                      # the original WSI (x, y)
+                      label_grid[y_idx, x_idx] = label
+      
+              img = Image.open(os.path.join(self._data_path, '{}.png'.format(idx)))
+      
+              # color jitter
+              img = self._color_jitter(img)
+      
+              # use left_right flip
+              if np.random.rand() > 0.5:
+                  img = img.transpose(Image.FLIP_LEFT_RIGHT)
+                  label_grid = np.fliplr(label_grid)
+      
+              # use rotate
+              num_rotate = np.random.randint(0, 4)
+              img = img.rotate(90 * num_rotate)
+              label_grid = np.rot90(label_grid, num_rotate)
+      
+              # PIL image:   H x W x C
+              # torch image: C X H X W
+              img = np.array(img, dtype=np.float32).transpose((2, 0, 1))
+      
+              if self._normalize:
+                  img = (img - 128.0)/128.0
+      
+              # flatten the square grid
+              img_flat = np.zeros(
+                  (self._grid_size, 3, self._crop_size, self._crop_size),
+                  dtype=np.float32)
+              label_flat = np.zeros(self._grid_size, dtype=np.float32)
+      
+              idx = 0
+              for x_idx in range(self._patch_per_side):
+                  for y_idx in range(self._patch_per_side):
+                      # center crop each patch
+                      x_start = int(
+                          (x_idx + 0.5) * self._patch_size - self._crop_size / 2)
+                      x_end = x_start + self._crop_size
+                      y_start = int(
+                          (y_idx + 0.5) * self._patch_size - self._crop_size / 2)
+                      y_end = y_start + self._crop_size
+                      img_flat[idx] = img[:, x_start:x_end, y_start:y_end]
+                      label_flat[idx] = label_grid[x_idx, y_idx]
+      
+                      idx += 1
+      
+              return (img_flat, label_flat)
+      
+    '''
+  }
+  {
+    linesHighlighted: []
+    name: "wsi_producer.py"
+    mode: "Python"
+    content: '''
+      import numpy as np
+      from torch.utils.data import Dataset
+      import openslide
+      import PIL
+      
+      np.random.seed(0)
+      
+      
+      class GridWSIPatchDataset(Dataset):
+          """
+          Data producer that generate all the square grids, e.g. 3x3, of patches,
+          from a WSI and its tissue mask, and their corresponding indices with
+          respect to the tissue mask
+          """
+          def __init__(self, wsi_path, mask_path, image_size=768, patch_size=256,
+                       crop_size=224, normalize=True, flip='NONE', rotate='NONE'):
+              """
+              Initialize the data producer.
+      
+              Arguments:
+                  wsi_path: string, path to WSI file
+                  mask_path: string, path to mask file in numpy format
+                  image_size: int, size of the image before splitting into grid, e.g.
+                      768
+                  patch_size: int, size of the patch, e.g. 256
+                  crop_size: int, size of the final crop that is feed into a CNN,
+                      e.g. 224 for ResNet
+                  normalize: bool, if normalize the [0, 255] pixel values to [-1, 1],
+                      mostly False for debuging purpose
+                  flip: string, 'NONE' or 'FLIP_LEFT_RIGHT' indicating the flip type
+                  rotate: string, 'NONE' or 'ROTATE_90' or 'ROTATE_180' or
+                      'ROTATE_270', indicating the rotate type
+              """
+              self._wsi_path = wsi_path
+              self._mask_path = mask_path
+              self._image_size = image_size
+              self._patch_size = patch_size
+              self._crop_size = crop_size
+              self._normalize = normalize
+              self._flip = flip
+              self._rotate = rotate
+              self._preprocess()
+      
+          def _preprocess(self):
+              self._mask = np.load(self._mask_path)
+              self._slide = openslide.OpenSlide(self._wsi_path)
+      
+              X_slide, Y_slide = self._slide.level_dimensions[0]
+              X_mask, Y_mask = self._mask.shape
+      
+              if X_slide / X_mask != Y_slide / Y_mask:
+                  raise Exception('Slide/Mask dimension does not match ,'
+                                  ' X_slide / X_mask : {} / {},'
+                                  ' Y_slide / Y_mask : {} / {}'
+                                  .format(X_slide, X_mask, Y_slide, Y_mask))
+      
+              self._resolution = X_slide * 1.0 / X_mask
+              if not np.log2(self._resolution).is_integer():
+                  raise Exception('Resolution (X_slide / X_mask) is not power of 2 :'
+                                  ' {}'.format(self._resolution))
+      
+              # all the idces for tissue region from the tissue mask
+              self._X_idcs, self._Y_idcs = np.where(self._mask)
+              self._idcs_num = len(self._X_idcs)
+      
+              if self._image_size % self._patch_size != 0:
+                  raise Exception('Image size / patch size != 0 : {} / {}'.
+                                  format(self._image_size, self._patch_size))
+              self._patch_per_side = self._image_size // self._patch_size
+              self._grid_size = self._patch_per_side * self._patch_per_side
+      
+          def __len__(self):
+              return self._idcs_num
+      
+          def __getitem__(self, idx):
+              x_mask, y_mask = self._X_idcs[idx], self._Y_idcs[idx]
+      
+              x_center = int((x_mask + 0.5) * self._resolution)
+              y_center = int((y_mask + 0.5) * self._resolution)
+      
+              x = int(x_center - self._image_size / 2)
+              y = int(y_center - self._image_size / 2)
+      
+              img = self._slide.read_region(
+                  (x, y), 0, (self._image_size, self._image_size)).convert('RGB')
+      
+              if self._flip == 'FLIP_LEFT_RIGHT':
+                  img = img.transpose(PIL.Image.FLIP_LEFT_RIGHT)
+      
+              if self._rotate == 'ROTATE_90':
+                  img = img.transpose(PIL.Image.ROTATE_90)
+      
+              if self._rotate == 'ROTATE_180':
+                  img = img.transpose(PIL.Image.ROTATE_180)
+      
+              if self._rotate == 'ROTATE_270':
+                  img = img.transpose(PIL.Image.ROTATE_270)
+      
+              # PIL image:   H x W x C
+              # torch image: C X H X W
+              img = np.array(img, dtype=np.float32).transpose((2, 0, 1))
+      
+              if self._normalize:
+                  img = (img - 128.0)/128.0
+      
+              # flatten the square grid
+              img_flat = np.zeros(
+                  (self._grid_size, 3, self._crop_size, self._crop_size),
+                  dtype=np.float32)
+      
+              idx = 0
+              for x_idx in range(self._patch_per_side):
+                  for y_idx in range(self._patch_per_side):
+                      # center crop each patch
+                      x_start = int(
+                          (x_idx + 0.5) * self._patch_size - self._crop_size / 2)
+                      x_end = x_start + self._crop_size
+                      y_start = int(
+                          (y_idx + 0.5) * self._patch_size - self._crop_size / 2)
+                      y_end = y_start + self._crop_size
+                      img_flat[idx] = img[:, x_start:x_end, y_start:y_end]
+      
+                      idx += 1
+      
+              return (img_flat, x_mask, y_mask)
+      
+    '''
+  }
+  {
+    name: "annotation.py "
+    mode: "Python"
+    content: '''
+      \'''
+      这就是一个把xml文件变成json文件的代码
+      \'''
+      
+      import json
+      import xml.etree.ElementTree as ET
+      import copy
+      
+      import numpy as np
+      from skimage.measure import points_in_poly
+      
+      np.random.seed(0)
+      
+      
+      class Polygon(object):
+          """
+          Polygon represented as [N, 2] array of vertices
+          """
+          def __init__(self, name, vertices):
+              """
+              Initialize the polygon.
+      
+              Arguments:
+                  name: string, name of the polygon
+                  vertices: [N, 2] 2D numpy array of int
+              """
+              self._name = name
+              self._vertices = vertices
+      
+          def __str__(self):
+              return self._name
+      
+          def inside(self, coord):
+              """
+              Determine if a given coordinate is inside the polygon or not.
+      
+              Arguments:
+                  coord: 2 element tuple of int, e.g. (x, y)
+      
+              Returns:
+                  bool, if the coord is inside the polygon.
+              """
+              return points_in_poly([coord], self._vertices)[0]
+      
+          def vertices(self):
+      
+              return np.array(self._vertices)
+      
+      
+      class Annotation(object):
+          """
+          Annotation about the regions within WSI in terms of vertices of polygons.
+          """
+          def __init__(self):
+              self._json_path = ''
+              self._polygons_positive = []
+              self._polygons_negative = []
+      
+          def __str__(self):
+              return self._json_path
+      
+          def from_json(self, json_path):
+              """
+              Initialize the annotation from a json file.
+      
+              Arguments:
+                  json_path: string, path to the json annotation.
+              """
+              self._json_path = json_path
+              with open(json_path) as f:
+                  annotations_json = json.load(f)
+      
+              for annotation in annotations_json['positive']:
+                  name = annotation['name']
+                  vertices = np.array(annotation['vertices'])
+                  polygon = Polygon(name, vertices)
+                  self._polygons_positive.append(polygon)
+      
+              for annotation in annotations_json['negative']:
+                  name = annotation['name']
+                  vertices = np.array(annotation['vertices'])
+                  polygon = Polygon(name, vertices)
+                  self._polygons_negative.append(polygon)
+      
+          def inside_polygons(self, coord, is_positive):
+              """
+              Determine if a given coordinate is inside the positive/negative
+              polygons of the annotation.
+      
+              Arguments:
+                  coord: 2 element tuple of int, e.g. (x, y)
+                  is_positive: bool, inside positive or negative polygons.
+      
+              Returns:
+                  bool, if the coord is inside the positive/negative polygons of the
+                  annotation.
+              """
+              if is_positive:
+                  polygons = copy.deepcopy(self._polygons_positive)
+              else:
+                  polygons = copy.deepcopy(self._polygons_negative)
+      
+              for polygon in polygons:
+                  if polygon.inside(coord):
+                      return True
+      
+              return False
+      
+          def polygon_vertices(self, is_positive):
+              """
+              Return the polygon represented as [N, 2] array of vertices
+      
+              Arguments:
+                  is_positive: bool, return positive or negative polygons.
+      
+              Returns:
+                  [N, 2] 2D array of int
+              """
+              if is_positive:
+                  return list(map(lambda x: x.vertices(), self._polygons_positive))
+              else:
+                  return list(map(lambda x: x.vertices(), self._polygons_negative))
+      
+      
+      class Formatter(object):
+          """
+          Format converter e.g. CAMELYON16 to internal json
+          """
+          def camelyon16xml2json(inxml, outjson):
+              """
+              Convert an annotation of camelyon16 xml format into a json format.
+      
+              Arguments:
+                  inxml: string, path to the input camelyon16 xml format
+                  outjson: string, path to the output json format
+              """
+              root = ET.parse(inxml).getroot()
+              annotations_tumor = \\
+                  root.findall('./Annotations/Annotation[@PartOfGroup="Tumor"]')
+              annotations_0 = \\
+                  root.findall('./Annotations/Annotation[@PartOfGroup="_0"]')
+              annotations_1 = \\
+                  root.findall('./Annotations/Annotation[@PartOfGroup="_1"]')
+              annotations_2 = \\
+                  root.findall('./Annotations/Annotation[@PartOfGroup="_2"]')
+              annotations_positive = \\
+                  annotations_tumor + annotations_0 + annotations_1
+              annotations_negative = annotations_2
+      
+              json_dict = {}
+              json_dict['positive'] = []
+              json_dict['negative'] = []
+      
+              for annotation in annotations_positive:
+                  X = list(map(lambda x: float(x.get('X')),
+                           annotation.findall('./Coordinates/Coordinate')))
+                  Y = list(map(lambda x: float(x.get('Y')),
+                           annotation.findall('./Coordinates/Coordinate')))
+                  vertices = np.round([X, Y]).astype(int).transpose().tolist()
+                  name = annotation.attrib['Name']
+                  json_dict['positive'].append({'name': name, 'vertices': vertices})
+      
+              for annotation in annotations_negative:
+                  X = list(map(lambda x: float(x.get('X')),
+                           annotation.findall('./Coordinates/Coordinate')))
+                  Y = list(map(lambda x: float(x.get('Y')),
+                           annotation.findall('./Coordinates/Coordinate')))
+                  vertices = np.round([X, Y]).astype(int).transpose().tolist()
+                  name = annotation.attrib['Name']
+                  json_dict['negative'].append({'name': name, 'vertices': vertices})
+      
+              with open(outjson, 'w') as f:
+                  json.dump(json_dict, f, indent=1)
+      
+          def vertices2json(outjson, positive_vertices=[], negative_vertices=[]):
+              json_dict = {}
+              json_dict['positive'] = []
+              json_dict['negative'] = []
+      
+              for i in range(len(positive_vertices)):
+                  name = 'Annotation {}'.format(i)
+                  vertices = positive_vertices[i].astype(int).tolist()
+                  json_dict['positive'].append({'name': name, 'vertices': vertices})
+      
+              for i in range(len(negative_vertices)):
+                  name = 'Annotation {}'.format(i)
+                  vertices = negative_vertices[i].astype(int).tolist()
+                  json_dict['negative'].append({'name': name, 'vertices': vertices})
+      
+              with open(outjson, 'w') as f:
+                  json.dump(json_dict, f, indent=1)
+    '''
+    linesHighlighted: []
+  }
+]
+isStarred: false
+isTrashed: false

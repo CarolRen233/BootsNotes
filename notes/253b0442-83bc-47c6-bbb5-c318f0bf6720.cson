@@ -1,5 +1,5 @@
 createdAt: "2020-01-14T03:23:52.568Z"
-updatedAt: "2020-01-14T03:25:00.441Z"
+updatedAt: "2020-01-17T09:47:11.032Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "NCRF Codes"
@@ -9,7 +9,17 @@ content: '''
   
   
   
-  [NCRF/wsi/bin/train.py](:note:412c508c-3881-4a6b-b17d-0db7422448ee)
+  [NCRF/wsi/bin/](:note:412c508c-3881-4a6b-b17d-0db7422448ee)
+  1. **patch_gen.py**：'Generate patches from a given list of coordinates'
+  就是建立四个放patch的文件夹，分别是Normal/Tumor+Train/Valid的组合。先coords里面的.txt文件，将我们要读取哪张wsi，坐标（中心点坐标）这些数据生成一个list，然后读取wsi的.tif的文件，按照坐标来取相应的patch并保存
+  3. **train.py**：'Get tissue mask of WSI and save it in npy format'
+  
+  5. **tissue_mask.py**：
+  
+  [NCRF/wsi/data](:note:9e5e0fff-dde5-4c78-9557-0e3c979d8932)
+  数据预处理：
+  1. annotation.py,就是将xml的标注变成json格式的
+  2. wsi_producer.py, 
 '''
 linesHighlighted: []
 isStarred: false
