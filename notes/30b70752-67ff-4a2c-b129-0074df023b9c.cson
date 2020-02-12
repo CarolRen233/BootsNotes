@@ -1,0 +1,16 @@
+createdAt: "2020-02-11T07:53:12.464Z"
+updatedAt: "2020-02-11T07:54:06.953Z"
+type: "MARKDOWN_NOTE"
+folder: "0c8dbf9ec6d493d3fd38"
+title: "分类模型"
+tags: []
+content: '''
+  # 分类模型
+  
+  
+  运行框输入mstsc
+  nat.cloudbastion.cn:20022
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
