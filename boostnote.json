@@ -6,6 +6,11 @@
       "name": "Command"
     },
     {
+      "key": "17ec6a2700afef60a17d",
+      "color": "#30D5C8",
+      "name": "camelyon16"
+    },
+    {
       "key": "ba78bd24b69f615562d5",
       "color": "#2BA5F7",
       "name": "Reports"
@@ -19,16 +24,6 @@
       "key": "f1fd0a362703e39f5960",
       "color": "#E8D252",
       "name": "CV"
-    },
-    {
-      "key": "17ec6a2700afef60a17d",
-      "color": "#30D5C8",
-      "name": "camelyon16"
-    },
-    {
-      "key": "99257779ddb9d71c9f1f",
-      "color": "#30D5C8",
-      "name": "ML"
     }
   ],
   "version": "1.0"

@@ -1,0 +1,99 @@
+createdAt: "2020-03-05T08:39:13.489Z"
+updatedAt: "2020-03-05T10:15:18.421Z"
+type: "MARKDOWN_NOTE"
+folder: "f1fd0a362703e39f5960"
+title: "1901213094_任妍 LeetCode '#1#69#70'"
+tags: []
+content: '''
+  # 1901213094_任妍 LeetCode '#1#69#70'
+  
+  ## 1. Two Sum
+  
+  ![094b1038.png](:storage\\791a5fff-62ea-409b-9f5f-55168788bcb4\\094b1038.png)
+  ![577a0ba3.png](:storage\\791a5fff-62ea-409b-9f5f-55168788bcb4\\577a0ba3.png)
+  ~~~python
+  class Solution:
+      def twoSum(self, nums, target):
+          
+          """
+          :type nums: List[int]
+          :type target: int
+          :rtype: List[int]
+          """
+          if len(nums)==0:
+              return []
+          for i, num in enumerate(nums):
+              for res_index in range(i+1,len(nums)):
+                  if num + nums[res_index] == target:
+                      return [i,res_index]
+  
+  ~~~
+  
+  **思路：**
+  用enumerate得到这个list的数值和索引，从第一个数值开始找，如果在剩下的数里面有一个数和它相加等于target，那么就返回这两个数的索引，如果找不到，就继续遍历list
+  
+  
+  ## 69. Sqrt(x)
+  
+  ![98e233e5.png](:storage\\791a5fff-62ea-409b-9f5f-55168788bcb4\\98e233e5.png)
+  ![f7e1c48a.png](:storage\\791a5fff-62ea-409b-9f5f-55168788bcb4\\f7e1c48a.png)
+  
+  ~~~c
+  class Solution {
+  public:
+      int mySqrt(int x) {
+          
+          int l = 0, r = x;
+          while(l < r)
+          {
+              long long mid = (l + r + 1ll) >> 1; 
+              if(mid * mid < x)
+                  l = mid;
+              else if(mid * mid > x)
+                  r = mid - 1;
+              else
+                  return mid;
+          }
+          return r;
+      }
+  };
+  
+  ~~~
+  **思路：**
+  本来用python写的代码，不知道为什么总是显示时间超出了，无可奈何之下查看了C的代码，总体思路也是上课讲的，就是设置根可能存在的区间，这个区间的初始值就是0和x，然后用二分法，每次看看中间值的平方和x相比是大还是小，如果大，那么就更新区间的左边的值，相反就右边，直到这个区间的left>right了，就是找到这个值了
+  
+  
+  
+  ## 70.Climbing Stairs
+  
+  ![2a4dff24.png](:storage\\791a5fff-62ea-409b-9f5f-55168788bcb4\\2a4dff24.png)
+  ![1b5e43d6.png](:storage\\791a5fff-62ea-409b-9f5f-55168788bcb4\\1b5e43d6.png)
+  
+  ~~~python
+  class Solution(object):
+      def climbStairs(self, n):
+          """
+          :type n: int
+          :rtype: int
+          """
+          if n <=2:
+              return [1,2][n-1]
+          first, second = 1, 2  #一节楼梯一种方式，两节楼梯两种方式
+          step = 2
+          while step < n:
+              step +=1
+              current = first + second
+              if step ==n:
+                  return current
+              first = second
+              second = current
+  
+  ~~~
+  
+  **思路：**
+  
+  思路就是和课堂上讲的一样，走楼梯符合斐波那契额数列，f[n]=f[n-1]+f[n-2],f[1]=1,f[2]=2,然后写出来就可以了
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

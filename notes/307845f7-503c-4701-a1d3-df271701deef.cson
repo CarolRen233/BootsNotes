@@ -1,40 +1,119 @@
 createdAt: "2019-12-13T05:15:06.994Z"
-updatedAt: "2020-01-11T12:02:46.670Z"
+updatedAt: "2020-03-07T09:36:56.702Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
-title: "服务器常见问题"
+title: "服务器/Linux"
 tags: []
 content: '''
-  ### 服务器常见问题
+  # 服务器/Linux
   
-  ### 安装anaconda和pytorch
+  [TOC]
   
-  官网找到下载的地方，然后复制下载地址，用wget [url]来下载安装包，然后bash这个安装包，路径记得选择一下
   
-  然后添加到路径
+  ## 文件处理
+  
+  压缩与解压缩
+  
   ~~~
-  echo ‘export PATH="userhome/downloads/root/anaconda3/bin:$PATH"’ >> ~/.bashrc
-  source ~/.bashrc
+  zip -r example_service.zip example_service/
+  unzip FileName.zip
   ~~~
   
-  下载pytorch的时候在官网找到下载命令，然后-c后面变成清华镜像
+  删除文件夹
   
+  ~~~
+  rm -rf few-shot-ctm
+  rm -f *.txt //删掉所有txt的文件
+  rm -f *log*.* //删掉所有包含log的文件
+  ~~~
   
-  #### 查看cuda版本
+  link文件
+  ~~~
+  ln -s source.file softlink.file 
+  ~~~
   
-      nvcc -V
+  显示文件夹里面有什么
   
-  或者
+  ~~~
+  ls -ll
+  ~~~
   
-      cat /usr/local/cuda/version.txt
-  #### 查看pytorch版本
+  批量处理所有某后缀的文件
+  ~~~
+  mv *.pdf ~/.local/share/Trash/files
+  rm --!(*.pdf)  
+  
+  ~~~
+  
+  查看进程并关闭进程
+  ~~~
+  ps -ef |grep python
+  kill -9 进程id
+  ~~~
+  
+  安装文件
+  ~~~
+  sudo dpkg -i [package name.deb]
+  ~~~
+  
+  ## 路径
+  
+  返回上一级
+  
+  ~~~
+  cd ..
+  cd ../..
+  ~~~
+  返回主目录
+  ~~~
+  cd ~
+  ~~~
+  搜索某个软件的所在位置
+  ~~~
+  whereis latex
+  ~~~
+  将软件安装到指定路径
+  
+  ~~~
+  ./configure --prefix=路径
+  ~~~
+  
+  复制文件到指定目录
+  
+  ~~~
+  cp -r kfbreader_linux ~/workspace/renyan/tianchi/baseline/retinanet
+  ~~~
+  
+  复制整个文件夹到指定目录
+  ~~~
+  cp -ri /home/server/tomcat/* /home/server/test/
+  ~~~
+  
+  ## 查看版本/测试
+  
+  查看pytorch版本
   
       import torch
       print(torch.__version__)
       
-  #### 查看GPU使用情况
+  查看GPU使用情况
   
       watch -n 0.1 nvidia-smi
+  
+  ## 进程
+  
+  ~~~
+  ps -aux|grep python
+  ~~~
+  
+  ## Vim
+  
+  [Vim使用方法](https://www.runoob.com/linux/linux-vim.html) 
+  
+  [使用Vim配置环境变量](https://www.jb51.net/article/159388.htm)
+  
+  
+  
       
   
 '''

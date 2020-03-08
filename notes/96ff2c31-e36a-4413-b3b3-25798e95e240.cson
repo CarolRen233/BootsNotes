@@ -1,0 +1,125 @@
+createdAt: "2020-02-19T09:55:26.388Z"
+updatedAt: "2020-03-08T02:16:37.411Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Console"
+tags: []
+content: '''
+  # Console
+  
+  
+  ## 修改任前代码
+  
+  preprocess/config.py
+  
+  ~~~
+  data_path="/userhome/renyan/dataset/CAMELYON16/"
+  ~~~
+  extract_patched.py
+  
+  ~~~
+   # otsu_folder='/root/workspace/renqian/CAMELYON16/training/otsu_64'
+  tif_folder = '/userhome/renyan/dataset/CAMELYON16/training/'
+  mask_folder='/userhome/renyan/dataset/mask/'
+  level=8
+  save_path='/userhome/renyan/Cancer-detection/output/patchlist/'
+  win_size=150
+  
+  ~~~
+  
+  
+  ## 测试openslide显示.tif图片
+  
+  经测试：在云脑上，OpenSlide和open_slide都可以打开normal和tumor_mask的图片
+  
+  ~~~python
+  import os
+  import matplotlib.pyplot as plt
+  import numpy as np
+  import os.path as osp
+  print (os.getcwd())
+  
+  import openslide
+  from openslide import open_slide, OpenSlide, __library_version__ as openslide_version
+  
+  
+  
+  img_path = os.path.abspath(os.path.join(os.getcwd(), "..", "dataset/mask/tumor_024.tif"))
+  
+  print ('-------checking------isimg_path a valid path?', img_path, osp.exists(img_path))
+  
+  
+  #slide = openslide.OpenSlide(img_path)
+  slide = openslide.open_slide(img_path)
+  
+  def read_slide(slide, x, y, level, width, height, as_float=False):
+      im = slide.read_region((x,y), level, (width, height))
+      im = im.convert('RGB') # drop the alpha channel
+      if as_float:
+          im = np.asarray(im, dtype=np.float32)
+      else:
+          im = np.asarray(im)
+      assert im.shape == (height, width, 3)
+      return im
+  
+  
+  level_n = 7
+  
+  slide_image = read_slide(slide, 
+                           x=0, 
+                           y=0, 
+                           level=level_n, 
+                           width=slide.level_dimensions[level_n][0], 
+                           height=slide.level_dimensions[level_n][1])
+  
+  plt.figure(figsize=(10,10), dpi=100)
+  plt.imshow(slide_image)
+  plt.savefig('test2.png') #这一句要放在plt.imshow(slide_image)后面，这样子就可以保存所有显示出来的图片，相当于截图 
+  
+  ~~~
+  
+  
+  
+  ## 保存缩小了的tumor图片和覆盖了mask的tumor图片
+  
+  ~~~python
+  import matplotlib.pyplot as plt
+  import numpy as np
+  from openslide import open_slide, __library_version__ as openslide_version
+  import os
+  print (os.getcwd())
+  from preprocess import listsave
+  
+  tumor_slides_url = os.path.abspath(os.path.join(os.getcwd(), "..", "dataset/CAMELYON16/training/tumor/"))
+  tumor_masks_url = os.path.abspath(os.path.join(os.getcwd(), "..", "dataset/mask/"))
+  
+  tumorlist = listsave.tumorList(tumor_slides_url, tumor_masks_url)
+  
+  level_n = 7
+  
+  i=2
+  
+          slide_image = listsave.read_slide(tumorlist['slides'][i], 
+                               x=0, 
+                               y=0, 
+                               level=level_n, 
+                               width=tumorlist['slides'][i].level_dimensions[level_n][0], 
+                               height=tumorlist['slides'][i].level_dimensions[level_n][1])
+          mask_image = listsave.read_slide(tumorlist['tumors'][i],
+                              x=0, 
+                              y=0, 
+                              level=level_n, 
+                              width=tumorlist['tumors'][i].level_dimensions[level_n][0],
+                              height=tumorlist['tumors'][i].level_dimensions[level_n][1])
+  
+  mask_image = mask_image[:,:,0]
+  plt.figure(figsize=(10,10), dpi=100)
+  plt.title('True regions')
+  #plt.imshow(slide_image)
+  plt.imshow(mask_image, cmap='jet', alpha=0.5)
+  plt.savefig('test.png')
+  ~~~
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: true

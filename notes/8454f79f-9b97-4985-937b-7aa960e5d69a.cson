@@ -1,0 +1,25 @@
+createdAt: "2020-03-07T10:14:14.439Z"
+updatedAt: "2020-03-07T10:31:31.505Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "ADL Code README"
+tags: []
+content: '''
+  # ADL Code README
+  
+  代码是对论文《Detecting Cancer Metastases on Gigapixel Pathology Images》的复现。代码原github链接:[GitHub - olahosa/adl_cancer_detection](https://github.com/olahosa/adl_cancer_detection)
+  
+  代码用的框架是keras，需要下载tensorflow和keras
+  `conda install tensorflow-gpu==1.14.0`
+  `conda install keras`
+  
+  1. 首先用PatchPlot.py生成patch
+  2. 然后用save_npy.py生成训练用的数据，这里的数据保存为numpy格式
+  3. 然后用main.py来训练并生成heatmap
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

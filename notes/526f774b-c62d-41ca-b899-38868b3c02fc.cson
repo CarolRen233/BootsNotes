@@ -1,19 +1,50 @@
 createdAt: "2019-12-05T05:13:56.022Z"
-updatedAt: "2020-01-11T12:32:28.828Z"
+updatedAt: "2020-03-04T09:01:00.276Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
-title: "Conda"
+title: "Conda/pip"
 tags: []
 content: '''
-  # Conda
+  # Conda/pip
+  
+  [toc]
   
   
-  #### 环境管理
+  ## Conda
+  [TOC]
+  
+  ### 安装anaconda和pytorch
+  
+  官网找到下载的地方，或者到清华镜像找安装包，然后复制下载地址，用wget [url]来下载安装包，然后bash这个安装包，路径记得选择一下
+  
+  然后添加到路径
+  ~~~
+  echo ‘export PATH="/root/anaconda3/bin:$PATH"’ 
+  ~/.bashrc
+  source ~/.bashrc
+  ~~~
+  
+  下载pytorch的时候在官网找到下载命令，然后-c后面变成清华镜像
+  
+      
+  ### 环境管理
   
   创建环境
   
   ~~~
   conda create -n py36 python=3.6 
+  ~~~
+  
+  查看都有哪些环境
+  
+  ~~~
+  conda info --env
+  ~~~
+  
+  删除环境
+  
+  ~~~
+  conda remove -n py36 --all
   ~~~
   
   安装包来自txt
@@ -27,6 +58,50 @@ content: '''
   ~~~
   conda install -c conda-forge tensorboardx 
   ~~~
+  
+  ### 镜像管理
+  
+  查看channels信息
+  ~~~
+  conda config --show channels
+  ~~~
+  
+  移除某个源
+  
+  ~~~
+  conda config --remove channels [url]
+  ~~~
+  
+  添加清华源并在安装的时候显示包的安装来源
+  
+  ~~~
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  conda config --set show_channel_urls yes
+  ~~~
+  
+  ## Pip
+  
+  设清华镜像
+  
+  ~~~
+  pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+  ~~~
+  
+  
+  安装opencv
+  ~~~
+  pip search opencv-python #查看最新版本的
+  pip install opencv-python==3.1.0.0
+  ~~~
+  
+  防止time out
+  ~~~
+  pip install --default-timeout=100 torch torchvision
+  ~~~
+  
+  
+  
   
 '''
 linesHighlighted: []

@@ -1,0 +1,27 @@
+createdAt: "2020-03-08T02:14:23.659Z"
+updatedAt: "2020-03-08T02:37:35.581Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Classification Code README"
+tags: []
+content: '''
+  # Classification Code README
+  
+  ## Steps
+  ### 0. 生成mask
+  
+  >1. 生成training的mask
+  >2. 生成testing的mask
+  
+  `preprocess/config.py`文件修改路径，然后运行
+  `python preprocess/generateMask.py`
+  
+  
+  
+  ### 1. 生成训练的patchlist
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

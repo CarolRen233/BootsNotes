@@ -1,0 +1,48 @@
+createdAt: "2020-02-26T03:39:54.619Z"
+updatedAt: "2020-02-26T04:04:49.161Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Paper Note - Detecting Cancer Metastases on Gigapixel Pathology Images"
+tags: []
+content: '''
+  # Paper Note - Detecting Cancer Metastases on Gigapixel Pathology Images
+  
+  [toc]
+  
+  ## Key Points
+  
+  >Despite performing inference with stride 128 (instead of 4), we halve the error rate at 8
+  false positives (FPs) per slide, setting a new state-of-the-art. ??
+  
+  >We also found that several approaches yielded no benefits:
+  >1) 多尺度的方法
+  >2) 在ImageNet上面预训练
+  >3) color normalization
+  
+  
+  ## Method
+  
+  ### 1. Slides → Patches
+  
+  *代码采用的方法就是找到center region，列出center region的中心点的坐标，和label，形成csv的列表，之后训练的时候，在中心点的基础上取patch*
+  
+  ### 2. Predict
+  
+  - input patch size：299×299
+  - center region：128×128
+  - label：We label a patch as tumor if at least one pixel in the center region is annotated as tumor.
+  
+  
+  每张patch都有一个概率，然后这些概率形成整张slide的概率热图，然后将里面概率最大的那个概率作为整张slide的tumor prediction
+  
+  >Similarly, we perform inference over patches in a sliding window across the slide, generating a tumor probability heatmap. For each slide, we report the maximum value in the heatmap as the slide-level tumor prediction.
+  >
+  
+  
+  
+  ### 3
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

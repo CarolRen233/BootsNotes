@@ -1,5 +1,5 @@
 createdAt: "2019-11-26T12:35:07.886Z"
-updatedAt: "2019-11-26T12:35:48.614Z"
+updatedAt: "2020-02-18T02:37:29.987Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "常见命令"
@@ -9,11 +9,9 @@ content: '''
   
   [TOC]
   
-  查看GPU使用情况
   
-      nvidia-smi
        
 '''
 linesHighlighted: []
 isStarred: false
-isTrashed: false
+isTrashed: true

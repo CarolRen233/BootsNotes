@@ -1,5 +1,5 @@
 createdAt: "2020-02-11T07:53:12.464Z"
-updatedAt: "2020-02-11T07:54:06.953Z"
+updatedAt: "2020-02-13T08:02:42.144Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "分类模型"
@@ -13,4 +13,4 @@ content: '''
 '''
 linesHighlighted: []
 isStarred: false
-isTrashed: false
+isTrashed: true

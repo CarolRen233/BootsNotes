@@ -1,36 +1,143 @@
 createdAt: "2020-01-02T08:22:50.479Z"
-updatedAt: "2020-01-09T07:26:21.215Z"
+updatedAt: "2020-03-05T08:39:06.239Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
-title: "资料"
+title: "资料和准备"
 tags: []
 content: '''
-  # 资料
+  # 资料和准备
   
-  #### 镜像：
-  172.168.202.50:5000/user-images/renq_01
+  [TOC]
   
-  #### 比赛官网
-  [CAMELYON16 - Home](https://camelyon16.grand-challenge.org/Home/)
-  
-  #### 服务器
-  [Jupyter Notebook](http://192.168.203.26:62672/lab?)
+  ## 信息
   
   
-  #### 代码:
-  - [MedcineSegmentation](https://github.com/Ryanrenqian/MedcineSegmentation/invitations)
-  - [camelyon16](https://github.com/Ryanrenqian/camelyon16/invitations)
-  - [GitHub - baidu-research/NCRF: Cancer metastasis detection with neural conditional random field (NCRF)](https://github.com/baidu-research/NCRF)
+  ### Camelyon
   
-  #### 数据：
-  /gdata/medical_dataset/CAMELYON16
+  比赛官网
+  >[CAMELYON16 - Home](https://camelyon16.grand-challenge.org/Home/)
   
-  #### 文章：
+  代码
+  
+  >- [MedcineSegmentation](https://github.com/Ryanrenqian/MedcineSegmentation/invitations)
+  >- [camelyon16](https://github.com/Ryanrenqian/camelyon16/invitations)
+  >- [GitHub - baidu-research/NCRF: Cancer metastasis detection with neural conditional random field (NCRF)](https://github.com/baidu-research/NCRF)
+  
+  
+  ### 服务器
+  
+  镜像
+  >172.168.202.50:5000/user-images/renq_01
+  >
+  
+  conda环境
+  >cd
+  
+  数据
+  >/gdata/medical_dataset/CAMELYON16
+  >或者
+  ~~~bash
+  scp -r -P 62670 root@192.168.203.26:/root/workspace/dataset/CAMELYON16/ /root/workspace/dataset 
+  #62670是远程有文件的服务器192.168.203.26的端口，然后后面跟的地址是自己的地址
+  ~~~
   
   
   
+  ## 环境搭建
   
-  #### 运行脚本：
+  ### 0.环境搭建
+  
+  ~~~
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/
+   
+  conda config --set show_channel_urls yes
+  ~~~
+  
+  
+  
+  ### 1. openslide
+  
+  ``apt-get install python3-openslide``或者``pip install openslide-python``
+  
+  
+  ### 2. 安装Boost C++库
+  
+  1. [boost网站](http://www.boost.org/)下载boost的安装包，假设版本为 boost_1_72_0.tar.gz
+  
+  2. 依次运行一下命令：
+     ```bash
+     tar zxvf boost_1_72_0.tar.gz
+     cd boost_1_72_0
+     ./bootstrap.sh --with-libraries=all --with-toolset=gcc
+     ./b2 toolset=gcc
+     ./b2 install --prefix=/usr
+     ldconfig
+     ```
+     
+  
+  ### 3. ASAP环境搭建
+  
+  *为什么需要安装ASAP？*
+  
+  能够将XML文件转成对应的tif文件，用于预处理数据和进行分割任务时，能够减少代码难度
+  
+  下载网站：
+  
+  1. 在[网站](https://github.com/computationalpathologygroup/ASAP/releases)下载ASAP 选择对应版本，如ASAP-1.9-Linux-Ubuntu1604.deb
+  2. 运行下面的命令
+  ~~~bash
+  apt-get update
+  dpkg -i ASAP-1.9-Linux-Ubuntu1604.deb
+  apt-get -f install
+  dpkg -L asap # 检查安装路径
+  ~~~
+  3. 写入环境变量
+  export PYTHONPATH="/opt/ASAP/bin":"${PYTHONPATH}"
+  [Vim使用方法](https://www.runoob.com/linux/linux-vim.html) | 
+  [使用Vim配置环境变量](https://www.jb51.net/article/159388.htm)
+  
+  
+  ### 4. 其他
+  conda可以安装的conda安，不可以的
+  
+  设清华镜像
+  
+  ~~~
+  pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+  ~~~
+  
+  安装tensorflow/numpy
+  
+  ~~~
+  pip install tensorflow-gpu==1.11.0 
+  #如果time out就多试几次
+  # 再不行就pip --default-timeout=100 install -U tensorflow-gpu==1.11.0
+  pip install numpy==1.16.0 #numpy版本太高会报错
+  
+  pip install keras==2.2.4
+  ~~~
+  
+  安装opencv
+  ~~~
+  pip search opencv-python #查看最新版本的
+  pip install opencv-python==3.1.0.0
+  ~~~
+  
+  其他
+  
+  ~~~
+  pip install scikit-image
+  pip install scikit-learn
+  ~~~
+  
+  
+  ## 运行脚本：
+  
   
   ~~~
   set -x
@@ -53,11 +160,13 @@ content: '''
   python /userhome/renqian/camelyon16/wsi_prepare/wsi_mask.py -ir $train_image -ar $train_anno -sf $save -ds $ds 
   ~~~
   
-  #### 其他：
+  ### 其他：
   
       apt-get install python3-openslide
       cd /userhome/renqian && bash prepare_wsi.sh 8
 '''
-linesHighlighted: []
+linesHighlighted: [
+  0
+]
 isStarred: false
 isTrashed: false

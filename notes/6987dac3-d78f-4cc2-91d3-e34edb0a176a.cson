@@ -1,10 +1,10 @@
 createdAt: "2019-12-17T02:22:46.732Z"
-updatedAt: "2020-01-07T04:22:55.441Z"
+updatedAt: "2020-03-05T04:07:28.491Z"
 type: "MARKDOWN_NOTE"
 folder: "ba78bd24b69f615562d5"
-title: "2019.12.30-2020.1.5_周报_任妍"
+title: "2020.3.2-2020.3.8_周报_任妍"
 content: '''
-  # 2019.12.30-2020.1.5_周报_任妍
+  # 2020.3.2-2020.3.8_周报_任妍
   
   [TOC]
   
@@ -12,24 +12,26 @@ content: '''
   ## 本周工作总结
   
   
-  1.  进行few-shot的实验
-  在鹏城服务器上跑实验，学习使用云脑
-  
-  2. ScanNet文章的精读
-  关于病灶分割的文章《ScanNet: A Fast and Dense Scanning Framework for Metastastic Breast Cancer Detection from Whole-Slide Image》文章精读，并请教任前相关问题
   
   
+  【病灶分割】
+  
+  继续复现Detecting Cancer Metastases on Gigapixel Pathology Images这篇文章，提取了patchlist，进行训练
   
   
   
   ## 本周遇到问题及解决方案
-  本周遇到的问题主要是云脑的使用，发现云脑的使用和之前服务器的使用还是有区别的
+  
+  1. 发现生成的patchlist的label都是0，有些明明是tumor但是却标了0(normal)，很费解，代码和任前的一模一样，但是就是结果不一样
+  解决：暂时不用云脑，转用服务器，然后win_size设置成了和论文一样的128，最后生成的patchlist是正确的
+  
+  2. 使用到生成的mask的时候，发现一个奇怪的现象，就是mask要么就是横向的比原图少了32个像素，要么就是纵向的比原图少了32个像素，目前还找不到原因，只能先遇到这样的情况就把原图切割一下
+  
   
   
   ## 下周计划
   
-  1. 政治作业复习
-  2. ScanNet调研
+  病灶分割代码复现进行训练
 '''
 linesHighlighted: []
 tags: []

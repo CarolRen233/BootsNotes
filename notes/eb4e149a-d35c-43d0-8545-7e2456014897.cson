@@ -1,12 +1,13 @@
 createdAt: "2019-11-19T11:58:38.833Z"
-updatedAt: "2020-01-11T12:04:36.010Z"
+updatedAt: "2020-02-19T05:39:13.091Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
-title: "Git常见命令"
+title: "Git/Github常见命令"
 tags: []
 content: '''
-  ### Git常见命令
+  # Git/Github常见命令
   
+  [toc]
   
   删除本地git仓库
   
@@ -30,6 +31,22 @@ content: '''
   ~~~
   
   
+  ## Git常用命令
+  
+  ~~~git
+  git checkout [commit-id]  #回到之前的版本
+  
+  git remote add origin [url]  #将远端的地址拉到本地并用origin表示
+  git remote #查看目前远程仓库名字
+  git remote -v  #查看远程仓库的具体链接
+  
+  
+  
+  
+  
+  
+  
+  ~~~
 '''
 linesHighlighted: []
 isStarred: false

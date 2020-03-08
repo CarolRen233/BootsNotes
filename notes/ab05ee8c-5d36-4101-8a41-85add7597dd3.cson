@@ -1,0 +1,42 @@
+createdAt: "2020-02-24T06:49:48.840Z"
+updatedAt: "2020-02-24T08:31:53.505Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Tumor Segmentation Plan"
+tags: []
+content: '''
+  # Tumor Segmentation Plan
+  
+  [toc]
+  
+  ## 1. 计划
+  
+  
+  复现Google Brain团队论文《Detecting Cancer Metastases on Gigapixel Pathology Images》[(Link)](https://arxiv.org/pdf/1703.02442.pdf)
+  
+  - **任务**：Aid breast cancer metastasis detection in lymph nodes
+  - **据集**：Camelyon16
+  - **框架**：Inception_v3
+  - **结果**：优于Camelyon16 winner
+  
+  ## 2. 任务安排
+  
+  
+  | 时间 | 阶段 | 任务 | 详情 |完成情况 |
+  | --- | --- | --- | --- | --- |
+  | **2.17-2.21** | **准备工作** |  |  |  |
+  |  |  | 文章阅读 | 阅读论文，了解背景知识，了解Camelyon16比赛的内容 | :white_check_mark: |
+  |  |  | 环境配置 | 在服务器和云脑上配置环境 | :white_check_mark: |
+  | **2.24-3.18** | **复现代码** |  |  |  |
+  | 2.24-2.26 |  | 数据准备 |1. 生成tumor mask，提取ROI，提取patch <br> 2. patch label生成（至少有一个像素在128×128中心区域中是tumor则为1） <br>3.对tumor和normal数据平均概率取出，数据增强| :white_large_square: |
+  | 2.27-2.28 |  | 代码阅读 | 阅读[camelyon16-grand-challenge](https://github.com/arjunvekariyagithub/camelyon16-grand-challenge)和[Caner-Detection](https://github.com/Reemr/Cancer-detection)代码，找到逻辑关系| :white_large_square: |
+  | 3.2-3.6 |  | 模型训练 | 1. 利用现有代码进行补充，还原论文中的方法<br> 2. 模型训练，对有问题部分的代码进行修改<br> 3. 对结果进行分析和思考 |:white_large_square:   |
+  | 3.10-3.14 |  | 模型评估 | 1. 计算FROC, @8FP,AUC并与论文结果对比，如果有较大偏差，分析原因并修改代码 | :white_large_square:  |
+  | **3.17-3.21** | **书写报告** |  |  |  |
+  |  |  | 整合结果 | 对所有结果进行整合，对之前实验过程中发现的细节问题进行思考和总结，将代码进一步完善，增加易读性，方便之后继续开展实验 | :white_large_square:  |
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

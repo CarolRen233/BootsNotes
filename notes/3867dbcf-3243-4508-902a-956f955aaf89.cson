@@ -1,5 +1,5 @@
 createdAt: "2020-01-13T04:57:42.055Z"
-updatedAt: "2020-01-14T02:23:40.492Z"
+updatedAt: "2020-02-18T04:45:56.388Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "NCRF"
@@ -25,6 +25,8 @@ content: '''
   python NCRF/wsi/bin/patch_gen.py /userhome/renqian/dataset/CAMELYON16/training/tumor/ NCRF/coords/tumor_valid.txt /PATCHES_TUMOR_VALID/
   python NCRF/wsi/bin/patch_gen.py /userhome/renqian/dataset/CAMELYON16/training/normal/ NCRF/coords/normal_valid.txt /PATCHES_NORMAL_VALID/
   ~~~
+  
+  
 '''
 linesHighlighted: []
 isStarred: false

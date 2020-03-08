@@ -1,5 +1,5 @@
 createdAt: "2020-01-03T03:43:56.427Z"
-updatedAt: "2020-01-14T03:24:15.705Z"
+updatedAt: "2020-03-08T02:16:58.578Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "Camelyon16目录"
@@ -8,10 +8,23 @@ content: '''
   #### Camelyon16目录
   
   
-  [资料](:note:35d68c74-b0fd-4bab-a1a7-97a43d1a7649)
-  [Competition Introduction](:note:183f2218-88e4-4265-bef6-f4078977584f)
-  [NCRF](:note:3867dbcf-3243-4508-902a-956f955aaf89)
-  [NCRF Codes](:note:253b0442-83bc-47c6-bbb5-c318f0bf6720)
+  1. [资料和准备](:note:35d68c74-b0fd-4bab-a1a7-97a43d1a7649)
+  2. [Competition Introduction](:note:183f2218-88e4-4265-bef6-f4078977584f)
+  3. [NCRF](:note:3867dbcf-3243-4508-902a-956f955aaf89)
+  4. [NCRF Codes](:note:253b0442-83bc-47c6-bbb5-c318f0bf6720)
+  
+  
+  ##### Classification
+  
+  1. [Tumor Classification](:note:ffb967e6-cc12-4318-94be-29996c7b3d9e)
+  2. [Paper Note - Detecting Cancer Metastases on Gigapixel Pathology Images](:note:50b54f48-38d6-46b1-a466-45267d7f0ad1)
+  3. 
+  
+  #### Code
+  
+  1. [ADL Code README](:note:8454f79f-9b97-4985-937b-7aa960e5d69a)
+  2. [Classification Code README](:note:4cddbf12-6444-4a67-b665-c9ddee9d5d0c)
+  3. 
 '''
 linesHighlighted: []
 isStarred: false

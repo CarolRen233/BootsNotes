@@ -1,5 +1,5 @@
 createdAt: "2019-11-20T03:19:50.379Z"
-updatedAt: "2019-12-17T05:31:51.897Z"
+updatedAt: "2020-02-19T07:16:41.095Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "python 常见功能"
@@ -9,6 +9,13 @@ content: '''
   
   
   [TOC]
+  ## 基本功能
+  
+  1. [Python 异常处理 try/except | 菜鸟教程](https://www.runoob.com/python/python-exceptions.html)
+  2. [Python os.path() 模块 \\| 菜鸟教程](https://www.runoob.com/python/python-os-path.html)
+  3. [Python OS 文件/目录方法 \\| 菜鸟教程](https://www.runoob.com/python/os-file-methods.html)
+  
+  
   
   ## 文件相关
   
