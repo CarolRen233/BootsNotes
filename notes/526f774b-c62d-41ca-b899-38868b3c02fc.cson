@@ -1,5 +1,5 @@
 createdAt: "2019-12-05T05:13:56.022Z"
-updatedAt: "2020-03-04T09:01:00.276Z"
+updatedAt: "2020-03-08T06:12:33.371Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Conda/pip"
@@ -19,7 +19,7 @@ content: '''
   
   然后添加到路径
   ~~~
-  echo ‘export PATH="/root/anaconda3/bin:$PATH"’ 
+  echo ‘export PATH="/root/workspace/anaconda3/bin:$PATH"’ 
   ~/.bashrc
   source ~/.bashrc
   ~~~

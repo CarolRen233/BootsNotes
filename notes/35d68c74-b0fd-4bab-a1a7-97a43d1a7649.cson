@@ -1,5 +1,5 @@
 createdAt: "2020-01-02T08:22:50.479Z"
-updatedAt: "2020-03-05T08:39:06.239Z"
+updatedAt: "2020-03-08T08:21:32.785Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "资料和准备"
@@ -63,7 +63,7 @@ content: '''
   ### 1. openslide
   
   ``apt-get install python3-openslide``或者``pip install openslide-python``
-  
+  `pip install opencv-python`
   
   ### 2. 安装Boost C++库
   

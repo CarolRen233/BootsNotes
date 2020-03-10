@@ -1,5 +1,5 @@
 createdAt: "2020-03-08T02:14:23.659Z"
-updatedAt: "2020-03-08T02:37:35.581Z"
+updatedAt: "2020-03-10T01:57:16.718Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "Classification Code README"
@@ -16,9 +16,54 @@ content: '''
   `preprocess/config.py`文件修改路径，然后运行
   `python preprocess/generateMask.py`
   
+  暂时可以用的mask都在dataset里面
   
   
   ### 1. 生成训练的patchlist
+  
+  >1. 生成training的patchlist
+  >2. 生成testing的patchlist
+  
+  其中，生成train的patchlist的时候，`preprocess/extract_patches.py`里面的`extract_from_single_slide`函数里面的是这样 的代码
+  
+  ~~~python
+  count = 0
+  if 'tumor' in slidename:
+      mask = OpenSlide(self.mask_dict[slidename])
+  else:
+      logging.info(f'mask {slidename} not exists!!')
+      mask = 0
+  slide=OpenSlide(self.tifs[slidename])
+  ~~~
+  
+  其中，生成test的patchlist的时候，`preprocess/extract_patches.py`里面的`extract_from_single_slide`函数里面的是这样 的代码
+  
+  ~~~python
+  count = 0
+  try:
+      mask = OpenSlide(self.mask_dict[slidename])
+  except:
+      logging.info(f'mask {slidename} not exists!!')
+      mask = 0
+  slide=OpenSlide(self.tifs[slidename])
+  ~~~
+  
+  这个代码中的参数stride的作用：
+  
+  >![36849667.png](:storage\\4cddbf12-6444-4a67-b665-c9ddee9d5d0c\\36849667.png)
+  >
+  ### 2. train
+  
+  修改`bin/config.py`和`bin/inception_config.py`然后运行`bin/main.py`
+  
+  
+  ****
+  记录：
+  
+  0310
+  
+  python extract_patches.py -tf /root/workspace/dataset/CAMELYON16/testing -mf /root/workspace/dataset/CAMELYON16/test_mask/ -w 128 -ss 128 -p 299 -s /root/workspace/output/tumor_seg/test_patchlist/
+  
   
   
 '''
