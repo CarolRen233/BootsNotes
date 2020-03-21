@@ -1,5 +1,5 @@
 createdAt: "2020-03-08T02:14:23.659Z"
-updatedAt: "2020-03-10T01:57:16.718Z"
+updatedAt: "2020-03-20T02:10:23.701Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "Classification Code README"
@@ -24,28 +24,15 @@ content: '''
   >1. 生成training的patchlist
   >2. 生成testing的patchlist
   
-  其中，生成train的patchlist的时候，`preprocess/extract_patches.py`里面的`extract_from_single_slide`函数里面的是这样 的代码
+  用云脑生成：
   
-  ~~~python
-  count = 0
-  if 'tumor' in slidename:
-      mask = OpenSlide(self.mask_dict[slidename])
-  else:
-      logging.info(f'mask {slidename} not exists!!')
-      mask = 0
-  slide=OpenSlide(self.tifs[slidename])
+  ~~~bash
+  source ~/.bashrc; cd userhome/code/classfication/preprocess; python extract_patches.py -tf /userhome/dataset/CAMELYON16/training -mf /userhome/dataset/train_mask/ -w 128 -ss 128 -p 299 -s /userhome/output/tumor_seg/0312/train_patchlist/
   ~~~
+  用服务器
+  ~~~
+  python extract_patches.py -tf /root/workspace/dataset/CAMELYON16/testing/ -mf /root/workspace/dataset/CAMELYON16/test_mask/ -w 128 -ss 128 -p 299 -s /root/workspace/output/inceptionv3/testpatchlist/
   
-  其中，生成test的patchlist的时候，`preprocess/extract_patches.py`里面的`extract_from_single_slide`函数里面的是这样 的代码
-  
-  ~~~python
-  count = 0
-  try:
-      mask = OpenSlide(self.mask_dict[slidename])
-  except:
-      logging.info(f'mask {slidename} not exists!!')
-      mask = 0
-  slide=OpenSlide(self.tifs[slidename])
   ~~~
   
   这个代码中的参数stride的作用：
@@ -57,13 +44,102 @@ content: '''
   修改`bin/config.py`和`bin/inception_config.py`然后运行`bin/main.py`
   
   
-  ****
-  记录：
   
-  0310
   
-  python extract_patches.py -tf /root/workspace/dataset/CAMELYON16/testing -mf /root/workspace/dataset/CAMELYON16/test_mask/ -w 128 -ss 128 -p 299 -s /root/workspace/output/tumor_seg/test_patchlist/
+  ## 环境配置
   
+  `conda create -n torch10 python=3.7`
+  
+  ### 0.镜像源设置
+  
+  ~~~
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/
+  conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/
+  conda config --set show_channel_urls yes
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  conda config --set show_channel_urls yes
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+  https://blog.csdn.net/qq_43237588/article/details/89183303
+  
+  
+  ~~~
+  
+  
+  
+  ### 1. openslide/opencv
+  
+  ``apt-get install python3-openslide``或者``pip install openslide-python``
+  `pip install opencv-python`
+  
+  ### 2. 安装Boost C++库
+  
+  1. [boost网站](http://www.boost.org/)下载boost的安装包，假设版本为 boost_1_72_0.tar.gz
+  
+  2. 依次运行一下命令：
+     ```bash
+     tar zxvf boost_1_72_0.tar.gz
+     cd boost_1_72_0
+     ./bootstrap.sh --with-libraries=all --with-toolset=gcc
+     ./b2 toolset=gcc
+     ./b2 install --prefix=/usr
+     ldconfig
+     ```
+     
+  
+  ### 3. ASAP环境搭建
+  
+  *为什么需要安装ASAP？*
+  
+  能够将XML文件转成对应的tif文件，用于预处理数据和进行分割任务时，能够减少代码难度
+  
+  下载网站：
+  
+  1. 在[网站](https://github.com/computationalpathologygroup/ASAP/releases)下载ASAP 选择对应版本，如ASAP-1.9-Linux-Ubuntu1604.deb
+  2. 运行下面的命令
+  ~~~bash
+  apt-get update
+  dpkg -i ASAP-1.9-Linux-Ubuntu1604.deb
+  apt-get -f install
+  dpkg -L asap # 检查安装路径
+  ~~~
+  3. 写入环境变量
+  export PYTHONPATH="/opt/ASAP/bin":"${PYTHONPATH}"
+  [Vim使用方法](https://www.runoob.com/linux/linux-vim.html) | 
+  [使用Vim配置环境变量](https://www.jb51.net/article/159388.htm)
+  
+  
+  ### 4. 其他
+  
+  **conda**
+  
+  ~~~
+  conda install pytorch torchvision cudatoolkit=10.1
+  conda install pandas
+  conda install tqdm
+  conda install tensorflow
+  conda install -c conda-forge tensorboardx
+  conda install pillow=6.1
+  conda install matplotlib
+  ~~~
+  
+  **pip**
+  
+  设清华镜像
+  
+  ~~~
+  pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+  ~~~
+  
+  
+  ~~~
+  pip install scikit-image
+  pip install scikit-learn
+  ~~~
   
   
 '''

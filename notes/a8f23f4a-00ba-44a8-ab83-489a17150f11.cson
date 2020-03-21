@@ -1,5 +1,5 @@
 createdAt: "2020-01-03T03:43:56.427Z"
-updatedAt: "2020-03-08T02:16:58.578Z"
+updatedAt: "2020-03-12T07:07:32.331Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "Camelyon16目录"
@@ -18,12 +18,12 @@ content: '''
   
   1. [Tumor Classification](:note:ffb967e6-cc12-4318-94be-29996c7b3d9e)
   2. [Paper Note - Detecting Cancer Metastases on Gigapixel Pathology Images](:note:50b54f48-38d6-46b1-a466-45267d7f0ad1)
-  3. 
+  3. [Code outline](:note:633495e2-bee3-482a-844c-1b809bbd6db1)
   
   #### Code
   
-  1. [ADL Code README](:note:8454f79f-9b97-4985-937b-7aa960e5d69a)
-  2. [Classification Code README](:note:4cddbf12-6444-4a67-b665-c9ddee9d5d0c)
+  1. [ADL Code README](:note:8454f79f-9b97-4985-937b-7aa960e5d69a) env:py36
+  2. [Classification Code README](:note:4cddbf12-6444-4a67-b665-c9ddee9d5d0c) env:torch10
   3. 
 '''
 linesHighlighted: []

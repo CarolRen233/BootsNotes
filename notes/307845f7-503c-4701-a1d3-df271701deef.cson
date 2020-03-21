@@ -1,5 +1,5 @@
 createdAt: "2019-12-13T05:15:06.994Z"
-updatedAt: "2020-03-07T09:36:56.702Z"
+updatedAt: "2020-03-16T07:02:07.769Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "服务器/Linux"
@@ -10,14 +10,29 @@ content: '''
   [TOC]
   
   
+      source ~/.bashrc; conda activate torch10;  python main.py
+  
   ## 文件处理
   
-  压缩与解压缩
+  统计文件的个数
+  ~~~
+  ls -l |grep "^-"|wc -l
+  ~~~
+  查看进程并关闭进程
+  ~~~bash
+  ps -ef |grep python
+  kill -9 进程id
+  ps -aux|grep python|grep extract_patches.py|awk '{print $2}'|xargs kill -9 #只关掉extract_patches.py的进程
+  ~~~
   
+  
+  远程服务器与服务器传文件
+  ~~~bash
+  scp -r -P 63420 root@192.168.202.134:/root/workspace/dataset /userhome/dataset 
+  #63420是远程有文件的服务器192.168.202.134的端口，然后后面跟的地址是自己的地址，如果要传文件夹，就在scp后面加-r，某个文件就去掉r
   ~~~
-  zip -r example_service.zip example_service/
-  unzip FileName.zip
-  ~~~
+  
+  
   
   删除文件夹
   
@@ -33,7 +48,6 @@ content: '''
   ~~~
   
   显示文件夹里面有什么
-  
   ~~~
   ls -ll
   ~~~
@@ -44,12 +58,13 @@ content: '''
   rm --!(*.pdf)  
   
   ~~~
+  压缩与解压缩
   
-  查看进程并关闭进程
   ~~~
-  ps -ef |grep python
-  kill -9 进程id
+  zip -r example_service.zip example_service/
+  unzip FileName.zip
   ~~~
+  
   
   安装文件
   ~~~
