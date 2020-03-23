@@ -1,5 +1,5 @@
 createdAt: "2019-12-05T05:13:56.022Z"
-updatedAt: "2020-03-19T14:24:26.487Z"
+updatedAt: "2020-03-23T01:43:59.696Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Conda/pip"
@@ -53,6 +53,8 @@ content: '''
   
   ~~~
   conda install --yes --file requirements.txt
+  
+  pip install -r requirements.txt 
   ~~~
   
   安装tensorboardX

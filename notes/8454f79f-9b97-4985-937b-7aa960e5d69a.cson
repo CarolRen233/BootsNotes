@@ -1,5 +1,5 @@
 createdAt: "2020-03-07T10:14:14.439Z"
-updatedAt: "2020-03-21T03:22:32.388Z"
+updatedAt: "2020-03-21T09:17:01.533Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "ADL Code README"
@@ -140,8 +140,8 @@ content: '''
   **conda**
   
   ~~~
-  conda --default-timeout=100 install tensorflow-gpu==1.14.0
-  conda install keras
+  conda install tensorflow-gpu=1.9.0
+  conda install keras=2.2.0
   ~~~
   
   **pip**
@@ -154,7 +154,7 @@ content: '''
   
   安装tensorflow
   ~~~
-  pip --default-timeout=100 install -U tensorflow-gpu==1.14.0
+  pip --default-timeout=100 install -U tensorflow-gpu==1.9.0
   pip install numpy==1.16.0 
   ~~~
   
@@ -162,6 +162,11 @@ content: '''
   pip install scikit-image
   pip install scikit-learn
   ~~~
+  
+  **报错**
+  
+  1.  ImportError: cannot import name 'Feature'
+  降级setuptool，`pip install setuptools==19.2 `
   
 '''
 linesHighlighted: []

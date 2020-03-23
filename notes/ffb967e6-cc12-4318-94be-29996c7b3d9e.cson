@@ -1,5 +1,5 @@
 createdAt: "2020-02-13T07:50:43.159Z"
-updatedAt: "2020-03-08T02:16:15.619Z"
+updatedAt: "2020-03-23T07:13:26.505Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "Tumor Classification Introduction"
@@ -17,4 +17,4 @@ content: '''
 '''
 linesHighlighted: []
 isStarred: false
-isTrashed: false
+isTrashed: true
