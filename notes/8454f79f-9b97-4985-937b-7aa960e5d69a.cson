@@ -1,5 +1,5 @@
 createdAt: "2020-03-07T10:14:14.439Z"
-updatedAt: "2020-03-21T09:17:01.533Z"
+updatedAt: "2020-04-10T05:46:30.550Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "ADL Code README"
@@ -31,11 +31,11 @@ content: '''
   
   用服务器
   ~~~bash
-  python save_npy.py -tt trainval -tf /root/workspace/dataset/CAMELYON16/training/tumor/ -mf /root/workspace/dataset/CAMELYON16/train_mask/ -sf /root/workspace/output/ADL/log/0319/
+  python PatchPlot2.py -tf /root/workspace/dataset/CAMELYON16/training/tumor/ -mf /root/workspace/dataset/CAMELYON16/train_mask/ -sf /root/workspace/output/inceptionv3/0330/train/train_patchlist/
   
   python save_npy.py  -tt test -tf /root/workspace/dataset/CAMELYON16/testing/images/ -mf /root/workspace/dataset/CAMELYON16/test_mask/ -sf /root/workspace/output/ADL/log/0319/
   
-  python save_npy.py -tt trainval -tf /root/workspace/dataset/CAMELYON16/training/normal/ -mf /root/workspace/dataset/CAMELYON16/trainormal_mask/ -sf /root/workspace/output/ADL/log/0319/
+  python PatchPlot2.py  -tf /root/workspace/dataset/CAMELYON16/training/normal/ -mf /root/workspace/dataset/CAMELYON16/trainormal_mask/ -sf /root/workspace/output/inceptionv3/0330/train/train_patchlist/
   
   ~~~
   用云脑
@@ -94,6 +94,9 @@ content: '''
   
   
   ### 1. openslide/opencv
+  apt-get install openslide-tools
+  apt-get install python-openslide
+  pip install openslide-python
   
   ``apt-get install python3-openslide``或者``pip install openslide-python``
   `pip install opencv-python`

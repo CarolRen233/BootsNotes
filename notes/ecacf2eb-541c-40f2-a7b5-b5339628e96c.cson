@@ -1,0 +1,21 @@
+createdAt: "2020-03-26T11:57:28.416Z"
+updatedAt: "2020-03-26T12:11:59.221Z"
+type: "MARKDOWN_NOTE"
+folder: "ba78bd24b69f615562d5"
+title: "代码链接"
+tags: []
+content: '''
+  # 代码链接
+  
+  
+  
+  
+  ![b2c698c1.png](:storage\\ecacf2eb-541c-40f2-a7b5-b5339628e96c\\b2c698c1.png)
+  [GitHub - ROC-HCI/CollaborationCoach_PostFeedback: Video conferencing based group discussion analysis with post-discssuon feedback](https://github.com/ROC-HCI/CollaborationCoach_PostFeedback)
+  这是一个在线会议软件，叫做CoCo，能够检测人脸，并且CoCo使用参与者的网络摄像头和麦克风记录讨论的音频和视频。从听觉和视觉数据中，我们提取了参与者的面部和韵律特征。这些特征包括:参与、打断、情感效价、态度(参与、关注、惊讶、愤怒)和共享的微笑。
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

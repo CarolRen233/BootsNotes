@@ -1,5 +1,5 @@
 createdAt: "2020-01-03T03:43:56.427Z"
-updatedAt: "2020-03-23T07:15:43.608Z"
+updatedAt: "2020-04-16T14:06:07.360Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "Project目录"
@@ -14,11 +14,13 @@ content: '''
   1. [资料和准备](:note:35d68c74-b0fd-4bab-a1a7-97a43d1a7649)
   2. [Competition Introduction](:note:183f2218-88e4-4265-bef6-f4078977584f)
   3. [NCRF](:note:3867dbcf-3243-4508-902a-956f955aaf89) | [NCRF Codes](:note:253b0442-83bc-47c6-bbb5-c318f0bf6720)
+  4. [inception_v3 report](:note:2a039ae8-6876-4c28-8e72-73155eaa42c2)
   
   **code：**
   
   1. [ADL Code README](:note:8454f79f-9b97-4985-937b-7aa960e5d69a) env:py36
   2. [Classification Code README](:note:4cddbf12-6444-4a67-b665-c9ddee9d5d0c) env:torch10
+  3. [P4M 准备工作和代码](:note:ab44b665-1c7d-420d-937c-7bdd88282aec)
   
   
   
@@ -27,7 +29,7 @@ content: '''
   **准备**
   
   1. [肝脏病灶分割资料与准备](:note:91da6b04-9648-412e-ba8f-1f43a19da4e9)
-  2. 
+  2. [Liver Cancer Questions](:note:381fc5b6-85bc-4646-a9f0-e8a26f5be752)
   
   
   

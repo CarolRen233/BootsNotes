@@ -1,0 +1,136 @@
+createdAt: "2020-03-25T03:55:56.618Z"
+updatedAt: "2020-03-25T05:32:50.434Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "ADL 代码解释以及需要增加的功能"
+tags: []
+content: '''
+  # ADL 代码解释以及需要增加的功能
+  
+  
+  ## 流程
+  
+  1. 提取patch
+  2. 训练模型
+  3. 测试准确率
+  4. 生成heatmap，计算FROC等指标
+  
+  ## 代码解释
+  
+  ### 1. 提取patch
+  
+  用到`PatchPlot.py`和`save_npy.py`两个代码
+  
+  PatchPlot.py只是提供一些函数。
+  参数的设定在save_npy.py
+  
+  这部分的代码目的是提取出两个level（level0和level1）下的train/validation数据和test数据。
+  
+  ![6c24fde6.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\6c24fde6.png)
+  
+  log文件里有每个图片提取了多少个tumor或者normal的patch
+  
+  ![836e97f6.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\836e97f6.png)
+  
+  每张图片生成3个npy文件，X1是level0下的patch，X2是level1下的patch，y是label
+  
+  ![c06f7c48.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\c06f7c48.png)
+  
+  假如一共提取了1000个patch，那么X1,X2,Y的shape分别是
+  （1000，299，299）
+  （1000，299，299）
+  （1000，）
+  
+  **参数**
+  
+  ![18ee2763.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\18ee2763.png)
+  
+  num_per_img 就是每张图片提取多少个tumor或者normal，但是有的时候可能提取不到这个数量
+  
+  num_random_sample 必须大于num_per_img
+  
+  **存在的问题及修改**
+  
+  1. test的数据不应该按照这样的方式1：1提取，需要修改成提取所有的tissue区域
+  
+  ### 1.5 合并npy文件
+  
+  用到`npy_concate.py`代码，将所有的数据合并并保存在all_npy文件夹中
+  
+  ![e6f764c8cefcec5da1d86ed4f888f21.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\e4611ca5.png)
+  
+  
+  ### 2. 训练模型
+  用到`train_all_npy.py`代码，参数如下
+  
+  ![5d56030ba1cf8f48d8d73a5f283cab6.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\f79988c1.png)
+  
+  会保存一个最佳的模型 MODEL.h5，和训练的acc/loss曲线图片
+  
+  ![73193021.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\73193021.png)
+  
+  **存在的问题及修改**
+  
+  1. 训练的时候除了accuracy等数据，还需要可视化一下recall，specificity，AUC等指标
+  2. 需要加一下hard mining，如果可以的话，把难样本画出来看一下到底是哪些地方
+  
+  
+  ### 3. 测试模型
+  
+  
+  用到`test_all_npy.py`代码，会导入上一步生成的最佳模型。输出一个log文件，结果是所有的patch的预测准确率
+  
+  
+  **存在的问题及修改**
+  1. test的patch要用所有的patch，而不是部分
+  2. 希望可以加上recall，specificity，AUC等指标
+  
+  
+  
+  ### 4. 生成heatmap
+  
+  这部分用到两个代码，`heatmap.py`,`evaluate.py`
+  
+  heatmap在level7下找到点，然后还原回去取出patch，查看center得到真实值true_class，用模型预测得到预测值pred_class
+  
+  为了节省内存，一次处理1000个patch
+  
+  ![2c0af125.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\2c0af125.png)
+  
+  最大值保存下来
+  ![4d892d19.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\4d892d19.png)
+  
+  
+  最终结果是两个图，一个图是原图
+  ![0ebfbb49.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\0ebfbb49.png)
+  一个是预测图
+  ![b1f1bafe.png](:storage\\b5666fdf-6df8-4302-ac39-0de857ac92a1\\b1f1bafe.png)
+  
+  **存在的问题及修改**
+  1. 不知道是不是哪里有bug，上面一张图也可以看到，没有对所有的点进行预测，中间截断了
+  
+  
+  
+  ### 5.Evaluate
+  
+  用到`evaluate.py`的代码
+  
+  每张test图作为输入，然后生成一个字典，字典key为图片名字，value为各个指标参数的值
+  
+  但是这个跑下来有问题，之前看到的结果非常不合理
+  
+  **存在的问题及修改**
+  1. 代码只写了TPs, FPs, TNs, FNs, total_pos, total_neg这些指标，不知道FROC,AUC是不是也要加在这里，nms不知道是不是也要加在这里？
+  
+  
+  
+  
+  
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

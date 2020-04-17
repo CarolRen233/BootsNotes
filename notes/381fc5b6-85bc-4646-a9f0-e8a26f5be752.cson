@@ -1,0 +1,19 @@
+createdAt: "2020-03-29T10:33:47.191Z"
+updatedAt: "2020-04-01T06:01:13.704Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Liver Cancer Questions"
+tags: []
+content: '''
+  # Liver Cancer Questions
+  
+  1. 所有的都是Hepatocellular Carcinoma(HCC)，肝细胞癌吗？
+  2. 任务只是分割出病灶区域 Liver Cancer Segmentation？有 Viable Tumor Burden Estimation活细胞肿瘤负荷的评估需求吗？
+  3. 染色都是一致的吗？不同的图片会不会有细微的差异？
+  4. 标注围成的肿瘤区域里面全都是肿瘤吗？还是有正常细胞？
+  5. 目的是什么，分类正常的肝脏和癌变的肝脏？还是只针对癌变的肝脏，将病灶区域找出来？
+  6. 
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

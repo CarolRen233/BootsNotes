@@ -1,0 +1,42 @@
+createdAt: "2020-04-09T02:51:25.568Z"
+updatedAt: "2020-04-09T03:01:47.230Z"
+type: "MARKDOWN_NOTE"
+folder: "0c8dbf9ec6d493d3fd38"
+title: "Debug"
+tags: []
+content: '''
+  # Debug
+  
+  [Python 代码调试技巧](https://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/index.html)
+  
+  ## PDB调试
+  pdb 调试有个明显的缺陷就是对于多线程，远程调试等支持得不够好
+  
+  不需要修改代码
+  
+      python -m pdb test.py
+  
+  在代码里面插入：
+  
+  ~~~python
+  import pdb
+  pdb.set_trace()
+  ~~~
+  
+  
+  |命令|解释|
+  |---|---|
+  | n       | 下一步 |
+  | p [变量名]       | 查看变量值（仅在某个变量的那一行已经执行了n下一步的操作之后，才可以查看 |
+  |list 或 l| 展示前后的代码部分|
+  |q 或 quit|退出|
+  |s |执行到某个函数的时候，按s可以进入到该函数，然后在函数里面还是可以用np等操作|
+  |r | 退出函数，回到之前的断电的地方
+  
+  ## Pycharm
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,20 @@
+createdAt: "2020-03-24T09:09:54.772Z"
+updatedAt: "2020-03-24T09:10:22.460Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Liver 数据分析"
+tags: []
+content: '''
+  # Liver 数据分析
+  
+  
+  ~~~
+  41	1837075	男	37岁	
+  1、“左半肝”肝细胞癌，低分化，可见脉管内癌栓，癌组织侵犯肝脏被膜，未突破被膜，
+  周围肝组织呈肝硬化改变，并可见散在分布的卫星结节，肝脏离断面未见癌。 
+  2、慢性胆囊炎，胆囊颈断端未见癌。
+  ~~~
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

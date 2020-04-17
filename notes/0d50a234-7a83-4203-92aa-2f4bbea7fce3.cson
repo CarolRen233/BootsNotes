@@ -1,0 +1,63 @@
+createdAt: "2020-04-04T08:11:25.871Z"
+updatedAt: "2020-04-04T08:38:28.963Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Inception_V3代码解释"
+tags: []
+content: '''
+  # Inception_V3代码解释
+  
+  以下默认实验2
+  
+  ## 1.生成patch
+  
+  代码：http://192.168.202.134:63422/lab/tree/root/workspace/code/adl_cancer_detection-master/PatchPlot2.py
+  解释：
+  1. 这个代码用来从tumor或者normal图片中提取patch，num_per_img为每张图片提取的tumor patch的数量，normal patch的数量为已经提取到的tumor patch数量的1/2.45(参考305行)
+  2. 生成的结果保存在
+  /root/workspace/output/inceptionv3/test2/train/train_patchlist/路径下
+  
+  
+  ## 2. 训练
+  
+  训练的代码：
+  (http://192.168.202.134:63422/lab/tree/root/workspace/code/inception/test2/t2_train_inception.py)
+  涉及到的其他代码：
+  - config文件：(http://192.168.202.134:63422/lab/tree/root/workspace/code/inception/test2/iinception_config.py)
+  - 其他用到的函数都在/root/workspace/code/classfication路径下
+  
+  生成的结果保存在
+  /root/workspace/output/inceptionv3/test2/train下
+  
+  
+  以下默认实验1，因为实验2的结果还没有跑出来
+  ## 3. heatmap生成
+  
+  代码:(http://192.168.202.134:63422/lab/tree/root/workspace/code/inception/heatmap.py)
+  
+  上一步训练会保存checkpoint文件在train/model下，load模型之后生成的heatmap保存在/root/workspace/output/inceptionv3/test1/heatmap
+  
+  
+  ## 4. heatmap可视化
+  
+  代码：
+  (http://192.168.202.134:63422/lab/tree/root/workspace/output/inceptionv3/test1/vis_heatmap.py)
+  
+  结果保存在root/workspace/output/inceptionv3/test1/heatmap_vis1
+  
+  
+  ## 5. nms
+  
+  代码：
+  (http://192.168.202.134:63422/lab/tree/root/workspace/output/inceptionv3/test1/nms_to%20_gen_csv.py)
+  
+  结果保存在root/workspace/output/inceptionv3/test1/heatmap_csv
+  
+  ## 6. froc
+  
+  代码：(http://192.168.202.134:63422/lab/tree/root/workspace/output/inceptionv3/test1/FROC_new.ipynb)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

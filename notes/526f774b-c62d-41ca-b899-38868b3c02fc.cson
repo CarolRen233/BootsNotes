@@ -1,5 +1,5 @@
 createdAt: "2019-12-05T05:13:56.022Z"
-updatedAt: "2020-03-23T01:43:59.696Z"
+updatedAt: "2020-04-10T05:26:55.279Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Conda/pip"
@@ -15,14 +15,12 @@ content: '''
   ### 安装anaconda和pytorch
   
   官网找到下载的地方，或者到清华镜像找安装包，然后复制下载地址，用wget [url]来下载安装包，然后bash这个安装包，路径记得选择一下
-  export ANACONDA_HOME=/userhome/root/anaconda3/bin
+  export ANACONDA_HOME=/root/workspace/renyan/anaconda3/bin
   export PATH=$ANACONDA_HOME:$PATH
   然后添加到路径
-  vim /etc/profile
-  source /etc/profile
-  export PATH="/userhome/root/anaconda3/bin:$PATH"
   ~~~
-  ~/.bashrc
+  vim ~/.bashrc
+  export PATH=/root/workspace/renyan/anaconda3/bin:$PATH
   source ~/.bashrc
   ~~~
   
@@ -108,6 +106,23 @@ content: '''
   防止time out
   ~~~
   pip install --default-timeout=100 torch torchvision
+  ~~~
+  
+  ## Jupyter
+  
+  **给jupyter选择conda环境***
+  
+  先给conda的源换成清华源
+  
+  conda config --remove-key channels
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  conda config --set show_channel_urls yes
+  然后安装
+  ~~~
+  conda install ipykernel
+  conda activate 环境名称
+  python -m ipykernel install --user --name torch10 --display-name "torch10"
   ~~~
   
   

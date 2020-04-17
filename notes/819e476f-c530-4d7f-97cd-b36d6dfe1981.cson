@@ -1,0 +1,74 @@
+createdAt: "2020-03-24T08:08:00.321Z"
+updatedAt: "2020-03-24T08:34:04.403Z"
+type: "MARKDOWN_NOTE"
+folder: "0c8dbf9ec6d493d3fd38"
+title: "关于OpenSlide版本的问题"
+tags: []
+content: '''
+  # 关于OpenSlide版本的问题
+  
+  
+  以下Slide指代.tif格式的原图，Mask指代由annotation文件生成的.tif格式的mask图片
+  
+  黑色背景的图片来自于服务器，白色背景来自云脑
+  
+  
+  ## 问题描述
+  
+  ### 服务器 
+  
+  在处理Camelyon16的数据时，有时需要对图片进行缩放，比方说level4水平下的缩放，或者level7水平下的缩放，直觉的理解level4应该是 2^4 的缩放，level7是2^7的缩放
+  
+  但是在运行代码的时候，发现Slide和Mask的缩放并不一致，Mask是严格按照2的次幂进行缩放，但是Slide的缩放却不是2的次幂，且level水平越高，差异越明显，如图所示:
+  
+  ![8bad194f.png](:storage\\819e476f-c530-4d7f-97cd-b36d6dfe1981\\8bad194f.png)
+  
+  可以看到有level1水平下，slide的大小是（49152，110592），而mask是（48896，110592）
+  
+  当level越高，两者的差异也越明显，当达到level7的时候，Slide大小是（1024，2048），而Mask是（764，1728）
+  
+  我们在level7水平将其可视化出来可以看到图片是下图所示，可以看到Slide图片右边和下边有很大的空白区域
+  
+  | Slide图片 | Mak图片 |
+  | --- | --- |
+  | ![e7cc3014.png](:storage\\819e476f-c530-4d7f-97cd-b36d6dfe1981\\e7cc3014.png)|![6ac3c4dc.png](:storage\\819e476f-c530-4d7f-97cd-b36d6dfe1981\\6ac3c4dc.png) |
+  
+  打印出他们的shape：
+  
+  ![a0fa178f.png](:storage\\819e476f-c530-4d7f-97cd-b36d6dfe1981\\a0fa178f.png)
+  
+  
+  ### 云脑
+  
+  但是发现用一模一样的代码在云脑上可视化，情况却不一样
+  
+  Mask和Slide的dimention在云脑上显示是一样的：
+  
+  ![c015ce46.png](:storage\\819e476f-c530-4d7f-97cd-b36d6dfe1981\\c015ce46.png)
+  
+  可视化出来大小也一致：
+  
+  | Slide图片 | Mak图片 |
+  | --- | --- |
+  |![20a43c2c.png](:storage\\819e476f-c530-4d7f-97cd-b36d6dfe1981\\20a43c2c.png)|![04fd58c6.png](:storage\\819e476f-c530-4d7f-97cd-b36d6dfe1981\\04fd58c6.png)|
+  
+  打印出来shape：
+  
+  ![2acbba64.png](:storage\\819e476f-c530-4d7f-97cd-b36d6dfe1981\\2acbba64.png)
+  
+  也是一致的
+  
+  ## 版本差异
+  
+  然后发现，云脑和服务器的唯一差别是OpenSlide的版本
+  
+  云脑上版本为3.4.1，Slide和Mask维度一致；服务器版本为3.4.0，Slide和Mask维度不一致。
+  
+  但是根据OpenSlide官网的描述，openslide包只能通过`pip/pip3 install openslide-python`的命令安装（或者`apt-get install python3-openslide`命令直接安装），无法指定版本为3.4.0或者3.4.1，因为可以安装的版本是1.1.1，或以下
+  ![729bb904.png](:storage\\819e476f-c530-4d7f-97cd-b36d6dfe1981\\729bb904.png)
+  ![b0f3affe.png](:storage\\819e476f-c530-4d7f-97cd-b36d6dfe1981\\b0f3affe.png)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
