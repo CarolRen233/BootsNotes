@@ -1,5 +1,5 @@
 createdAt: "2019-11-19T11:58:38.833Z"
-updatedAt: "2020-02-19T05:39:13.091Z"
+updatedAt: "2020-06-13T02:30:07.751Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Git/Github常见命令"
@@ -25,10 +25,12 @@ content: '''
   $$ git init
   $$ git remote add -f origin https://github.com/sajal2692/data-science-portfolio.git
   $$ git config core.sparsecheckout true 
-  $$ echo "customer_segments/*" >> .git/info/sparse-checkout
+  $$ echo "p4mdensenet/try11//*" >> .git/info/sparse-checkout
   $$ git checkout master
   $$ git pull origin master
   ~~~
+  
+  [403 Forbidden](https://static.cowtransfer.com/anonymous%2Fc2090195-e2f4-473e-b1e6-85854b825b6a%2Ftry11.zip?onett=c86ea40fae8d119599b1d97571ffcb39&attname=try11.zip)
   
   
   ## Git常用命令
@@ -41,12 +43,32 @@ content: '''
   git remote -v  #查看远程仓库的具体链接
   
   
-  
-  
-  
-  
+  git rm -r --cached "文件夹的名称" #删除缓存文件，防止push了之后文件夹是灰的无法打开
   
   ~~~
+  
+  使用SSH
+  
+  [windows下手动生成SSHkey_焱的博客-CSDN博客](https://blog.csdn.net/jincheng_921/article/details/80882282?utm_medium=distribute.pc_relevant.none-task-blog-baidujs-2)生成SSH，然后添加到github（或者pcl）上面
+  ~~~
+  git config --global user.name "yourname"
+  git config --global user.email your_email@youremail.com
+  ssh-keygen -t rsa # 找到密钥存的地方
+  cd /c/Users/carol/.ssh #到这个文件夹
+  cat id_rsa.pub #复制密钥到github网站上
+  ssh -vT git@github.com  #或者 ssh -vT git@git.pcl.ac.cn 如果显示successful就是成功了
+  git remote add origin [ssh url]
+  git push -u origin master
+  
+  ~~~
+  
+  pcl：reny  reny@123
+  git: CarolRen233 
+  
+  https://git.pcl.ac.cn/reny/ActionRecg.git
+  git@git.pcl.ac.cn:reny/ActionRecg.git
+  
+  
 '''
 linesHighlighted: []
 isStarred: false

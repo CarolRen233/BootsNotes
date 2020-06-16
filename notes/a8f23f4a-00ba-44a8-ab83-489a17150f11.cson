@@ -1,5 +1,5 @@
 createdAt: "2020-01-03T03:43:56.427Z"
-updatedAt: "2020-04-16T14:06:07.360Z"
+updatedAt: "2020-06-12T03:22:28.807Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "Project目录"
@@ -20,7 +20,7 @@ content: '''
   
   1. [ADL Code README](:note:8454f79f-9b97-4985-937b-7aa960e5d69a) env:py36
   2. [Classification Code README](:note:4cddbf12-6444-4a67-b665-c9ddee9d5d0c) env:torch10
-  3. [P4M 准备工作和代码](:note:ab44b665-1c7d-420d-937c-7bdd88282aec)
+  3. [P4M 准备工作和代码](:note:ab44b665-1c7d-420d-937c-7bdd88282aec) | [P4M 代码README](:note:c297872f-fd49-4195-a2b3-c0fadb81e8fb)
   
   
   
@@ -32,6 +32,11 @@ content: '''
   2. [Liver Cancer Questions](:note:381fc5b6-85bc-4646-a9f0-e8a26f5be752)
   
   
+  
+  #### 3. 其他
+  
+  1. [图像处理作业](:note:acbc9d26-65d1-4228-a2bb-33ecefac5afb)
+  2. 
   
 '''
 linesHighlighted: []

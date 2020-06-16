@@ -1,0 +1,98 @@
+createdAt: "2020-06-12T03:21:24.341Z"
+updatedAt: "2020-06-16T06:58:29.279Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "图像处理作业"
+tags: []
+content: '''
+  # 图像处理作业
+  
+  
+  
+  ## 一、思路
+  
+  
+  针对视频，复现表情识别的代码，复现动作识别的代码，然后将代码结合到一起，用公式进行计算
+  
+  1. 动作识别部分
+  2. 表情识别部分
+  3. 相结合并形成公式
+  
+  
+  ## 二、动作识别
+  
+  [paper](https://arxiv.org/pdf/1910.02793.pdf)  | [code](https://github.com/MichiganCOG/ViP)
+  
+  这是一个类似mmdetection的平台，可以提供以下的任务
+  >We currently support activity recognition, object detection, visual saliency prediction, and video object grounding as detailed in Sec. 3.4
+  >
+  
+  ### 2.1 Breakdown
+  
+  **Dataloading**
+  
+  由于视频的长度很多数据集里面是不一样的，因此会进行clip、preprocessing、bounding box位置相应的调整、生成json
+  
+  
+  **Executing experiments**
+  
+  用YAML文件储存配置的信息进行训练，然后提供IoU、AP、mAP、NSS、CC都评估的指标方便不同的任务来评估
+  
+  
+  
+  ### 2.2 Datasets and Benchmarks
+  
+  
+  为以下数据写了生成JSON的代码
+  >HMDB51 [10],UCF101 [20], Kinetics-400 [5], ImageNetVID 2015 [18], DHF1K [22], MSCOCO 2014 [11], and Pascal VOC 2007 [7]
+  >
+  
+  在以下模型中做了测试
+  > C3D [21], SSD300 [12], TASED-Net [14], DVSA (with frame-wise weighting and object interaction) [25]
+  
+  
+  HMDB51 UCF101
+  >HMDB51是最早的数据集之一，它涵盖了来自多个源的不同范围的操作。它包含3570个培训视频和1530个测试视频，横跨51个标签。
+  >UCF101继承了这个数据集，将标签总数扩展到101，将训练和测试视频的总数分别增加了近三倍，达到9537和3783。
+  >最近，Kinetics-400在30万多个视频中将不同的动作数量扩大到400个。
+  
+  ### Run the code
+  
+  1. 下载[HMDB51数据](https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/#Downloads)，其中最重要的是HMDB51和three splits for the HMDB51
+  2. 解压所有的数据
+  3. 用一个脚本把train和test分开
+  4. 然后运行 ViP/datasets/scripts/gen_json_HMDB51.py
+  5. 
+  
+  以C3D上训练HMDB51为例
+  
+  
+  ~~~
+  
+  python -m util_scripts.generate_video_jpgs /userhome/code/facialrecg/3D-ResNets-PyTorch/data/hmdb/train/video/ /userhome/code/facialrecg/3D-ResNets-PyTorch/data/hmdb/train/jpg/ hmdb51
+  
+  #------------------------------------------
+  
+  
+  python -m util_scripts.hmdb51_json annotation_dir_path jpg_video_dir_path dst_json_path
+  
+  
+  #--------------------------------------------
+  
+  
+  python main.py --root_path /userhome/code/facialrecg/3D-ResNets-PyTorch/data --video_path small_hmdb/jpg --annotation_path small_hmdb.json \\
+  --result_path results --dataset hmdb51 --model resnet \\
+  --model_depth 50 --n_classes 7 --batch_size 128 --n_threads 4 --checkpoint 5
+  ~~~
+  
+  ## 三、用到的其他知识和链接
+  
+  [**args kwargs**](https://blog.csdn.net/wem603947175/article/details/81199498)
+  
+  
+  [Serre Lab » HMDB: a large human motion database](https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/#Downloads)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

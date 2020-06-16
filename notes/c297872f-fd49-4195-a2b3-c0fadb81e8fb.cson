@@ -1,0 +1,62 @@
+createdAt: "2020-04-17T04:11:44.257Z"
+updatedAt: "2020-04-27T12:56:52.707Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "P4M代码README"
+tags: []
+content: '''
+  # P4M代码README
+  
+  ## 一、代码完善
+  
+  
+  :white_check_mark:dataload
+  - load Pcam的分割好的数据
+  
+  :white_large_square:
+  
+  
+  tensorflow-gpu=1.14.0
+  
+  
+  ## 二、Recipe for building equivariant networks
+  
+   D4 (roto-reflection)
+   C4 (rotations) 
+  
+  
+  >All convolutional layers with kernels larger than 1 should be replaced with group-equivariant layers.
+  >
+  >- The first layer transforms the input from Z2 to D4, by setting `h_input='Z2'` and` h_output='C4'` or `'D4'`.
+  >- Follow up layers live on the chosen group and have `h_input=h_output='D4' `(or 'C4').
+  >- Operations that learn parameters per feature-map should be replaced with group versions, including:
+  > --  BatchNormalization becomes GBatchNorm.
+  >- To create a model invariant to rotations, use GroupPool followed by a global spatial pooling layer such as GlobalAveragePooling.
+  >
+  
+  ## 三、Steps
+  
+  ### 1. load data
+  
+  
+  ### 2. 模型建立
+  
+  [densenetnew.py](https://github.com/CarolRen233/tumor_clf/blob/master/p4mdensenet/keras_gcnn/keras_gcnn/applications/densenetnew.py)
+  
+  ~~~python
+  
+  def GDenseNet(mc_dropout, padding, nb_dense_block=3, growth_rate=12, nb_filter=-1, nb_layers_per_block=-1,
+                bottleneck=False, reduction=0.0, dropout_rate=0.0, weight_decay=1e-4, subsample_initial_block=False,
+                include_top=True, weights=None, input_tensor=None, pooling=None, classes=10, activation='softmax',
+                input_shape=None, depth=40, bn_momentum=0.99, use_gcnn=False, conv_group=None, depth_multiplier=1,
+                use_g_bn=True, kernel_size=3, mc_bn=None):
+  
+  ~~~
+  
+  > - `include_top`: 如果值为False，那么input shape可以指定，否则就是(224, 224, 3)或者(3, 224, 224)
+  > - `depth`: number or layers in the DenseNet
+  > - `nb_dense_block`: number of dense blocks to add to end
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

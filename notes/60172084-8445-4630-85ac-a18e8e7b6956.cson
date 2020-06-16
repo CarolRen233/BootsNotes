@@ -1,0 +1,16 @@
+createdAt: "2020-04-24T04:55:00.191Z"
+updatedAt: "2020-04-24T04:59:26.180Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Group Equivariant Convolutional Networks"
+tags: []
+content: '''
+  # Group Equivariant Convolutional Networks
+  
+  
+  
+  symmetry group：就是一系列的图像变换。这种变换是对称性的
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

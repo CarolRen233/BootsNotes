@@ -1,22 +1,24 @@
 createdAt: "2020-04-15T02:02:25.840Z"
-updatedAt: "2020-04-17T03:48:10.050Z"
+updatedAt: "2020-06-04T03:35:28.928Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
-title: "P4M"
+title: "P4M实验记录"
 tags: []
 content: '''
-  # P4M 
+  # P4M实验记录
   
   [toc]
   
   ## 一、资料
   
-  [论文](http://basveeling.nl/pdf/gcnn_pcam.pdf) |  [环境搭建](https://ryanrenqian.github.io/_posts/2020-03-11-gcnn-%E4%B8%80-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/ ) | [PCam details and data](https://github.com/basveeling/pcam) | 
-  [Implementations of equivariant layers](https://github.com/basveeling/keras-gcnn)
+  [论文](http://basveeling.nl/pdf/gcnn_pcam.pdf) |  [环境搭建](https://ryanrenqian.github.io/_posts/2020-03-11-gcnn(1)/) | [PCam details and data](https://github.com/basveeling/pcam) | 
+  [Implementations of equivariant layers](https://github.com/basveeling/keras-gcnn) | 
+  [实验记录](https://docs.qq.com/sheet/DS2lkd0hwZEdyWmNN?tab=bb08j2&c=A1A0A0) | [GCNN](https://arxiv.org/pdf/1602.07576.pdf)
   
   
   ## 二、实验细节
   
+  ### 2.1 论文细节
   
   **background & non-tissue**
   
@@ -34,6 +36,30 @@ content: '''
   **WSI**
   >Uniformly sampling WSIs and drawing tumor/nontumor patches with **equal probability**
   >We focus on the WSI data at 10× magnification
+  
+  
+  ### 2.2 环境搭建
+  
+  ~~~
+  conda install tensorflow-gpu=1.9.0
+  conda install keras=2.0.9
+  pip install git+https://github.com/nom/GrouPy#egg=GrouPy -e git+https://github.com/basveeling/keras-gcnn.git#egg=keras_gcnn
+  pip install opencv-python
+  pip install pandas
+  pip install scikit-learn
+  pip install scikit-image
+  pip install h5py
+  git clone https://www.github.com/keras-team/keras-contrib.git
+  cd keras-contrib
+  python setup.py install
+  pip install pytest
+  pip install pydot graphviz
+  ~~~
+  cd userhome/code/code/p4mdensenet/try11; /userhome/root/anaconda3/envs/p4m/bin/python3   run_generate_patch.py /userhome/output/p4
+  m/dataset/patchlist/train_patch/train_patchlist/csv_list.txt /userhome/output/p4m/dataset/patchlist/train_patch/train_patchlist /userhome/output/p4m/dataset/patchlist/train_patch/patch/ 
+  
+  cd userhome/code/code/p4mdensenet/try10; /userhome/root/anaconda3/envs/p4m/bin/python3 test_heatmap_v22.py
+  
   
   
   
@@ -80,6 +106,15 @@ content: '''
   
   [自助法 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E8%87%AA%E5%8A%A9%E6%B3%95)
   
+  **4. keras**
+  
+  - [keras系列︱Sequential与Model模型、keras基本结构功能（一）_人工智能_素质云笔记/Recorder...-CSDN博客](https://blog.csdn.net/sinat_26917383/article/details/72857454)
+  - [主页 - Keras 中文文档](https://keras.io/zh/)
+  - https://keras.io/models/model/
+  - 
+  
+  
+  
   
   ## 四、计划
   
@@ -88,17 +123,56 @@ content: '''
   - 整理实验细节
   - 对不了解的概念查询资料
   
-  :white_large_square:代码分析
-  - 查看现有部分代码包含了哪些步骤
+   :ballot_box_with_check:代码分析
+  - :ballot_box_with_check:查看现有部分代码包含了哪些步骤
+  
   - 根据论文和现有代码整理出流程图
   
-  :white_large_square:完善代码及部分实验
+  :ballot_box_with_check:完善代码及部分实验
   - 针对还没有补充的部分，对代码进行完善
+    - 训练测试代码
+    - 评价指标代码
   - 已经有的部分，可以先进行实验
   
-  :white_large_square:实验
+  :ballot_box_with_check:实验
   - 用完整代码进行实验
   - 多次实验，分析结果
+  
+  
+  
+  ## 五、工作日志
+  
+  20.4.25
+  
+  阅读论文
+  整理实验细节
+  对不了解的概念查询资料
+  
+  ****
+  20.4.28
+  
+  实验路径：root/workspace/code/p4mdensenet/try1
+  
+  解决：
+  1. 环境配置 （keras_contrib和keras_gcnn仅仅复制文件夹还不够，必须要pip install，不然会报“*TypeError: i2g must be of type GArray, got<class 'groupy.garray.Z2_array.Z2Array'> instead.*”）
+  2. 数据维度不一致（建立模型时include_top=True，如果为False报错“*ValueError: Error when checking target: expected dense_4 to have 2 dimensions, but got array with shape (262144, 1, 1, 2)*”）
+  3. 训练代码基本可以跑通
+  
+  问题：
+  1. 目前使用cifar的网络结构进行试验，但网络结构需要根据论文修改
+  2. 没有用到GPU
+  
+  
+  ****
+  20.5.2
+  
+  1. 解决keras不使用GPU训练速度慢
+  2. 调整网络结构，重新训练
+  3. 可视化结果
+  
+  
+  
+  
   
   
   

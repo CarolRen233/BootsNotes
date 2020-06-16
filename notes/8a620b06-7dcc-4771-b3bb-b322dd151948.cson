@@ -1,0 +1,25 @@
+createdAt: "2020-05-23T09:24:48.001Z"
+updatedAt: "2020-05-23T09:26:58.187Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "P4M Camelyon16"
+tags: []
+content: '''
+  # P4M Camelyon16
+  
+  
+  ## 实验步骤
+  
+  ### 1. preprocess
+  
+  [CAMELYON/README.md](https://github.com/ilikewind/CAMELYON/blob/a12b7e12987fd51dab34e530db6328ed07ccc79f/README.md)
+  
+  1. 获得Tumor_001.tif在level_6下的组织掩码Tumor_001_tissue.npy；
+  2. 获得癌症掩码 Tumor_001_tumor.npy；
+  3. 获得癌症WSI中除去背景正常区域的掩码Tumor_001_normal.npy
+  4. 获取随机的癌症区域中的坐标点train_spot.txt
+  5. 
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

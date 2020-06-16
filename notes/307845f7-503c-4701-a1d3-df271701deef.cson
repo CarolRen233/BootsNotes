@@ -1,5 +1,5 @@
 createdAt: "2019-12-13T05:15:06.994Z"
-updatedAt: "2020-04-16T14:01:13.589Z"
+updatedAt: "2020-05-30T03:05:13.348Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "服务器/Linux"
@@ -28,9 +28,12 @@ content: '''
   
   远程服务器与服务器传文件
   ~~~bash
-  scp -r -P 61830 root@192.168.203.18:/root/workspace/camelyon_codes/p4mdensenet /root/workspace/code
-  root/workspace/test/classfication
-  scp -r -P 63420 root@192.168.202.134:/root/workspace/output/maskvis/test_mask/try4/test_105.tif /root/workspace/renyan/
+  scp -r -P 22280 root@192.168.202.125:/root/workspace/zhangch/datasets/CAMELYON16/mask /root/workspace/output/p4m/try11/Camelyon16patch/mask
+  
+  scp -r -P 10090 -i application_1587655031187_13874.pem /userhome/output/p4m/dataset/pcamv1 root@192.168.202.127:/userhome/ls/datasets/Pcam/
+  
+  
+  scp -r -P 63420 root@192.168.202.134:/root/workspace/dataset/pcamv1 /userhome/wangshubo
   
   scp -r -P 60420 root@192.168.203.27:/root/workspace/huangxs/CAMELYON16_prepare/result/ground_truth /root/workspace/dataset/CAMELYON16
   

@@ -1,5 +1,5 @@
 createdAt: "2020-03-23T07:14:36.605Z"
-updatedAt: "2020-04-01T06:00:32.654Z"
+updatedAt: "2020-04-29T02:30:35.031Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "肝脏病灶分割资料与准备"
@@ -16,7 +16,11 @@ content: '''
   ~~~
   # nat.cloudbastion.cn 端口64530，root,密码123
   
+  #北大数据
   /gdata/medical_dataset/data in Feb & Mar/livercanerHE-beidasz-cell-20200323
+  
+  #PAIP数据
+  /gdata/medical_dataset/competition/PAIP/
   ~~~
   /gdata/medical_dataset/competition/PAIP/
   

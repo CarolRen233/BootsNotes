@@ -1,5 +1,5 @@
 createdAt: "2020-03-07T10:14:14.439Z"
-updatedAt: "2020-04-10T05:46:30.550Z"
+updatedAt: "2020-05-22T03:51:18.662Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "ADL Code README"
@@ -157,7 +157,7 @@ content: '''
   
   安装tensorflow
   ~~~
-  pip --default-timeout=100 install -U tensorflow-gpu==1.9.0
+  pip --default-timeout=100 install -U torchvision==0.4
   pip install numpy==1.16.0 
   ~~~
   

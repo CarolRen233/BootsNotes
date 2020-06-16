@@ -1,0 +1,115 @@
+createdAt: "2020-05-10T04:57:52.942Z"
+updatedAt: "2020-05-10T09:17:09.927Z"
+type: "MARKDOWN_NOTE"
+folder: "0c8dbf9ec6d493d3fd38"
+title: "Email"
+tags: []
+content: '''
+  # Email 
+  
+  Dear Bas,
+  
+  I am a postgraduate student from Peking University in China. I am very interested in your paper *Rotation Equivariant CNNs for Digital Pathology* and trying to reproduce the model you mentioned in the paper.
+  
+  However, the outcome I had has a big gap with yours. The acc is around 0.66 and auc is aroud 0.7. I was wondering could I ask for you help? It would be a great help to me if you can check my code.  
+  
+  Here below are the changes I made in [densenetnew.py](https://github.com/basveeling/keras-gcnn/blob/master/keras_gcnn/applications/densenetnew.py) to train on pcam dataset:
+  
+  =========================================
+  #line 192
+  ```python
+  def GDenseNet(mc_dropout, padding, nb_dense_block=3, growth_rate=12, nb_filter=-1, nb_layers_per_block=-1,
+                bottleneck=False, reduction=0.0, dropout_rate=0.0, weight_decay=1e-4, subsample_initial_block=False,
+                include_top=True, weights=None, input_tensor=None, pooling=None, classes=10, activation='softmax',
+                input_shape=None, depth=40, bn_momentum=0.99, use_gcnn=False, conv_group=None, depth_multiplier=1,
+                use_g_bn=True, kernel_size=3, mc_bn=None):
+  ```
+  I changed `activation='softmax'` to `activation='sigmoid'`
+  
+  =========================================
+  #line 276
+  
+  I deleted 
+  ```
+      if activation not in ['softmax', 'sigmoid']:
+          raise ValueError('activation must be one of "softmax" or "sigmoid"')
+  
+      if activation == 'sigmoid' and classes != 1:
+          raise ValueError('sigmoid activation can only be used when classes = 1')
+  ```
+  ==========================================
+  #line 612
+  
+  in  __transition_block
+  
+  ```python
+  with K.name_scope('Transition'):
+          concat_axis = 1 if K.image_data_format() == 'channels_first' else -1
+  
+          x = ip
+          x = __BatchNorm(use_g_bn, conv_group, use_gcnn, momentum=bn_momentum, epsilon=1.1e-5, axis=concat_axis,
+                          name=name_or_none(block_prefix, '_bn'))(x, training=mc_bn)
+          x = Activation('relu')(x)
+          x = __Conv2D(int(nb_filter * compression), (1, 1), kernel_initializer='he_normal', padding=padding,
+                       use_bias=False, kernel_regularizer=l2(weight_decay), name=name_or_none(block_prefix, '_conv2D'),
+                       use_gcnn=use_gcnn, conv_group=conv_group, depth_multiplier=depth_multiplier)(x)
+          x = AveragePooling2D((2, 2), strides=(2, 2))(x)
+  
+          return x
+  ```  
+  
+  I changed `(1, 1)` to `kernel_size = (3,3), strides = (1, 1)`; `padding=padding,`to ` padding='valid'`
+  
+  ==========================================
+  #in line 739
+  
+  I changed `assert (depth - 4) % 3 == 0` to `assert (depth - 4) % 5 == 0` and  `count = int((depth - 4) / 3)` to `count = int((depth - 4) / 5)`
+  
+  ==========================================
+  #in line 772
+  
+  After `x = GConv2D(...)(img_input)`, I add `__BatchNorm`,`Activation` and `GConv2D`
+  
+  
+  ```python
+          if use_gcnn:
+              # Shrink the amount of parameters used during Gconv?
+              # nb_filter = round(nb_filter * depth_multiplier)
+              # Perhaps not do this for initial block... ^
+  
+              x = GConv2D(int(round(nb_filter * depth_multiplier)), initial_kernel, kernel_initializer='he_normal',
+                          padding='valid', name='initial_Gconv2D',
+                          strides=initial_strides, use_bias=False, kernel_regularizer=l2(weight_decay),
+                          h_input='Z2', h_output=conv_group)(img_input)
+              x = __BatchNorm(use_g_bn, conv_group, use_gcnn, momentum=bn_momentum, epsilon=1.1e-5, axis=concat_axis,
+                              name='initial_bn')(x, training=mc_bn)
+              x = Activation('relu')(x)
+              x = GConv2D(int(round(nb_filter * depth_multiplier)), initial_kernel, kernel_initializer='he_normal',
+                          padding='valid', name='initial_Gconv2D',
+                          strides=initial_strides, use_bias=False, kernel_regularizer=l2(weight_decay),
+                          h_input='Z2', h_output=conv_group)(img_input)
+  ```
+  ==========================================
+  #in line 788
+  
+  I changed `x = MaxPooling2D((3, 3), strides=(2, 2), padding=padding)(x)` to `x = MaxPooling2D((3, 3), strides=(1, 1), padding=padding)(x)`
+  
+  
+  
+  I also write a code named train_v4.py to train pcam data on GDenseNet, which is attached to this email.
+  
+  Here are my questions:
+  
+  1. The paper said every dense block has one layer, dose that mean I should set nb_layers_per_block [1,1,1,1,1]? If there is only one layer, how dose it dense connect?
+  2. Should I set nb_classes with 1 or 2? 
+  
+  I would be very appreciate if you can tell me what are the problems with my code and answer the questions. If possible, could you share your code?
+  
+  
+  Thank you for your time and I am looking forward to your reply.
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

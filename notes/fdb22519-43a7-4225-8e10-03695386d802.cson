@@ -1,0 +1,85 @@
+createdAt: "2020-05-10T03:32:52.384Z"
+updatedAt: "2020-05-10T04:39:00.941Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "GDenseNet Training Code"
+tags: []
+content: '''
+  # GDenseNet Training Code
+  
+  
+  ## Original Version
+  
+  作者的原代码：
+  
+  1. [densenetnew_original.py](./original/densenetnew_original.py) 模型文件，训练的时候会调用这里面的GDenseNet函数
+  2. [g_densnet_cifar.py](./original/g_densnet_cifar.py) 作者给出的训练cifar的code
+  3. [test_model_saving.py](./original/test_model_saving.py) 作者给出的一个test code
+  
+  
+  
+  ## V2
+  
+  在作者的代码基础上，第一版的修改后的代码：
+  
+  1. [densenetnew_v2.py](./v2/densenetnew_v2.py) 只修改了两个地方，如图，因为有5个denseblock，所以将3改成5
+  ![original--v2.1.PNG](:storage\\fdb22519-43a7-4225-8e10-03695386d802\\71bc540c.PNG)
+  ![original--v2.2.PNG](:storage\\fdb22519-43a7-4225-8e10-03695386d802\\94cf8d57.PNG)
+  2. [train_v2.py](./v2/train_v2.py)训练代码，参数设置如下：
+  batch_size=32
+  conv_group='D4'
+  depth=64
+  dropout_rate=0.0
+  epochs=15
+  growth_rate=3
+  img_channels=3
+  nb_classes=2
+  nb_dense_block=5
+  nb_filter=16
+  wh=96
+  use_gcnn = True
+  optimizer = Adam(lr=1e-3)
+  loss = 'categorical_crossentropy'
+  include_top=True
+  padding='same'
+  3. [model.txt](./v2/model.txt)，[pcam_model.png](./v2/pcam_model.png) 均为模型文件
+  4. [history.json](./v2/history.json)，[training-history.png](./v2/training-history.png)均为训练结果
+  5. [train_log_2020-04-29 08_06_43.386844.txt](./v2/train_log_2020-04-29 08_06_43.386844.txt)log文件
+  
+  ## V3
+  
+  
+  1. [densenetnew_v3.py](./v3/densenetnew_v3.py) 在densenetnew_v2.py基础上，将GDenseNet中的激活函数由activation='softmax'改成activation='sigmoid'
+  ![v2--v3.1.PNG](:storage\\fdb22519-43a7-4225-8e10-03695386d802\\ae8c0a5f.PNG)
+  ![v2--v3.2.PNG](:storage\\fdb22519-43a7-4225-8e10-03695386d802\\3939d5df.PNG)
+  对__transition_block中的卷积大小进行更改
+  ![v2--v3.3.PNG](:storage\\fdb22519-43a7-4225-8e10-03695386d802\\f9d3bd32.PNG)
+  在__create_dense_net中#Initial convolution后的代码进行修改，添加了batch norm，activatation，和另一个卷积：
+  ![v2--v3.4.PNG](:storage\\fdb22519-43a7-4225-8e10-03695386d802\\e99725df.PNG)
+  
+  2. [train_v3.py](./v3/train_v3.py)训练代码，参数设置与train_v2.py一致，只修改了lr_reducer和early_stopper和patience
+  ![220d8c9a.png](:storage\\fdb22519-43a7-4225-8e10-03695386d802\\220d8c9a.png)
+  3. [model.txt](./v3/model.txt)，[pcam_model.png](./v3/pcam_model.png) 均为模型文件
+  4. [history.json](./v3/history.json)，[training-history.png](./v2/training-history.png)均为训练结果
+  
+  
+  
+  ## V4
+  
+  
+  1. [densenetnew_v4.py](./v4/densenetnew_v4.py) 和densenetnew_v3.py一样
+  
+  2. [train_v4.py](./v4/train_v4.py)训练代码，与train_v3.py相比，参数变化：
+  depth = 24 (之前64)
+  growth_rate = 1(之前3)
+  
+  3. [model.txt](./v4/model.txt)，[pcam_model.png](./v4/pcam_model.png) 均为模型文件
+  4. [history.json](./v4/history.json)，[training-history.png](./v4/training-history.png)均为训练结果
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
