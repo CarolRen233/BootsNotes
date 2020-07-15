@@ -1,5 +1,5 @@
 createdAt: "2019-11-19T11:58:38.833Z"
-updatedAt: "2020-06-13T02:30:07.751Z"
+updatedAt: "2020-07-06T08:17:50.514Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Git/Github常见命令"
@@ -49,14 +49,15 @@ content: '''
   
   使用SSH
   
-  [windows下手动生成SSHkey_焱的博客-CSDN博客](https://blog.csdn.net/jincheng_921/article/details/80882282?utm_medium=distribute.pc_relevant.none-task-blog-baidujs-2)生成SSH，然后添加到github（或者pcl）上面
+  [windows下手动生成SSHkey_焱的博客-CSDN博客](https://blog.csdn.net/Suo_ivy/article/details/79940839)生成SSH，然后添加到github（或者pcl）上面
   ~~~
-  git config --global user.name "yourname"
-  git config --global user.email your_email@youremail.com
-  ssh-keygen -t rsa # 找到密钥存的地方
-  cd /c/Users/carol/.ssh #到这个文件夹
-  cat id_rsa.pub #复制密钥到github网站上
-  ssh -vT git@github.com  #或者 ssh -vT git@git.pcl.ac.cn 如果显示successful就是成功了
+  ssh-keygen  -t  rsa  -C "renyan_2015@163.com"
+  eval  "ssh-agent  -s"
+  ssh-add ~/.ssh/id_rsa #如果出现authentication错误就先输入ssh-agent bash，再输入ssh-add ~/.ssh/id_rsa
+  vim ~/.ssh/id_rsa.pub #复制密钥到网站上 
+  ssh -vT git@git.pcl.ac.cn  #如果显示successful就是成功了
+  git config user.name "yourname"
+  git config user.email your_email@youremail.com
   git remote add origin [ssh url]
   git push -u origin master
   

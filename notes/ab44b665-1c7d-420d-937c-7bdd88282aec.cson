@@ -1,5 +1,5 @@
 createdAt: "2020-04-15T02:02:25.840Z"
-updatedAt: "2020-06-04T03:35:28.928Z"
+updatedAt: "2020-07-06T08:29:50.202Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "P4M实验记录"
@@ -55,12 +55,6 @@ content: '''
   pip install pytest
   pip install pydot graphviz
   ~~~
-  cd userhome/code/code/p4mdensenet/try11; /userhome/root/anaconda3/envs/p4m/bin/python3   run_generate_patch.py /userhome/output/p4
-  m/dataset/patchlist/train_patch/train_patchlist/csv_list.txt /userhome/output/p4m/dataset/patchlist/train_patch/train_patchlist /userhome/output/p4m/dataset/patchlist/train_patch/patch/ 
-  
-  cd userhome/code/code/p4mdensenet/try10; /userhome/root/anaconda3/envs/p4m/bin/python3 test_heatmap_v22.py
-  
-  
   
   
   **Train**

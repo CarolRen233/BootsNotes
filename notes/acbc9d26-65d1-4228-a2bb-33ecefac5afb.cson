@@ -1,5 +1,5 @@
 createdAt: "2020-06-12T03:21:24.341Z"
-updatedAt: "2020-06-16T06:58:29.279Z"
+updatedAt: "2020-06-17T03:21:12.054Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "图像处理作业"
@@ -68,21 +68,20 @@ content: '''
   
   
   ~~~
+  python -m util_scripts.generate_video_jpgs avi_video_dir_path jpg_video_dir_path hmdb51
   
-  python -m util_scripts.generate_video_jpgs /userhome/code/facialrecg/3D-ResNets-PyTorch/data/hmdb/train/video/ /userhome/code/facialrecg/3D-ResNets-PyTorch/data/hmdb/train/jpg/ hmdb51
+  python -m util_scripts.generate_video_jpgs /userhome/code/facialrecg/3D-ResNets-PyTorch/data/HMDB/avi/ /userhome/code/facialrecg/3D-ResNets-PyTorch/data/HMDB/jpgs/ hmdb51
   
   #------------------------------------------
   
   
-  python -m util_scripts.hmdb51_json annotation_dir_path jpg_video_dir_path dst_json_path
+  python -m util_scripts.hmdb51_json /userhome/code/facialrecg/3D-ResNets-PyTorch/data/annotation/ /userhome/code/facialrecg/3D-ResNets-PyTorch/data/HMDB/jpg/ /userhome/code/facialrecg/3D-ResNets-PyTorch/data/
   
   
   #--------------------------------------------
   
   
-  python main.py --root_path /userhome/code/facialrecg/3D-ResNets-PyTorch/data --video_path small_hmdb/jpg --annotation_path small_hmdb.json \\
-  --result_path results --dataset hmdb51 --model resnet \\
-  --model_depth 50 --n_classes 7 --batch_size 128 --n_threads 4 --checkpoint 5
+  python main1.py --root_path /userhome/code/facialrecg/3D-ResNets-PyTorch/data --video_path HMDB/jpg --annotation_path hmdb51_1.json --result_path results --dataset hmdb51 --model resnet --model_depth 50 --n_classes 7 --batch_size 32 --n_threads 4 --checkpoint 1 --distributed
   ~~~
   
   ## 三、用到的其他知识和链接
