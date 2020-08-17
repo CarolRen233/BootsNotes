@@ -1,5 +1,5 @@
 createdAt: "2020-01-03T03:43:56.427Z"
-updatedAt: "2020-06-12T03:22:28.807Z"
+updatedAt: "2020-08-17T02:04:16.007Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "Project目录"
@@ -7,7 +7,16 @@ tags: []
 content: '''
   ## Project目录
   
-  #### 1. Camelyon16病灶分割
+  #### 1. Few-shot segmentation
+  
+  **准备**
+  
+  1. [Few-shot Segmentation Survey](:note:af8d664c-22ae-468e-9fea-e05a5ab16168)
+  2. 
+  
+  
+  
+  #### 2. Camelyon16病灶分割
   
   **准备**
   
@@ -24,16 +33,17 @@ content: '''
   
   
   
-  #### 2. 肝脏病灶分割
+  #### 3. 肝脏病灶分割
   
   **准备**
   
   1. [肝脏病灶分割资料与准备](:note:91da6b04-9648-412e-ba8f-1f43a19da4e9)
   2. [Liver Cancer Questions](:note:381fc5b6-85bc-4646-a9f0-e8a26f5be752)
+  3. [Liver Cancer Plan](:note:aec675dc-fd75-4b9b-a3d4-569ba23c4c7d)
   
   
   
-  #### 3. 其他
+  #### 4. 其他
   
   1. [图像处理作业](:note:acbc9d26-65d1-4228-a2bb-33ecefac5afb)
   2. 

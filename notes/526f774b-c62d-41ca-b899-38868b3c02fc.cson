@@ -1,5 +1,5 @@
 createdAt: "2019-12-05T05:13:56.022Z"
-updatedAt: "2020-07-06T09:03:17.114Z"
+updatedAt: "2020-07-27T03:23:52.571Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Conda/pip"
@@ -53,6 +53,10 @@ content: '''
   conda install --yes --file requirements.txt
   
   pip install -r requirements.txt 
+  
+  pip --default-timeout=1000 install 
+  
+   -i https://pypi.douban.com/simple
   ~~~
   
   安装tensorboardX

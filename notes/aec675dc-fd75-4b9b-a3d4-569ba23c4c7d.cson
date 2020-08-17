@@ -1,5 +1,5 @@
 createdAt: "2020-07-15T02:00:52.258Z"
-updatedAt: "2020-07-15T02:02:59.344Z"
+updatedAt: "2020-07-26T11:45:49.341Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "Liver Cancer Plan"
@@ -9,9 +9,20 @@ content: '''
   
   
   ## 一. Plan
+  :white_check_mark:
   
   1. :white_large_square:环境配置
-  2. :white_large_square:生成Mask
+      tensorflow-gpu1.4.0 keras 2.0.8
+  3. :white_large_square:生成Mask
+  
+  
+  ## 二. 问题
+  
+  1. xml标注只有tumor区域，和camelyon的标注不一样
+  2. 中文名，处理时候会停下来
+  3. 每张svs图片可以取的level还不一样，有的可以取到6，有的取不到
+  4. /userhome/dataset/livercanerHE-beidasz-cell-20200323/1904195moderatpoorly/svs/20191107_112620biuct.svs, /userhome/dataset/livercanerHE-beidasz-cell-20200323/1847451high/svs/1847451,.svs, ///  ValueError: threshold_otsu is expected to work with images having more than one color. The input image seems to have just one color 0.
+  5. 结缔组织，特殊染色，淋巴结，银染
   
   
 '''

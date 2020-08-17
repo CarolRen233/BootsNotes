@@ -1,5 +1,5 @@
 createdAt: "2019-12-13T05:15:06.994Z"
-updatedAt: "2020-05-30T03:05:13.348Z"
+updatedAt: "2020-07-18T08:45:26.971Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "服务器/Linux"
@@ -25,7 +25,12 @@ content: '''
   ps -aux|grep python|grep extract_patches.py|awk '{print $2}'|xargs kill -9 #只关掉extract_patches.py的进程
   ~~~
   
+  重命名含有中文名的文件
+  ~~~
+  ls -i  #找到文件前面的号码
+  find . -inum [号码] -exec mv {} [新文件名] \\;
   
+  ~~~
   远程服务器与服务器传文件
   ~~~bash
   scp -r -P 22280 root@192.168.202.125:/root/workspace/zhangch/datasets/CAMELYON16/mask /root/workspace/output/p4m/try11/Camelyon16patch/mask
