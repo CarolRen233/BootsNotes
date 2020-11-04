@@ -24,6 +24,11 @@
       "key": "f1fd0a362703e39f5960",
       "color": "#E8D252",
       "name": "CV"
+    },
+    {
+      "key": "0a10886e53840528eb15",
+      "color": "#3FD941",
+      "name": "FewShot Seg"
     }
   ],
   "version": "1.0"

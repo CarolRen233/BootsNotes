@@ -1,0 +1,25 @@
+createdAt: "2020-10-28T06:19:19.873Z"
+updatedAt: "2020-10-28T06:24:43.137Z"
+type: "MARKDOWN_NOTE"
+folder: "0a10886e53840528eb15"
+title: "服务器使用"
+tags: []
+content: '''
+  # 服务器使用
+  
+  使用vpn.pkusz.edu.cn的vpn进行连接
+  
+  服务器：
+  
+  ~~~
+  地址：219.223.192.24
+  端口：20700
+  账号：root
+  密码：123
+  ~~~
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

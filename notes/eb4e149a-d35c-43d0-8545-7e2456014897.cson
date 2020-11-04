@@ -1,5 +1,5 @@
 createdAt: "2019-11-19T11:58:38.833Z"
-updatedAt: "2020-07-06T08:17:50.514Z"
+updatedAt: "2020-08-27T10:41:27.907Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Git/Github常见命令"
@@ -61,6 +61,7 @@ content: '''
   git remote add origin [ssh url]
   git push -u origin master
   
+  # git 
   ~~~
   
   pcl：reny  reny@123

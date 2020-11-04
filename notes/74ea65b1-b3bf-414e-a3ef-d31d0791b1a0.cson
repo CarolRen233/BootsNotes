@@ -1,5 +1,5 @@
 createdAt: "2020-05-10T04:57:52.942Z"
-updatedAt: "2020-05-10T09:17:09.927Z"
+updatedAt: "2020-08-28T10:52:34.417Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Email"
@@ -112,4 +112,4 @@ content: '''
 '''
 linesHighlighted: []
 isStarred: false
-isTrashed: false
+isTrashed: true

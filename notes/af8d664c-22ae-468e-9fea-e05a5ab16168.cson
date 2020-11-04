@@ -1,5 +1,5 @@
 createdAt: "2020-08-17T02:03:54.629Z"
-updatedAt: "2020-08-17T02:06:06.482Z"
+updatedAt: "2020-08-17T11:59:59.369Z"
 type: "MARKDOWN_NOTE"
 folder: "17ec6a2700afef60a17d"
 title: "Few-shot Segmentation Survey"
@@ -10,22 +10,72 @@ content: '''
   
   ## 一、Background
   
-  ### 1. 问题定义
+  ##### 1. 问题定义
+  
+  few-shot semantic segmentation that only uses a few annotated training images to perform segmentation on new classes.
   
   
-  ### 2. 困难
+  >**在测试任务上**：通过利用很少的具有分割标签的support set 来获得query set上目标的分割结果；所以说对于query set 和 support set 两者的要求就是类别是相同的；
+  **训练任务的要求**：训练任务的support set与query set都需要给出分割的mask, support  set 的mask是用于提供指导信息；query set mask用于计算预测损失，用于反向传播更新网络参数；
+  **训练任务与测试任务的要求**：训练任务中的类别与测试任务中的类别需要是不同。
   
   
-  ### 3. 发展脉络
+  
+  ##### 2. 困难
+  
+  * 数据集不多，很多人用现有的COCO，PASCAL VOC进行划分形成数据集
+  * 以往的语义分割任务中使用大量的标注数据进行训练，同时训练模型的泛化能力也很差
+  * 
+  
+  ##### 3. 数据集
+  
+  | 数据集 | 介绍   |
+  | ------ | ------ |
+  | [FSS-1000](https://arxiv.org/pdf/1907.12347.pdf) | 之前没有出现过的或者没有被标注的物体，[方法介绍](https://zhuanlan.zhihu.com/p/158021955)，|
+  | 单元格 | 单元格 |
+  |        |        |
+  |        |        |
+  
+  ##### 4. 发展脉络
+  
+  度量学习-->元学习\\数据增强-->基于语义的方法
+  >- [从 CVPR 2019 一览小样本学习研究进展 - 知乎](https://zhuanlan.zhihu.com/p/75263636)
+  >- [CVPR2020最新《小样本学习》综述教程，145页ppt带你学习最新FSL进展 - 知乎](https://zhuanlan.zhihu.com/p/149719391)
+  >
   
   
-  ### 4. 经典方法、文献
+  ##### 5. 经典方法、文献
   
   
   ## 二、 Methods
   
   
-  ### 1. 
+  ##### 1. 图卷积
+  
+  
+  ##### 2. 马尔可夫分割
+  
+  
+  ##### 3. MRF 
+  
+  
+  ##### 4. CRF
+  
+  
+  
+  ##### 5. SPN affinity
+  
+  
+  ##### 6. 杨博宇
+  
+  
+  
+  三、 新的方法
+  
+  | 论文 | 年  |  引用 |  期刊| 方法简介|
+  | ------ | ------ |------ |------ |------ |
+  | 论文 | 年  |  引用 |CVPR|  |
+  
 '''
 linesHighlighted: []
 isStarred: false

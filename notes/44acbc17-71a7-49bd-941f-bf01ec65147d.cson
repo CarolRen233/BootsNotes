@@ -1,0 +1,23 @@
+createdAt: "2020-08-27T12:50:39.742Z"
+updatedAt: "2020-08-27T12:51:15.907Z"
+type: "MARKDOWN_NOTE"
+folder: "0c8dbf9ec6d493d3fd38"
+title: "Keras"
+tags: []
+content: '''
+  # Keras
+  
+  
+  ~~~
+  # keras是否使用GPU
+  from keras import backend as K
+  K.tensorflow_backend._get_available_gpus()
+  
+  
+  
+  
+  ~~~
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

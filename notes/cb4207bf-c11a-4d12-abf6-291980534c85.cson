@@ -1,0 +1,40 @@
+createdAt: "2020-08-27T08:18:38.717Z"
+updatedAt: "2020-09-01T02:54:47.696Z"
+type: "MARKDOWN_NOTE"
+folder: "17ec6a2700afef60a17d"
+title: "Few-shot Code"
+tags: []
+content: '''
+  # Few-shot Code
+  
+  
+  
+  环境
+  ~~~
+  conda create -n few python=3.6
+  conda install pytorch==1.1.0 torchvision==0.3.0 cudatoolkit=9.0 -c pytorch
+  conda install -c conda-forge tensorboardx 
+  ~~~
+  
+  ## PFENet
+  
+  [github](https://github.com/Jia-Research-Lab/PFENet) | [论文](https://arxiv.org/abs/2008.01449)
+  
+  **数据**
+  
+  COCO2014
+  
+  >[介绍](https://tangh.github.io/articles/coco-and-cityscapes-datasets/)，COCO2014和2017数据图像基本一样，只是训练的划分不一样，而且2017有png格式的mask，就是2017 Stuff Train/Val annotations [1.1GB] 
+  >
+  
+  PASCAL5i
+  
+  > 这个数据是由PASCAL2012和SBD数据结合在一起的，需要用到SBD的数据划分，还需要用到增强版的分割的标注，具体可以看[介绍](https://www.jianshu.com/p/4174aead6933)，[增强版的分割标注下载地址](https://www.dropbox.com/s/oeu149j8qtbs1x0/SegmentationClassAug.zip?dl=0)
+  > 
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
