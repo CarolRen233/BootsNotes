@@ -1,0 +1,28 @@
+createdAt: "2021-03-26T04:59:09.649Z"
+updatedAt: "2021-03-27T11:01:50.853Z"
+type: "MARKDOWN_NOTE"
+folder: "7b95254d4d023f3965f1"
+title: "Code 目录"
+tags: []
+content: '''
+  # Code 目录
+  
+  
+  
+  [支持文档](:note:94ff937a-8312-43b5-881a-4002e4479848)
+  
+  [Parts of a Normal Code](:note:3a0d1d7e-f7ef-433a-aa41-1fa6be9a39ae)
+  
+  
+  常见功能用法：
+  
+  [Numpy 用法](:note:93ffae3e-093c-4de6-aca4-83f41a3a894e)
+  [Pandas用法](:note:01a4fbae-b2fc-4938-9698-36b9d76a93d4)
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
+isPinned: true

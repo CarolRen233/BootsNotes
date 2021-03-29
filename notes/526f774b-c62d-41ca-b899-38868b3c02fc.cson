@@ -1,5 +1,5 @@
 createdAt: "2019-12-05T05:13:56.022Z"
-updatedAt: "2020-09-09T06:50:53.083Z"
+updatedAt: "2020-11-06T06:31:55.165Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Conda/pip"
@@ -141,6 +141,29 @@ content: '''
   python -m ipykernel install --user --name few --display-name "few"
   ~~~
   
+  
+  **Magic 关键字**
+  
+  
+  [链接](http://ipython.readthedocs.io/en/stable/interactive/magics.html)
+  
+  
+  Magic 命令的前面带有一个或两个百分号（% 或 %%），分别对应行 Magic 命令和单元格 Magic 命令
+  
+  1. `%%timeit` 可以用来测算这个函数运行的时间
+  2. `%%matplotlib inline` 可以画图（在分辨率较高的屏幕（例如 Retina 显示屏）上，notebook 中的默认图像可能会显得模糊。可以在` %matplotlib inline` 之后使用` %config InlineBackend.figure_format = 'retina' `来呈现分辨率较高的图像。）
+  3. ` %pdb` 开启交互式调试器 （https://docs.python.org/3/library/pdb.html）输入`q`退出
+  
+  
+  
+  
+  **nbconvert**
+  
+  将 notebook 转换为 HTML、Markdown、幻灯片等格式。
+  
+  * `jupyter nbconvert --to html notebook.ipynb` 
+  * `jupyter nbconvert notebook.ipynb --to slides`
+  * `jupyter nbconvert notebook.ipynb --to slides --post serve` （转化成幻灯片并展示出来）
   
   
   

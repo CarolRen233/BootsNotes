@@ -1,0 +1,61 @@
+createdAt: "2020-11-06T09:49:48.205Z"
+updatedAt: "2021-03-26T04:59:56.073Z"
+type: "MARKDOWN_NOTE"
+folder: "7b95254d4d023f3965f1"
+title: "支持文档"
+tags: []
+content: '''
+  # 支持文档
+  
+  
+  
+  [toc]
+  
+  
+  #### setuptools
+  
+  setuptools是常用的打包工具
+  
+  ~~~python
+  from setuptools import setup
+  
+  setup(name='protonets',
+        version='0.0.1',
+        author='Jake Snell',
+        author_email='jsnell@cs.toronto.edu',
+        license='MIT',
+        packages=['protonets'],
+        install_requires=[
+            'torch',
+            'tqdm'
+        ])
+  ~~~
+  
+  --packages 需要处理的包目录（包含__init__.py的文件夹）-------和setup.py同一目录下搜索各个含有 init.py的包
+  
+  --install_requires = ["requests"] 需要安装的依赖包
+  
+  #### 自动下载数据
+  
+  ~~~bash
+  
+  #!/usr/bin/env bash
+  DATADIR=data/omniglot/data
+  
+  mkdir -p $DATADIR
+  wget -O images_background.zip https://github.com/brendenlake/omniglot/blob/master/python/images_background.zip?raw=true
+  wget -O images_evaluation.zip https://github.com/brendenlake/omniglot/blob/master/python/images_evaluation.zip?raw=true
+  unzip images_background.zip -d $DATADIR
+  unzip images_evaluation.zip -d $DATADIR
+  mv $DATADIR/images_background/* $DATADIR/
+  mv $DATADIR/images_evaluation/* $DATADIR/
+  rmdir $DATADIR/images_background
+  rmdir $DATADIR/images_evaluation
+  
+  ~~~
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

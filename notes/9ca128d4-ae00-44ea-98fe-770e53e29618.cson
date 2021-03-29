@@ -1,0 +1,57 @@
+createdAt: "2021-03-26T04:58:26.938Z"
+updatedAt: "2021-03-27T13:08:58.476Z"
+type: "MARKDOWN_NOTE"
+folder: "7b95254d4d023f3965f1"
+title: "3. Implementing the basic functions"
+tags: []
+content: '''
+  # 3. Implementing the basic functions
+  
+  
+  ## sigmoid激活函数
+  比方说需要以下函数
+  - Sigmoid activation function
+  
+  $$\\sigma(x) = \\frac{1}{1+e^{-x}}$$
+  
+  - Output (prediction) formula
+  
+  $$\\hat{y} = \\sigma(w_1 x_1 + w_2 x_2 + b)$$
+  
+  - Error function
+  
+  $$Error(y, \\hat{y}) = - y \\log(\\hat{y}) - (1-y) \\log(1-\\hat{y})$$
+  
+  - The function that updates the weights
+  
+  $$ w_i \\longrightarrow w_i + \\alpha (y - \\hat{y}) x_i$$
+  
+  $$ b \\longrightarrow b + \\alpha (y - \\hat{y})$$
+  
+  ```python
+  # 参考 https://github.com/udacity/deep-learning-v2-pytorch.git intro-neural-networks > gradient-descent > GradientDescent.ipynb
+  # Activation (sigmoid) function
+  
+  def sigmoid(x):
+      return 1/(1+np.exp(-x))
+  
+  # Output (prediction) formula
+  def output_formula(features, weights, bias):
+      return sigmoid(np.dot(features, weights) + bias)
+  
+  # Error (log-loss) formula
+  def error_formula(y, output):
+      return (-1)*y*np.log(output)-(1-y)*np.log(1-output)
+  
+  # Gradient descent step
+  def update_weights(x, y, weights, bias, learnrate):
+      output = output_formula(x, weights, bias)
+      d_error = y - output
+      weights += learnrate*d_error*x
+      bias += learnrate*d_error
+      return weights,bias
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

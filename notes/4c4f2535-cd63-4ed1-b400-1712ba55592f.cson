@@ -1,0 +1,46 @@
+createdAt: "2020-11-05T02:18:24.076Z"
+updatedAt: "2020-11-06T12:44:09.844Z"
+type: "MARKDOWN_NOTE"
+folder: "0a10886e53840528eb15"
+title: "[Code] prototypical-networks"
+tags: []
+content: '''
+  # [Code] prototypical-networks
+  
+  [toc]
+  
+  [代码](https://github.com/jakesnell/prototypical-networks) | [论文](http://papers.nips.cc/paper/6996-prototypical-networks-for-few-shot-learning.pdf)
+  
+  ## 使用代码
+  
+  可能出现的报错及解决办法
+  
+  [ModuleNotFoundError: No module named 'protonets.utils' · Issue #14 · jakesnell/prototypical-networks · GitHub](https://github.com/jakesnell/prototypical-networks/issues/14)
+  
+  
+  
+  ## 代码分析
+  
+  ### 1. 整体结构
+  
+  三个文件夹
+  
+  > data：储存数据和数据的split方式
+  > protonets：网络部分和utils
+  > script：train、trainval和predict
+  
+  
+  ### 2. 论文中重点公式和创新对应代码
+  
+  都在protonets文件夹内，写的还算清晰
+  
+  ### 3. 值得借鉴
+  
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

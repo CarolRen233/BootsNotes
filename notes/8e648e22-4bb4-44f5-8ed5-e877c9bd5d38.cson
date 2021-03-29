@@ -1,5 +1,5 @@
 createdAt: "2020-11-04T10:56:01.482Z"
-updatedAt: "2020-11-04T10:56:28.364Z"
+updatedAt: "2020-11-05T02:24:20.434Z"
 type: "MARKDOWN_NOTE"
 folder: "0a10886e53840528eb15"
 title: "Few shot 目录"
@@ -9,9 +9,15 @@ content: '''
   
   
   1. [服务器使用](:note:9f20534d-46cd-497d-9c43-7c0bdd1461a0)
-  2. 
+  
+  
+  
+  Code：
+  
+  1. [[Code] prototypical-networks](:note:4c4f2535-cd63-4ed1-b400-1712ba55592f)
   
 '''
 linesHighlighted: []
 isStarred: false
 isTrashed: false
+isPinned: true

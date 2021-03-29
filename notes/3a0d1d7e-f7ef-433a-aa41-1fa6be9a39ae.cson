@@ -1,0 +1,30 @@
+createdAt: "2021-03-26T04:35:32.546Z"
+updatedAt: "2021-03-29T02:26:03.079Z"
+type: "MARKDOWN_NOTE"
+folder: "7b95254d4d023f3965f1"
+title: "Parts of a Normal Code"
+tags: []
+content: '''
+  # Parts of a Normal Code
+  
+  
+  
+  [1. Loading the data](:note:9197f548-c322-4c86-ab3c-dacaf11bd2f0)
+  [1. Plotting Data](:note:ee02a4d5-911a-429d-b19a-52f9923a7dd2)
+  
+  
+  [2. Processing Data](:note:62b8a1c6-969b-4424-9622-454129e60254)
+  
+  
+  [3. Implementing the basic functions](:note:9ca128d4-ae00-44ea-98fe-770e53e29618)
+  
+  
+  
+  [4. Training function](:note:df06a508-c83b-444f-ba1c-8abae58706fc)
+  [4. Training with Backpropagate](:note:640add54-bd90-45c0-a66a-0bfabf5d4525)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
+isPinned: true

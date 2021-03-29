@@ -29,6 +29,11 @@
       "key": "0a10886e53840528eb15",
       "color": "#3FD941",
       "name": "FewShot Seg"
+    },
+    {
+      "key": "7b95254d4d023f3965f1",
+      "color": "#3FD941",
+      "name": "Code"
     }
   ],
   "version": "1.0"

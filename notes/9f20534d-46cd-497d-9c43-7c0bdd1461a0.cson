@@ -1,5 +1,5 @@
 createdAt: "2020-10-28T06:19:19.873Z"
-updatedAt: "2020-10-28T06:24:43.137Z"
+updatedAt: "2020-12-22T12:34:40.168Z"
 type: "MARKDOWN_NOTE"
 folder: "0a10886e53840528eb15"
 title: "服务器使用"
@@ -18,7 +18,22 @@ content: '''
   密码：123
   ~~~
   
+  ## 配置Jupyter
   
+  ~~~
+  pip install jupyter
+  jupyter notebook –generate-config
+  ~~~
+  
+  打开python交互
+  
+  ~~~
+  from notebook.auth import passwd
+  passwd()  #密码123
+  >>>'sha1:1d4760bdad95:f925d05d2a59712c3c26baec7d73089046114e19'
+  >>>
+  
+  'argon2:$argon2id$v=19$m=10240,t=10,p=8$jYqmh50Y1lQhHsy4aMAXXw$M7br0iH4xq4ItG6yWCTOTQ'
 '''
 linesHighlighted: []
 isStarred: false

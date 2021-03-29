@@ -1,5 +1,5 @@
 createdAt: "2019-11-15T05:53:13.187Z"
-updatedAt: "2020-03-06T05:32:11.938Z"
+updatedAt: "2021-03-29T12:34:24.718Z"
 type: "MARKDOWN_NOTE"
 folder: "6b4f122b9934a34de253"
 title: "Username & Password"
@@ -27,6 +27,10 @@ content: '''
   学校邮箱
   3三%
   
+  邮箱：2015邮箱
+  账号：sandwich123
+  密码：x5i6+JU/gid9jfe
+  
   **nvidia**
   账号：2015邮箱
   密码：3三%
@@ -35,6 +39,8 @@ content: '''
   master pw；3三%
   
 '''
-linesHighlighted: []
+linesHighlighted: [
+  11
+]
 isStarred: false
 isTrashed: false

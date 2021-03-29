@@ -1,0 +1,42 @@
+createdAt: "2021-03-27T11:01:32.954Z"
+updatedAt: "2021-03-29T02:10:54.363Z"
+type: "MARKDOWN_NOTE"
+folder: "7b95254d4d023f3965f1"
+title: "Pandas用法"
+tags: []
+content: '''
+  # Pandas用法
+  
+  ## concat
+  
+  `result = pd.concat([df1, df4], axis=1)`将df1和df4按照列对齐，axis=0是行对齐
+  
+  ## 取和删
+  
+  **loc和iloc**
+  
+  loc是通过索引，iloc是行号
+  
+  `data.iloc[0]`取第一行；
+  `data.loc['a']`取索引为a的行
+  
+  `data.loc[:,['A']] `取'A'列所有行;
+  `data.loc[:,['A','B']]`多取几列，取A和B列
+  
+  `data.iloc[:,[0]]`取第0列所有行
+  `data.iloc[:,[0,1]]`多取几列
+  
+  **drop**
+  
+  `data.drop(index=0)` 删除index=0的行
+  `data.drop(labels=0, axis=0)` 删除 "行号为0" 的行
+  `data.drop(index=data[data['A'].isin([4])].index[0])` 删除包含4的行
+  `data.drop(index=data[data['A']==4].index[0])` 删除包含4的行
+  `data.drop(columns='A')` 删除columns为A的列
+  `data.drop(labels='A', axis=1)` 删除 "列名为A" 的列
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
