@@ -1,5 +1,5 @@
 createdAt: "2020-10-28T06:19:19.873Z"
-updatedAt: "2020-12-22T12:34:40.168Z"
+updatedAt: "2021-04-01T02:39:23.050Z"
 type: "MARKDOWN_NOTE"
 folder: "0a10886e53840528eb15"
 title: "服务器使用"
@@ -34,6 +34,14 @@ content: '''
   >>>
   
   'argon2:$argon2id$v=19$m=10240,t=10,p=8$jYqmh50Y1lQhHsy4aMAXXw$M7br0iH4xq4ItG6yWCTOTQ'
+  
+  ~~~
+  
+  
+  
+  ## 运行
+  
+  运行`nohup jupyter-lab &`然后打开地址是http://yourIP:port+2, 也就是219.223.192.24:20702
 '''
 linesHighlighted: []
 isStarred: false

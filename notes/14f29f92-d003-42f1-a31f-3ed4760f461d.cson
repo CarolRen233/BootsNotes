@@ -1,0 +1,31 @@
+createdAt: "2021-04-08T04:17:14.209Z"
+updatedAt: "2021-04-08T04:23:47.277Z"
+type: "MARKDOWN_NOTE"
+folder: "7b95254d4d023f3965f1"
+title: "os使用方法"
+tags: []
+content: '''
+  # os使用方法
+  
+  
+  
+  
+  `os.getcwd()`获取当前文件路径
+  
+  `os.path.dirname(os.getcwd())`获取上一级文件路径
+  
+  `os.path.join(path.dirname(os.getcwd()),"test")`获取同一级另一个文件夹
+  
+  `os.listdir()`获取当前路径下所有的文件名
+  
+  `os.path.exists("C:\\\\Program\\python.exe")`看检查文件是否存在
+  
+  `os.path.dirname(os.path.abspath('__file__'))`获取文件当前路径
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

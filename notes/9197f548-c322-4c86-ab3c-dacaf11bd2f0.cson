@@ -1,5 +1,5 @@
 createdAt: "2021-03-27T10:35:25.129Z"
-updatedAt: "2021-03-27T13:21:35.584Z"
+updatedAt: "2021-03-31T03:08:48.102Z"
 type: "MARKDOWN_NOTE"
 folder: "7b95254d4d023f3965f1"
 title: "1. Loading the data"
@@ -33,7 +33,27 @@ content: '''
   data[:10]
   ```
   
-  $$\\overgroup{AB}$$
+  ## 用torchvision中的datasets下载数据
+  下载数据，对数据进行transform预处理，然后放进dataloader，打乱顺序，生成batch
+  
+  
+  ```python
+  # 参考https://github.com/udacity/deep-learning-v2-pytorch.git  /intro-to-pytorch/Part 2 - Neural Networks in PyTorch (Exercises).ipynb
+  
+  ### Run this cell
+  
+  from torchvision import datasets, transforms
+  
+  # Define a transform to normalize the data
+  transform = transforms.Compose([transforms.ToTensor(),
+                                transforms.Normalize((0.5,), (0.5,)),
+                                ])
+  
+  # Download and load the training data
+  
+  trainset = datasets.MNIST('~/.pytorch/MNIST_data/', download=True, train=True, transform=transform)
+  trainloader = torch.utils.data.DataLoader(trainset, batch_size=64, shuffle=True)
+  ```
   
   
   

@@ -1,5 +1,5 @@
 createdAt: "2021-03-26T04:59:09.649Z"
-updatedAt: "2021-03-27T11:01:50.853Z"
+updatedAt: "2021-04-08T04:17:31.156Z"
 type: "MARKDOWN_NOTE"
 folder: "7b95254d4d023f3965f1"
 title: "Code 目录"
@@ -18,6 +18,10 @@ content: '''
   
   [Numpy 用法](:note:93ffae3e-093c-4de6-aca4-83f41a3a894e)
   [Pandas用法](:note:01a4fbae-b2fc-4938-9698-36b9d76a93d4)
+  [torch.tensor用法](:note:425d7b09-5c90-490b-8cd1-9ab82ba00198)
+  [os使用方法](:note:14f29f92-d003-42f1-a31f-3ed4760f461d)
+  
+  
   
   
   
