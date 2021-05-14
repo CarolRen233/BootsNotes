@@ -1,0 +1,68 @@
+createdAt: "2021-05-14T12:17:16.828Z"
+updatedAt: "2021-05-14T13:06:00.649Z"
+type: "MARKDOWN_NOTE"
+folder: "0a10886e53840528eb15"
+title: "Reference Materials"
+tags: []
+content: '''
+  # Reference Materials
+  
+  
+  
+  ## 论文汇总
+  
+  
+  - **📜期刊论文整理**
+    - [CVPR2021](https://github.com/52CV/CVPR-2021-Papers)
+    - [CVPR2020](https://github.com/52CV/CVPR-2020-Papers)
+    - [ECCV2020](https://github.com/52CV/ECCV-2020-Papers)
+    - [ACCV2020](https://mp.weixin.qq.com/s/Xw8zJKK1Y3NBBNFbS5GvCw)
+    - [BMVC2020](https://zhuanlan.zhihu.com/p/227710028)
+    - [2021计算机视觉相关综述](https://github.com/52CV/2021-CV-Surveys)
+  
+  
+  - **🌳分类整理**
+    - [ECCV 2020 论文大盘点-语义分割篇](https://zhuanlan.zhihu.com/p/260788240)
+    - [ECCV 2020 论文大盘点-实例分割篇](https://zhuanlan.zhihu.com/p/260788349)
+    - [ECCV 2020 论文大盘点-图像分割篇](https://zhuanlan.zhihu.com/p/260788053)
+    - [WACV 2021 论文大盘点-图像分割篇](https://zhuanlan.zhihu.com/p/345861558)
+    - [AAAI 2021 领域自适应、小样本论文列表](https://zhuanlan.zhihu.com/p/337436002)
+    - [AAAI 2021 小样本学习论文汇总](https://zhuanlan.zhihu.com/p/349131932)
+    - [CVPR 2021 领域自适应论文列表](https://zhuanlan.zhihu.com/p/360515508)
+    - [IJCAI 2020 小样本、零样本、领域自适应、元学习论文汇总](https://zhuanlan.zhihu.com/p/159450189)
+    - [ECCV 2020 domain adaptation 论文列表](https://zhuanlan.zhihu.com/p/158616716)
+    
+  
+  
+  - **⭐精选论文**
+    - [计算机视觉论文速递](https://www.zhihu.com/column/c_172507674)
+    - [CVPR2019 TOP20](https://zhuanlan.zhihu.com/p/163060806)
+    - [ICCV2019 TOP20](https://zhuanlan.zhihu.com/p/171530688)
+    - [ECCV2018 TOP20](https://zhuanlan.zhihu.com/p/166468385)
+    - [CVPR2018 TOP20](https://zhuanlan.zhihu.com/p/179888212)
+  
+  
+  
+  ## 视频教程
+  
+  - **🧊Udacity**
+    - Deep Learning (PyTorch) https://github.com/udacity/deep-learning-v2-pytorch
+    - Deep Reinforcement Learning Nanodegree https://github.com/udacity/deep-reinforcement-learning
+    - Facial Keypoint Detection https://github.com/udacity/P1_Facial_Keypoints
+    - Reinforcement Learning https://github.com/udacity/reinforcement-learning
+    - TensorFlow Convolutional Neural Network Lab https://github.com/udacity/RoboND-CNN-Lab
+    - CN-Face-Recognition https://github.com/udacity/CN-Face-Recognition
+    - Deep Learning Nanodegree Foundation https://github.com/udacity/deep-learning
+    - 深度学习基石纳米学位 https://github.com/udacity/cn-deep-learning
+    - CarND-Semantic-Segmentation https://github.com/udacity/CarND-Semantic-Segmentation  
+     - RoboND-DeepLearning-Project  https://github.com/udacity/RoboND-DeepLearning-Project
+  
+  
+  ## 学术工具
+  
+  [学术相关工具整理](https://zhuanlan.zhihu.com/p/161862055)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

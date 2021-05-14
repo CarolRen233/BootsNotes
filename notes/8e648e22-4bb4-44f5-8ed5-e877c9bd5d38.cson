@@ -1,21 +1,31 @@
 createdAt: "2020-11-04T10:56:01.482Z"
-updatedAt: "2020-11-05T02:24:20.434Z"
+updatedAt: "2021-05-14T12:26:25.151Z"
 type: "MARKDOWN_NOTE"
 folder: "0a10886e53840528eb15"
-title: "Few shot 目录"
+title: "Research 目录"
 tags: []
 content: '''
-  # Few shot 目录
-  
-  
-  1. [服务器使用](:note:9f20534d-46cd-497d-9c43-7c0bdd1461a0)
+  # Research 目录
   
   
   
-  Code：
+  [服务器使用](:note:9f20534d-46cd-497d-9c43-7c0bdd1461a0)
+  
+  
+  
+  ## Code：
   
   1. [[Code] prototypical-networks](:note:4c4f2535-cd63-4ed1-b400-1712ba55592f)
   
+  
+  ## Paper
+  
+  1. [Paper Reading List](:note:a56e0c20-8db9-4836-80f0-b7c62c92e412)
+  
+  ## Materials
+  
+  
+  [Reference Materials](:note:8e321fa5-0c9e-4b05-9b9f-62de1ae42fa4)
 '''
 linesHighlighted: []
 isStarred: false

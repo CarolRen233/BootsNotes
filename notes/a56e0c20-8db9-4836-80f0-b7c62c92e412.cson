@@ -1,0 +1,45 @@
+createdAt: "2021-05-14T12:02:30.399Z"
+updatedAt: "2021-05-14T12:50:06.465Z"
+type: "MARKDOWN_NOTE"
+folder: "0a10886e53840528eb15"
+title: "Paper Reading list"
+tags: []
+content: '''
+  # Paper Reading list
+  
+  [toc]
+  
+  ⬜✅
+  
+  ## Survey
+  
+  - **域泛化**
+    - [Generalizing to Unseen Domains: A Survey on Domain Generalization](https://arxiv.org/pdf/2103.03097.pdf)
+    - [Domain Generalization: A Survey](https://arxiv.org/abs/2103.02503)
+  
+  
+  - **Transformers**
+    - [Transformers in Vision: A Survey](https://arxiv.org/abs/2101.01169)
+  
+  
+  - **课程学习(Curriculum Learning)**
+    - [A Survey on Curriculum Learning](https://arxiv.org/pdf/2010.13166.pdf) | [知乎](https://zhuanlan.zhihu.com/p/362351969)
+    - 
+    - 
+  
+  
+  ## CVPR2021
+  
+  - **小样本分割**
+    - [Self-Guided and Cross-Guided Learning for Few-Shot Segmentation](https://arxiv.org/pdf/2103.16129.pdf) | 😎[code](https://github.com/zbf1991/SCL)
+    - [Adaptive Prototype Learning and Allocation for Few-Shot Segmentation](https://arxiv.org/pdf/2104.01893.pdf) | 😎[code](https://github.com/Reagan1311/ASGNet)
+  
+  
+  ## ECCV2020
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
