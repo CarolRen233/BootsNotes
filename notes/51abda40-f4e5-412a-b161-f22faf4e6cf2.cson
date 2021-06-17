@@ -1,0 +1,67 @@
+createdAt: "2021-06-14T01:18:23.080Z"
+updatedAt: "2021-06-14T01:32:51.462Z"
+type: "MARKDOWN_NOTE"
+folder: "0a10886e53840528eb15"
+title: "如何读论文"
+tags: []
+content: '''
+  # 如何读论文
+  
+  
+  [toc]
+  
+  ####  读哪些论文
+  
+  
+  - **高质量会**：- CVPR\\ECCV\\ICCV\\AAAI\\NIPS\\ICLR\\ICML
+  
+  - **知名团队**：Yoshua Bengio、Yann leCun、Geoffrey Hinton、Andrew Ng
+  
+  
+  #### 如何找论文
+  
+  - 看IF，JCR
+  
+  #### 如何整理论文
+  
+  - pdf放入文件夹之后按照**时间-作者-题名**的格式命名
+  - 借助论文管理软件Endnote
+  
+  
+  #### 如何读论文
+  
+  **泛读**
+  
+  - 读标题，摘要，结论，小标题和图标
+  - 读后自测，论文要解决什么问题？论文采用了什么方法？论文达到了什么效果？
+  
+  **精读**
+  
+  - 泛读之后，选出精华，仔细阅读，例如当中数据增强部分
+  - 自测，所读段落是否详细掌握
+  
+  **总结**
+  
+  - 总览全文，归纳总结，总结创新点，关键点，启发点等信息
+  
+  **论文效果自测**
+  
+  - 论文提出采用什么方法，细节是什么
+  - 论文要解决什么问题，启发点和借鉴之处在哪？
+  - 论文方法达到的效果
+  
+  
+  #### 知识基础
+  
+  ![d36ab449.png](:storage\\51abda40-f4e5-412a-b161-f22faf4e6cf2\\d36ab449.png)
+  
+  
+  #### 学习路径
+  
+  ![4e813489.png](:storage\\51abda40-f4e5-412a-b161-f22faf4e6cf2\\4e813489.png)
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

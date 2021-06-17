@@ -1,0 +1,37 @@
+createdAt: "2021-05-19T02:21:21.403Z"
+updatedAt: "2021-05-19T03:04:57.322Z"
+type: "MARKDOWN_NOTE"
+folder: "0a10886e53840528eb15"
+title: "Topic Paper Reading | Curriculum Learning"
+tags: []
+content: '''
+  # Topic Paper Reading | Curriculum Learning
+  
+  [toc]
+  
+  ## Paper List
+  
+  1. [Self-Paced Learning for Latent Variable Models](http://ai.stanford.edu/~koller/Papers/Kumar+al:NIPS10.pdf) 入门论文
+  2. [A Survey on Curriculum Learning](https://arxiv.org/pdf/2010.13166.pdf) 2021综述
+  3. [Curriculum learning](https://qmro.qmul.ac.uk/xmlui/bitstream/handle/123456789/15972/Bengio%2C%202009%20Curriculum%20Learning.pdf?sequence=1&isAllowed=y) 2009 最早提出概念
+  
+  
+  
+  
+  ## Key Points in Papers
+  
+  
+  #### [A Survey on Curriculum Learning](https://arxiv.org/pdf/2010.13166.pdf)
+  
+  - 从简单数据到困难数据
+  - 即插即用
+  - 课程学习的方法可以用到machine learning中，但不总是有效的
+  
+  
+  ![cl](https://pic2.zhimg.com/v2-794426d707866d311f83ec3b4b1892e1_r.jpg)
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

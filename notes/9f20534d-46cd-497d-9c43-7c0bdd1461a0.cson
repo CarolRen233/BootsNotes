@@ -1,5 +1,5 @@
 createdAt: "2020-10-28T06:19:19.873Z"
-updatedAt: "2021-04-01T02:39:23.050Z"
+updatedAt: "2021-06-17T06:43:00.362Z"
 type: "MARKDOWN_NOTE"
 folder: "0a10886e53840528eb15"
 title: "服务器使用"
@@ -39,9 +39,36 @@ content: '''
   
   
   
-  ## 运行
+  ## 运行Jupyter
   
   运行`nohup jupyter-lab &`然后打开地址是http://yourIP:port+2, 也就是219.223.192.24:20702
+  
+  ## 配置Pycharm和远程服务器相连
+  
+  Tools->Development->Configuration
+  
+  - connection中设置服务器（219.223.192.24）和端口 （20700）
+  - mappings中设置映射关系
+  - excluded paths中设置希望忽略的路径
+  
+  
+  ## 在Pycharm上运行某个项目
+  
+  #### 1.先设置python解释器 
+  
+  File->Settings->Project->Project Interpreter
+  
+  点击小⚙按钮添加SSH Interpreter，然后选择Existing的服务器，就是刚刚设置好的。
+  
+  然后设置运行的解释器，在远程服务器终端上输入`which python`,就可以看到是用哪个python的解释器
+  
+  下面的Sync folder可以设置你这个项目会同步到远程服务器的哪里，注意这里远程服务器的地址填你SSH设置的root地址后面的地址，例如我的就是/code
+  
+  #### 2. 运行终端
+  
+  Tools->Start SSH Session
+  
+  
 '''
 linesHighlighted: []
 isStarred: false

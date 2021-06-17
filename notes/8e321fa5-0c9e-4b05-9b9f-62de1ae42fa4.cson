@@ -1,5 +1,5 @@
 createdAt: "2021-05-14T12:17:16.828Z"
-updatedAt: "2021-05-14T13:06:00.649Z"
+updatedAt: "2021-06-17T05:57:48.912Z"
 type: "MARKDOWN_NOTE"
 folder: "0a10886e53840528eb15"
 title: "Reference Materials"
@@ -31,6 +31,7 @@ content: '''
     - [CVPR 2021 领域自适应论文列表](https://zhuanlan.zhihu.com/p/360515508)
     - [IJCAI 2020 小样本、零样本、领域自适应、元学习论文汇总](https://zhuanlan.zhihu.com/p/159450189)
     - [ECCV 2020 domain adaptation 论文列表](https://zhuanlan.zhihu.com/p/158616716)
+    - [域适应、小样本学习、元学习](https://www.zhihu.com/column/c_173586281)
     
   
   
@@ -43,7 +44,7 @@ content: '''
   
   
   
-  ## 视频教程
+  ## 教程
   
   - **🧊Udacity**
     - Deep Learning (PyTorch) https://github.com/udacity/deep-learning-v2-pytorch
@@ -57,6 +58,9 @@ content: '''
     - CarND-Semantic-Segmentation https://github.com/udacity/CarND-Semantic-Segmentation  
      - RoboND-DeepLearning-Project  https://github.com/udacity/RoboND-DeepLearning-Project
   
+  - 🎩吴恩达
+    - [GitHub - TingsongYu/deeplearning_ai_books: deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）](https://github.com/TingsongYu/deeplearning_ai_books)
+    - 
   
   ## 学术工具
   

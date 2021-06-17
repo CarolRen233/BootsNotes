@@ -1,5 +1,5 @@
 createdAt: "2020-11-04T10:56:01.482Z"
-updatedAt: "2021-05-14T12:26:25.151Z"
+updatedAt: "2021-06-14T01:18:43.641Z"
 type: "MARKDOWN_NOTE"
 folder: "0a10886e53840528eb15"
 title: "Research 目录"
@@ -10,7 +10,7 @@ content: '''
   
   
   [服务器使用](:note:9f20534d-46cd-497d-9c43-7c0bdd1461a0)
-  
+  [如何读论文](:note:51abda40-f4e5-412a-b161-f22faf4e6cf2)
   
   
   ## Code：
@@ -20,7 +20,9 @@ content: '''
   
   ## Paper
   
-  1. [Paper Reading List](:note:a56e0c20-8db9-4836-80f0-b7c62c92e412)
+  1. [Journal Paper Reading list](:note:a56e0c20-8db9-4836-80f0-b7c62c92e412)
+  2. [Topic Paper Reading | Curriculum Learning](:note:36c8294e-1aad-4acf-bd63-433b91dc5511)
+  3. [Topic Paper Reading | Few-shot Segmentation](:note:6ca9d16e-fc89-45c2-9f11-e3298fa2b57a)
   
   ## Materials
   

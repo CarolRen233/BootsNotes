@@ -1,5 +1,5 @@
 createdAt: "2019-11-20T03:19:50.379Z"
-updatedAt: "2020-03-10T03:31:26.943Z"
+updatedAt: "2021-06-17T05:25:26.754Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "python 常见功能"
@@ -34,6 +34,24 @@ content: '''
   import os
   if not os.path.exists(directory):
       os.makedirs(directory)
+  ~~~
+  
+  获取当前路径和父级目录
+  ~~~python
+  import os
+  current_dir = os.path.abspath(os.path.dirname(__file__))
+  print(current_dir)
+  ~~~
+  
+  导入模块使导入上上级目录
+  ~~~python
+  import os,sys 
+  parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
+  sys.path.insert(0,parentdir)
+  ~~~
+  
+  ~~~python
+  os.path.join(BASE_DIR, "..", "data", "train")
   ~~~
   
   

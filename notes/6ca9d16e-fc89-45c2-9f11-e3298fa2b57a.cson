@@ -1,0 +1,28 @@
+createdAt: "2021-05-20T03:54:17.759Z"
+updatedAt: "2021-05-20T04:00:32.121Z"
+type: "MARKDOWN_NOTE"
+folder: "0a10886e53840528eb15"
+title: "Topic Paper Reading | Few-shot Segmentation"
+tags: []
+content: '''
+  # Topic Paper Reading | Few-shot Segmentation
+  
+  
+  [toc]
+  
+  ## Paper List
+  
+    - [Adaptive Prototype Learning and Allocation for Few-Shot Segmentation](https://arxiv.org/pdf/2104.01893.pdf) | 😎[code](https://github.com/Reagan1311/ASGNet) 2021CVPR
+  
+    - [Self-Guided and Cross-Guided Learning for Few-Shot Segmentation](https://arxiv.org/pdf/2103.16129.pdf) | 😎[code](https://github.com/zbf1991/SCL)
+  
+  
+  ## Key Points in Papers
+  
+  ### Adaptive Prototype Learning and Allocation for Few-Shot Segmentation
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
