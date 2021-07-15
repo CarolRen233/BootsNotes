@@ -1,11 +1,11 @@
 createdAt: "2019-12-05T05:13:56.022Z"
-updatedAt: "2020-11-06T06:31:55.165Z"
+updatedAt: "2021-07-01T08:31:11.267Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
-title: "Conda/pip"
+title: "Conda/pip/jupyter"
 tags: []
 content: '''
-  # Conda/pip
+  # Conda/pip/jupyter
   
   [toc]
   
@@ -138,7 +138,7 @@ content: '''
   ~~~
   conda install ipykernel
   conda activate 环境名称
-  python -m ipykernel install --user --name few --display-name "few"
+  python -m ipykernel install --user --name few --display-name "base"
   ~~~
   
   

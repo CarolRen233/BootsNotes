@@ -1,5 +1,5 @@
 createdAt: "2021-06-17T06:07:40.984Z"
-updatedAt: "2021-06-17T06:31:24.619Z"
+updatedAt: "2021-06-17T07:46:57.067Z"
 type: "MARKDOWN_NOTE"
 folder: "0c8dbf9ec6d493d3fd38"
 title: "Pycharm"
@@ -25,6 +25,14 @@ content: '''
   
   下面的Sync folder可以设置你这个项目会同步到远程服务器的哪里，注意这里远程服务器的地址填你SSH设置的root地址后面的地址
   
+  
+  ## Debug
+  
+  看各变量
+  - 运行debug模式，运行完就可以看到
+  
+  重点看一些变量的shape
+  - debug模式运行完，左边第二列有个python的图标，没有就点>>打开找，然后输入`inputs.shape`可以看到inputs变量的shape
   
   
   

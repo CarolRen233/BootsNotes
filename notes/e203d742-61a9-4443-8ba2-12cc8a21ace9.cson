@@ -1,0 +1,17 @@
+createdAt: "2021-06-17T11:33:42.469Z"
+updatedAt: "2021-07-12T08:20:40.301Z"
+type: "MARKDOWN_NOTE"
+folder: "0a10886e53840528eb15"
+title: "启发点"
+tags: []
+content: '''
+  # 启发点
+  
+  
+  1. 相似图片具有相近的高级特征（6.1 p3），这些高级特征可以用于图像检索，效果应该优于基于原始图像（6.1 p4）（AlexNet）
+  2. 多个对比实验的精度没有明显差异时，可以考虑从一个角度描述，例如说SE模块具有很好的鲁棒性
+  3. 
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

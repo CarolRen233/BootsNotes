@@ -1,5 +1,5 @@
 createdAt: "2020-11-04T10:56:01.482Z"
-updatedAt: "2021-06-14T01:18:43.641Z"
+updatedAt: "2021-07-01T04:57:27.670Z"
 type: "MARKDOWN_NOTE"
 folder: "0a10886e53840528eb15"
 title: "Research 目录"
@@ -11,6 +11,8 @@ content: '''
   
   [服务器使用](:note:9f20534d-46cd-497d-9c43-7c0bdd1461a0)
   [如何读论文](:note:51abda40-f4e5-412a-b161-f22faf4e6cf2)
+  [跑代码注意事项](:note:4e6773c1-7c60-4b98-a252-85070b6e78a0)
+  
   
   
   ## Code：
@@ -18,11 +20,25 @@ content: '''
   1. [[Code] prototypical-networks](:note:4c4f2535-cd63-4ed1-b400-1712ba55592f)
   
   
-  ## Paper
+  ## 读Paper
   
   1. [Journal Paper Reading list](:note:a56e0c20-8db9-4836-80f0-b7c62c92e412)
   2. [Topic Paper Reading | Curriculum Learning](:note:36c8294e-1aad-4acf-bd63-433b91dc5511)
   3. [Topic Paper Reading | Few-shot Segmentation](:note:6ca9d16e-fc89-45c2-9f11-e3298fa2b57a)
+  
+  
+  ## 写Paper
+  
+  1. [值得研究的有意思的专题](:note:842ff6b7-3592-4299-8bb9-a62f643c4f31)
+  2. [启发点](:note:e203d742-61a9-4443-8ba2-12cc8a21ace9)
+  3. [创新点从哪里来](:note:fe042bcb-514c-43e4-92ba-36cddcab7101)
+  4. [做实验的tricks](:note:b6ba9d37-8a03-41c8-b46d-218d76ce7e7d)
+  
+  ## 写Code
+  
+  1. [代码tricks](:note:80d73657-c971-4f70-8ea3-dbbc419e0725)
+  
+  
   
   ## Materials
   
